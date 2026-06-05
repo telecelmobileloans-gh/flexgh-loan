@@ -1,1619 +1,1045 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TelecelLoans – Fast & Secure Loans for Telecel Subscribers</title>
-  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;600;700;800;900&family=Red+Hat+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --red: #E30613;
-      --red-dark: #C0040F;
-      --red-deep: #9B0209;
-      --red-soft: rgba(227,6,19,0.09);
-      --red-border: rgba(227,6,19,0.22);
-      --blue: #0066CC;
-      --black: #0A0A0A;
-      --dark: #111111;
-      --dark2: #1A1A1A;
-      --dark3: #222222;
-      --dark4: #2A2A2A;
-      --white: #FFFFFF;
-      --off-white: #F7F7F7;
-      --grey-light: #E8E8E8;
-      --grey-mid: #AAAAAA;
-      --grey: #666666;
-      --green: #1DA851;
-      --shadow: 0 2px 20px rgba(0,0,0,0.12);
-      --shadow-lg: 0 8px 40px rgba(0,0,0,0.18);
-      --shadow-red: 0 4px 24px rgba(227,6,19,0.28);
-      --radius: 4px;
-      --radius-md: 8px;
-      --radius-lg: 12px;
-      --transition: 0.2s ease;
-    }
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior:smooth; font-size:16px; }
-    body {
-      font-family: 'Red Hat Text', sans-serif;
-      background: var(--white);
-      color: var(--dark);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TelecelLoans — Instant Loans for Telecel Subscribers</title>
 
-    /* ══════════════════════════════════
-       TOP BAR - HIDDEN
-    ══════════════════════════════════ */
-    .top-bar {
-      display: none;
-    }
+<style>
+:root {
+  --red: #E30613;
+  --red-d: #B8040F;
+  --red-l: #FF2530;
+  --red-bg: #FFF5F5;
+  --red-border: rgba(227,6,19,0.18);
+  --page: #F7F6F3;
+  --white: #FFFFFF;
+  --ink: #111010;
+  --ink2: #3D3838;
+  --ink3: #7A7370;
+  --ink4: #B5B0AC;
+  --border: #E5E1DB;
+  --border2: #CEC9C3;
+  --green: #0D8A4E;
+  --green-bg: #EDFAF3;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.07), 0 2px 8px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.09), 0 8px 28px rgba(0,0,0,0.05);
+  --shadow-red: 0 4px 20px rgba(227,6,19,0.25);
+  --r-sm: 6px;
+  --r: 10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  background: var(--page);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--page); }
+::-webkit-scrollbar-thumb { background: var(--red); border-radius: 2px; }
 
-    /* ══════════════════════════════════
-       HEADER / NAV
-    ══════════════════════════════════ */
-    header {
-      background: var(--white);
-      border-bottom: 2px solid var(--red);
-      position: sticky;
-      top: 0;
-      z-index: 900;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    }
-    .header-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 12px 32px;
-      height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      flex-shrink: 0;
-    }
-    .logo-icon {
-      display: none;
-    }
-    .logo-text {
-      font-family: 'Red Hat Display', sans-serif;
-      font-size: 22px;
-      font-weight: 900;
-      letter-spacing: -0.5px;
-      line-height: 1;
-      margin: 0;
-    }
-    .logo-text .t1 { color: var(--red); font-weight: 900; }
-    .logo-text .t2 { color: #0066CC; font-weight: 900; }
-    .logo-sub {
-      font-size: 10px;
-      color: var(--grey);
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin: 2px 0 0 0;
-      display: block;
-    }
+/* ── HEADER ── */
+header {
+  position: sticky; top: 0; z-index: 900;
+  background: rgba(247,246,243,0.96);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(18px);
+}
+.hdr {
+  max-width: 1180px; margin: 0 auto;
+  padding: 0 32px; height: 68px;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+}
+.logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+.logo-mark {
+  width: 38px; height: 38px;
+  background: var(--red);
+  border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--shadow-red);
+  flex-shrink: 0;
+}
+.logo-mark svg { width:20px; height:20px; }
+.logo-name {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 22px; color: var(--ink); letter-spacing: -.3px;
+}
+.logo-name em { font-style: normal; color: var(--red); }
+nav.dn { display:flex; align-items:center; gap:2px; }
+nav.dn a {
+  color: var(--ink2); text-decoration: none;
+  font-size: 13.5px; font-weight: 500;
+  padding: 7px 13px; border-radius: var(--r-sm);
+  transition: color .15s, background .15s;
+}
+nav.dn a:hover { color:var(--ink); background:rgba(0,0,0,0.04); }
+nav.dn a.act { color:var(--red); background:var(--red-bg); }
+.hdr-r { display:flex; align-items:center; gap:9px; }
+.btn-login {
+  background: var(--red); color: #fff; border: none;
+  padding: 9px 20px; border-radius: var(--r-sm);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  box-shadow: var(--shadow-red);
+  transition: background .15s, transform .12s, box-shadow .15s;
+}
+.btn-login:hover { background:var(--red-d); transform:translateY(-1px); box-shadow:0 6px 24px rgba(227,6,19,0.32); }
+.ham {
+  display:none; flex-direction:column; gap:5px;
+  cursor:pointer; background:none; border:none; padding:6px;
+}
+.ham span { display:block; width:21px; height:2px; background:var(--ink); border-radius:1px; transition:all .22s; }
+.ham.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+.ham.open span:nth-child(2) { opacity:0; }
+.ham.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+.mnav {
+  display:none; position:fixed; top:68px; left:0; right:0;
+  background:var(--white); z-index:850; flex-direction:column;
+  border-bottom:1px solid var(--border); box-shadow:var(--shadow-md);
+  max-height:0; overflow:hidden; transition:max-height .28s;
+}
+.mnav.open { max-height:420px; }
+.mnav a {
+  display:block; padding:14px 22px;
+  color:var(--ink2); text-decoration:none;
+  font-size:14px; font-weight:500;
+  border-bottom:1px solid var(--border);
+  transition:background .12s, color .12s;
+}
+.mnav a:hover { background:var(--red-bg); color:var(--red); }
+.mnav-cta {
+  margin:12px 16px; display:block; text-align:center;
+  background:var(--red); color:#fff;
+  padding:13px; font-weight:600; font-size:13px; border:none;
+  cursor:pointer; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
+  border-radius:var(--r); box-shadow:var(--shadow-red);
+}
 
-    nav.desktop-nav {
-      display: flex;
-      align-items: center;
-      height: auto;
-      gap: 8px;
-    }
-    nav.desktop-nav a {
-      color: var(--dark);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-      padding: 8px 16px;
-      display: flex;
-      align-items: center;
-      border-bottom: 3px solid transparent;
-      transition: all var(--transition);
-      letter-spacing: 0.2px;
-      white-space: nowrap;
-    }
-    nav.desktop-nav a:hover { color: var(--red); border-bottom-color: var(--red); }
-    nav.desktop-nav a.active { color: var(--red); border-bottom-color: var(--red); }
+/* ── HERO ── */
+.hero {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden; position: relative;
+}
+.hero::before {
+  content:''; position:absolute; top:-140px; right:-100px;
+  width:580px; height:580px; border-radius:50%;
+  background: radial-gradient(circle, rgba(227,6,19,0.055) 0%, transparent 68%);
+  pointer-events:none;
+}
+.hero-inner {
+  max-width: 1180px; margin: 0 auto;
+  padding: 72px 32px 80px;
+  display: grid; grid-template-columns: 1fr 460px; gap: 60px; align-items: center;
+  position: relative; z-index:1;
+}
+.pill {
+  display:inline-flex; align-items:center; gap:7px;
+  background:var(--red-bg); border:1px solid var(--red-border);
+  padding:5px 14px 5px 7px; border-radius:40px;
+  font-size:11px; font-weight:600; letter-spacing:.8px;
+  text-transform:uppercase; color:var(--red); margin-bottom:20px;
+}
+.pill-dot {
+  width:16px; height:16px; background:var(--red);
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+}
+.pill-dot::after {
+  content:''; width:5px; height:5px; background:#fff; border-radius:50%;
+  animation:pulse 1.8s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.25)} }
+.hero-h1 {
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:56px; color:var(--ink); letter-spacing:-1.5px;
+  line-height:1.05; margin-bottom:16px;
+}
+.hero-h1 em { font-style:italic; color:var(--red); display:block; }
+.hero-sub {
+  font-size:15.5px; color:var(--ink2); line-height:1.8;
+  max-width:400px; margin-bottom:30px; font-weight:400;
+}
+.hero-ctas { display:flex; gap:11px; flex-wrap:wrap; margin-bottom:38px; }
+.btn-main {
+  background:var(--red); color:#fff; border:none;
+  padding:14px 28px; border-radius:var(--r);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
+  font-size:14px; font-weight:600; cursor:pointer;
+  box-shadow:var(--shadow-red);
+  transition:background .15s, transform .12s, box-shadow .15s;
+}
+.btn-main:hover { background:var(--red-d); transform:translateY(-2px); box-shadow:0 8px 28px rgba(227,6,19,0.34); }
+.btn-ghost {
+  background:transparent; color:var(--ink);
+  border:1.5px solid var(--border2);
+  padding:13px 22px; border-radius:var(--r);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
+  font-size:14px; font-weight:500; cursor:pointer;
+  transition:border-color .15s, background .15s, color .15s;
+}
+.btn-ghost:hover { border-color:var(--red); background:var(--red-bg); color:var(--red); }
+.hero-stats {
+  display:flex; border:1px solid var(--border);
+  border-radius:var(--r); overflow:hidden; background:var(--page);
+}
+.hstat { flex:1; padding:15px 14px; border-right:1px solid var(--border); text-align:center; }
+.hstat:last-child { border-right:none; }
+.hstat-v {
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:20px; color:var(--ink); line-height:1;
+}
+.hstat-v em { font-style:normal; color:var(--red); }
+.hstat-l { font-size:10px; color:var(--ink3); font-weight:500; letter-spacing:.7px; text-transform:uppercase; margin-top:4px; }
 
-    .header-right { display: flex; align-items: center; gap: 8px; }
-    .btn-login-header {
-      background: var(--white);
-      color: var(--red);
-      border: none;
-      padding: 8px 16px;
-      border-radius: var(--radius-md);
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: 'Red Hat Text', sans-serif;
-      transition: background var(--transition);
-      white-space: nowrap;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      height: fit-content;
-    }
-    .btn-login-header:hover { background: rgba(255,255,255,0.9); }
+/* ── CALCULATOR ── */
+.calc-wrap {
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:var(--r-xl);
+  box-shadow:var(--shadow-md);
+  overflow:hidden;
+}
+.calc-top-bar {
+  height:3px;
+  background:linear-gradient(90deg,var(--red),#FF5722,var(--red));
+}
+.calc-head {
+  padding:20px 24px 16px;
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between;
+}
+.calc-head-l { display:flex; align-items:center; gap:11px; }
+.calc-ico {
+  width:38px; height:38px; background:var(--red-bg);
+  border:1px solid var(--red-border); border-radius:var(--r-sm);
+  display:flex; align-items:center; justify-content:center; font-size:18px;
+}
+.calc-ht { font-family:Georgia,'Times New Roman',serif; font-size:16px; color:var(--ink); }
+.calc-hs { font-size:11px; color:var(--ink3); margin-top:1px; }
+.live-badge {
+  display:flex; align-items:center; gap:5px;
+  font-size:10px; font-weight:600; letter-spacing:.9px; text-transform:uppercase;
+  color:var(--green); background:var(--green-bg);
+  padding:4px 10px; border-radius:20px; border:1px solid rgba(13,138,78,0.15);
+}
+.live-dot { width:6px; height:6px; background:var(--green); border-radius:50%; animation:pulse 2s infinite; }
+.calc-body { padding:22px 24px 24px; }
+.clabel {
+  display:block; font-size:10px; font-weight:600;
+  letter-spacing:1.4px; text-transform:uppercase;
+  color:var(--ink3); margin-bottom:10px;
+}
 
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 4px;
-      background: none;
-      border: none;
-    }
-    .hamburger span {
-      display: block;
-      width: 22px;
-      height: 2.5px;
-      background: var(--dark);
-      border-radius: 0;
-      transition: all 0.28s;
-    }
-    .hamburger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+/* Amount field */
+.amt-field {
+  display:flex; align-items:stretch; gap:0;
+  border:1.5px solid var(--border2);
+  border-radius:var(--r); overflow:hidden;
+  transition:border-color .15s;
+  margin-bottom:10px;
+}
+.amt-field:focus-within { border-color:var(--red); }
+.amt-prefix {
+  padding:0 13px; display:flex; align-items:center;
+  font-size:12px; font-weight:600; color:var(--ink3);
+  border-right:1px solid var(--border);
+  background:var(--page); white-space:nowrap;
+}
+.amt-input {
+  flex:1; border:none; outline:none;
+  background:transparent;
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:30px; color:var(--ink);
+  padding:12px 13px; min-width:0;
+  letter-spacing:-1px; caret-color:var(--red);
+}
+.amt-input::placeholder { color:var(--ink4); }
+.amt-input::-webkit-outer-spin-button,
+.amt-input::-webkit-inner-spin-button { -webkit-appearance:none; }
+.slider-row { display:flex; align-items:center; gap:9px; margin-bottom:20px; }
+.s-bound { font-size:10px; color:var(--ink4); white-space:nowrap; font-weight:500; }
+input[type="range"] {
+  flex:1; height:4px; border-radius:2px;
+  -webkit-appearance:none; appearance:none;
+  background:var(--border); cursor:pointer; outline:none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance:none;
+  width:18px; height:18px; border-radius:50%;
+  background:var(--red); border:3px solid #fff;
+  box-shadow:0 1px 6px rgba(227,6,19,0.4);
+  cursor:pointer; transition:transform .12s;
+}
+input[type="range"]::-webkit-slider-thumb:hover { transform:scale(1.2); }
 
-    .mobile-nav {
-      display: none;
-      position: fixed;
-      top: 64px; left: 0; right: 0;
-      background: var(--white);
-      z-index: 850;
-      flex-direction: column;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-      border-top: 2px solid var(--red);
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.32s ease;
-    }
-    .mobile-nav.open { max-height: 480px; }
-    .mobile-nav a {
-      display: block;
-      padding: 15px 24px;
-      color: var(--dark);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-      border-bottom: 1px solid var(--grey-light);
-      transition: background var(--transition), color var(--transition);
-      letter-spacing: 0.2px;
-    }
-    .mobile-nav a:hover { background: var(--off-white); color: var(--red); }
-    .mobile-nav .mobile-login-btn {
-      margin: 16px 20px;
-      display: block;
-      text-align: center;
-      background: var(--red);
-      color: white;
-      border-radius: 0;
-      padding: 14px;
-      font-weight: 700;
-      font-size: 13px;
-      border: none;
-      cursor: pointer;
-      font-family: 'Red Hat Text', sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-    }
+/* Period tabs */
+.ptabs { display:grid; grid-template-columns:repeat(6,1fr); gap:5px; margin-bottom:20px; }
+.ptab {
+  padding:9px 4px;
+  border:1.5px solid var(--border);
+  border-radius:var(--r-sm); background:var(--page);
+  color:var(--ink3); font-size:12px; font-weight:600;
+  cursor:pointer; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
+  transition:all .13s; text-align:center;
+}
+.ptab:hover { border-color:var(--red-border); color:var(--ink); }
+.ptab.act { background:var(--red); border-color:var(--red); color:#fff; box-shadow:0 2px 8px rgba(227,6,19,0.3); }
 
-    /* ══════════════════════════════════
-       HERO — DARK BACKGROUND
-    ══════════════════════════════════ */
-    .hero {
-      background: var(--dark2);
-      padding: 0;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: repeating-linear-gradient(
-        -45deg,
-        transparent,
-        transparent 40px,
-        rgba(255,255,255,0.05) 40px,
-        rgba(255,255,255,0.05) 41px
-      );
-      pointer-events: none;
-      z-index: 0;
-    }
+/* Result box */
+.calc-result {
+  background:var(--page); border:1px solid var(--border);
+  border-radius:var(--r); overflow:hidden; margin-bottom:18px;
+}
+.cr-row {
+  display:grid; grid-template-columns:1fr 1px 1fr;
+}
+.cr-col { padding:14px 16px; }
+.cr-sep { background:var(--border); }
+.cr-lbl { font-size:9.5px; font-weight:600; letter-spacing:1.3px; text-transform:uppercase; color:var(--ink3); margin-bottom:5px; }
+.cr-val {
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:22px; color:var(--ink); letter-spacing:-.8px; line-height:1;
+}
+.cr-val.green { color:var(--green); }
+.cr-foot {
+  border-top:1px solid var(--border); padding:9px 16px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.cr-note { font-size:11px; color:var(--ink3); }
+.rate-pill {
+  font-size:10px; font-weight:600; letter-spacing:.7px; text-transform:uppercase;
+  background:var(--red-bg); color:var(--red); border:1px solid var(--red-border);
+  padding:3px 9px; border-radius:20px;
+}
+.btn-calc {
+  width:100%; background:var(--red); color:#fff; border:none;
+  padding:15px; border-radius:var(--r);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
+  font-size:13px; font-weight:600; cursor:pointer;
+  letter-spacing:.4px; box-shadow:var(--shadow-red);
+  transition:background .15s, transform .12s;
+}
+.btn-calc:hover { background:var(--red-d); transform:translateY(-1px); }
 
-    .hero-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 32px;
-      position: relative;
-      z-index: 1;
-    }
+/* ── RED STRIP ── */
+.strip { background:var(--red); }
+.strip-grid {
+  max-width:1180px; margin:0 auto; padding:0 32px;
+  display:grid; grid-template-columns:repeat(4,1fr);
+}
+.si {
+  padding:24px 16px; text-align:center;
+  border-right:1px solid rgba(255,255,255,0.2);
+}
+.si:last-child { border-right:none; }
+.si-v { font-family:Georgia,'Times New Roman',serif; font-size:26px; color:#fff; letter-spacing:-.4px; line-height:1; }
+.si-l { font-size:10px; color:rgba(255,255,255,0.72); font-weight:500; letter-spacing:1px; text-transform:uppercase; margin-top:4px; }
 
-    .hero-banner {
-      padding: 80px 0 64px;
-      text-align: center;
-      border-bottom: 1px solid rgba(255,255,255,0.15);
-    }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,0.25);
-      color: white;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 6px 16px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 28px;
-    }
-    .hero-badge .dot {
-      width: 6px; height: 6px;
-      background: white;
-      border-radius: 50%;
-      animation: blink 1.5s infinite;
-    }
-    @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+/* ── ELIGIBILITY ── */
+.elig { background:var(--ink); }
+.elig-inner { max-width:1180px; margin:0 auto; padding:72px 32px; }
+.elig-head { margin-bottom:44px; }
+.eyebrow {
+  display:inline-flex; align-items:center; gap:7px;
+  font-size:10px; font-weight:600; letter-spacing:2px;
+  text-transform:uppercase; color:var(--red); margin-bottom:10px;
+}
+.eyebrow::before,.eyebrow::after { content:''; display:inline-block; width:16px; height:1.5px; background:var(--red); }
+.sec-title {
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:36px; color:var(--ink); letter-spacing:-1px; line-height:1.1;
+}
+.sec-title.light { color:#fff; }
+.sec-sub { font-size:15px; color:var(--ink2); margin-top:9px; max-width:460px; line-height:1.75; }
+.sec-sub.light { color:rgba(255,255,255,0.5); }
+.elig-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:2px;
+}
+.ecard {
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.07);
+  padding:28px 24px;
+  transition:background .2s, border-color .2s;
+}
+.ecard:hover { background:rgba(255,255,255,0.07); border-color:rgba(227,6,19,0.3); }
+.ecard-num {
+  font-family:Georgia,'Times New Roman',serif; font-size:40px;
+  color:rgba(227,6,19,0.18); line-height:1; margin-bottom:12px;
+}
+.ecard-title { font-family:Georgia,'Times New Roman',serif; font-size:16px; color:#fff; margin-bottom:7px; }
+.ecard-desc { font-size:13px; color:rgba(255,255,255,0.4); line-height:1.7; }
+.elig-note {
+  margin-top:28px; padding:16px 22px;
+  background:rgba(227,6,19,0.1);
+  border:1px solid rgba(227,6,19,0.2);
+  border-radius:var(--r);
+  display:flex; align-items:center; gap:12px;
+}
+.elig-note-icon { font-size:18px; flex-shrink:0; }
+.elig-note p { font-size:13.5px; color:rgba(255,255,255,0.6); line-height:1.6; }
+.elig-note strong { color:#fff; font-weight:600; }
 
-    .hero-title {
-      font-family: 'Red Hat Display', sans-serif;
-      font-size: 64px;
-      font-weight: 900;
-      color: var(--white);
-      line-height: 1.0;
-      letter-spacing: -2px;
-      margin-bottom: 20px;
-    }
-    .hero-title .line-red { color: var(--red); display: block; }
-    .hero-desc {
-      font-size: 17px;
-      color: rgba(255,255,255,0.9);
-      max-width: 540px;
-      margin: 0 auto;
-      line-height: 1.75;
-      font-weight: 400;
-    }
+/* ── HOW IT WORKS ── */
+.how { background:var(--page); }
+.sec { padding:80px 0; }
+.sec-inner { max-width:1180px; margin:0 auto; padding:0 32px; }
+.sec-head { margin-bottom:48px; }
+.steps { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; }
+.step {
+  background:var(--white); padding:28px 22px;
+  border-top:3px solid transparent;
+  box-shadow:var(--shadow-sm); border-radius:var(--r);
+  transition:border-color .18s, box-shadow .18s;
+}
+.step:hover { border-top-color:var(--red); box-shadow:var(--shadow-md); }
+.step-n {
+  font-family:Georgia,'Times New Roman',serif; font-size:44px;
+  color:rgba(227,6,19,0.09); line-height:1; margin-bottom:14px;
+}
+.step-tag {
+  display:inline-block; background:var(--red); color:#fff;
+  font-size:9.5px; font-weight:600; padding:3px 9px;
+  border-radius:4px; letter-spacing:.8px; text-transform:uppercase; margin-bottom:10px;
+}
+.step-title { font-family:Georgia,'Times New Roman',serif; font-size:16px; color:var(--ink); margin-bottom:7px; }
+.step-desc { font-size:13px; color:var(--ink2); line-height:1.7; }
 
-    .hero-content {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 48px;
-      align-items: start;
-      padding: 48px 0 60px;
-    }
+/* ── BENEFITS ── */
+.benefits { background:var(--white); }
+.ben-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.bcard {
+  background:var(--page); border:1px solid var(--border);
+  border-radius:var(--r-lg); padding:28px 24px;
+  transition:border-color .18s, transform .18s, box-shadow .18s;
+}
+.bcard:hover { border-color:var(--red-border); transform:translateY(-2px); box-shadow:var(--shadow-md); }
+.bcard-ico {
+  width:46px; height:46px;
+  background:var(--red-bg); border:1px solid var(--red-border);
+  border-radius:var(--r); display:flex; align-items:center;
+  justify-content:center; font-size:22px; margin-bottom:15px;
+}
+.bcard-title { font-family:Georgia,'Times New Roman',serif; font-size:16px; color:var(--ink); margin-bottom:7px; }
+.bcard-desc { font-size:13px; color:var(--ink2); line-height:1.7; }
 
-    /* ══════════════════════════════════
-       CALCULATOR CARD
-    ══════════════════════════════════ */
-    .calc-card {
-      background: var(--white);
-      border-radius: 8px;
-      padding: 0;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
-      overflow: hidden;
-      border-top: 4px solid var(--red);
-      max-width: 100%;
-      margin: 0 auto;
-    }
-    .calc-card-header {
-      background: var(--red);
-      padding: 16px 24px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .calc-card-icon {
-      width: 38px; height: 38px;
-      background: rgba(255,255,255,0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .calc-card-title {
-      font-family: 'Red Hat Display', sans-serif;
-      font-size: 17px;
-      font-weight: 800;
-      color: var(--white);
-      letter-spacing: -0.2px;
-    }
-    .calc-card-sub { font-size: 12px; color: rgba(255,255,255,0.75); margin-top: 2px; letter-spacing: 0.3px; }
+/* ── FAQ ── */
+.faq { background:var(--page); }
+.faq-inner { max-width:720px; }
+.faq-item {
+  background:var(--white); border-radius:var(--r);
+  border:1px solid var(--border); margin-bottom:7px;
+  overflow:hidden; box-shadow:var(--shadow-sm);
+  transition:border-color .18s;
+}
+.faq-item.open { border-color:var(--red-border); }
+.faq-q {
+  padding:16px 20px; cursor:pointer;
+  display:flex; justify-content:space-between; align-items:center;
+  font-size:14px; font-weight:500; color:var(--ink);
+  user-select:none; gap:14px; transition:color .15s;
+}
+.faq-item.open .faq-q { color:var(--red); }
+.faq-arr {
+  width:26px; height:26px; background:var(--page);
+  border-radius:5px; display:flex; align-items:center;
+  justify-content:center; color:var(--ink3); font-size:10px;
+  font-weight:900; flex-shrink:0;
+  transition:transform .22s, background .15s, color .15s;
+}
+.faq-item.open .faq-arr { transform:rotate(180deg); background:var(--red); color:#fff; }
+.faq-ans { max-height:0; overflow:hidden; transition:max-height .28s; }
+.faq-item.open .faq-ans { max-height:200px; }
+.faq-ans-text { padding:0 20px 16px; font-size:13.5px; color:var(--ink2); line-height:1.75; }
 
-    .calc-body { padding: 24px; background: #F9FAFB; }
+/* ── TESTIMONIALS ── */
+.testimonials { background:var(--white); }
+.t-toggle { display:flex; align-items:center; justify-content:space-between; cursor:pointer; user-select:none; }
+.t-arr {
+  width:36px; height:36px; background:var(--red-bg);
+  border:1px solid var(--red-border); border-radius:var(--r-sm);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--red); font-size:12px; transition:transform .22s, background .15s;
+}
+.t-toggle.open .t-arr { transform:rotate(180deg); background:var(--red); color:#fff; }
+.t-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:14px;
+  max-height:0; overflow:hidden; transition:max-height .38s, margin-top .28s;
+}
+.t-grid.open { max-height:500px; margin-top:36px; }
+.tcard {
+  background:var(--page); border:1px solid var(--border);
+  border-top:3px solid var(--red); border-radius:var(--r-lg);
+  padding:24px 22px; box-shadow:var(--shadow-sm);
+  transition:transform .18s, box-shadow .18s;
+}
+.tcard:hover { transform:translateY(-2px); box-shadow:var(--shadow-md); }
+.t-stars { color:var(--red); font-size:13px; letter-spacing:3px; margin-bottom:10px; }
+.t-text { font-size:13px; color:var(--ink2); line-height:1.75; font-style:italic; margin-bottom:14px; }
+.t-name { font-family:Georgia,'Times New Roman',serif; font-size:14px; color:var(--ink); }
+.t-role { font-size:11px; color:var(--ink3); margin-top:2px; }
 
-    .calc-field { margin-bottom: 18px; }
-    .calc-label {
-      display: block;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--grey);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 10px;
-    }
-    .calc-input-wrap {
-      display: flex;
-      align-items: center;
-      border: 2px solid var(--grey-light);
-      border-radius: 0;
-      background: var(--white);
-      overflow: hidden;
-      transition: border-color var(--transition);
-    }
-    .calc-input-wrap:focus-within {
-      border-color: var(--red);
-      background: white;
-    }
-    .calc-prefix, .calc-suffix {
-      padding: 13px 16px;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--grey);
-      background: transparent;
-      white-space: nowrap;
-      letter-spacing: 0.5px;
-    }
-    .calc-prefix { border-right: 2px solid var(--grey-light); }
-    .calc-input {
-      flex: 1;
-      padding: 13px 14px;
-      border: none;
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--dark);
-      font-family: 'Red Hat Display', sans-serif;
-      outline: none;
-      background: transparent;
-      min-width: 0;
-    }
-    .calc-input::-webkit-outer-spin-button,
-    .calc-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+/* ── MODALS ── */
+.modal-ov {
+  display:none; position:fixed; inset:0;
+  background:rgba(17,16,16,0.72); z-index:1000;
+  align-items:flex-end; justify-content:center; padding:0;
+  backdrop-filter:blur(6px);
+}
+.modal-ov.open { display:flex; }
+.mbox {
+  background:var(--white);
+  border-radius:20px 20px 0 0;
+  width:100%; max-width:440px;
+  box-shadow:0 -8px 40px rgba(0,0,0,0.18);
+  border-top:3px solid var(--red);
+  animation:slideUp .28s cubic-bezier(.22,.8,.3,1) both;
+  max-height:90vh; overflow-y:auto;
+}
+@keyframes slideUp { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
+.mhead {
+  padding:18px 22px;
+  border-bottom:1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:center;
+  position:sticky; top:0; background:var(--white); z-index:1;
+}
+.mhead-l { display:flex; align-items:center; gap:11px; }
+.mhead-ico {
+  width:38px; height:38px; background:var(--red-bg);
+  border:1px solid var(--red-border); border-radius:var(--r-sm);
+  display:flex; align-items:center; justify-content:center; font-size:18px;
+}
+.mhead-title { font-family:Georgia,'Times New Roman',serif; font-size:16px; color:var(--ink); }
+.mhead-sub { font-size:11px; color:var(--ink3); margin-top:1px; }
+.mclose {
+  background:var(--page); border:none; color:var(--ink3);
+  font-size:14px; cursor:pointer;
+  width:30px; height:30px; display:flex; align-items:center;
+  justify-content:center; border-radius:var(--r-sm);
+  transition:background .13s, color .13s;
+}
+.mclose:hover { background:var(--red); color:#fff; }
+.mbody { padding:20px 22px; }
 
-    .range-track {
-      position: relative;
-      margin-top: 14px;
-    }
-    .range-track input[type="range"] {
-      width: 100%;
-      height: 4px;
-      border-radius: 0;
-      outline: none;
-      -webkit-appearance: none;
-      appearance: none;
-      background: var(--grey-light);
-      cursor: pointer;
-    }
-    .range-track input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 18px; height: 18px;
-      border-radius: 50%;
-      background: var(--red);
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(227,6,19,0.4);
-      border: 3px solid white;
-    }
-    .range-labels {
-      display:flex;
-      justify-content:space-between;
-      font-size:11px;
-      color:var(--grey-mid);
-      margin-top:6px;
-      font-weight:600;
-      letter-spacing:0.3px;
-    }
+/* Progress */
+.prog { display:flex; gap:5px; margin-bottom:20px; }
+.prog-seg { flex:1; height:3px; background:var(--border); border-radius:2px; transition:background .28s; }
+.prog-seg.act { background:var(--red); }
 
-    .period-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-    }
-    .period-btn {
-      padding: 11px 6px;
-      border: 2px solid var(--grey-light);
-      border-radius: 0;
-      background: var(--white);
-      color: var(--grey);
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: 'Red Hat Text', sans-serif;
-      transition: all var(--transition);
-      text-align: center;
-      letter-spacing: 0.3px;
-    }
-    .period-btn:hover { border-color: var(--red); color: var(--red); background: var(--red-soft); }
-    .period-btn.active {
-      background: var(--red);
-      border-color: var(--red);
-      color: white;
-    }
+/* Form */
+.fg { margin-bottom:14px; }
+.fl { display:block; font-size:10px; font-weight:600; color:var(--ink3); text-transform:uppercase; letter-spacing:1.4px; margin-bottom:6px; }
+.fi {
+  width:100%; padding:11px 14px;
+  background:var(--page); border:1.5px solid var(--border);
+  border-radius:var(--r-sm);
+  font-size:14px; font-weight:400; color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; outline:none;
+  transition:border-color .15s;
+}
+.fi:focus { border-color:var(--red); }
+.fi::placeholder { color:var(--ink4); }
+select.fi { -webkit-appearance:auto; appearance:auto; }
+.frow { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
 
-    .calc-results {
-      background: var(--dark2);
-      padding: 18px 20px;
-      margin: 18px 0 16px;
-      border-left: 4px solid var(--red);
-      border-radius: 4px;
-      color: white;
-    }
-    .calc-results-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-    }
-    .result-item { display: flex; flex-direction: column; gap: 5px; }
-    .result-item.right { text-align: right; }
-    .result-label {
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: rgba(255,255,255,0.6);
-    }
-    .result-val {
-      font-family: 'Red Hat Display', sans-serif;
-      font-size: 22px;
-      font-weight: 900;
-      color: white;
-      letter-spacing: -0.5px;
-    }
-    .result-val.green { color: #4ADE80; }
-    .result-divider {
-      width: 1px;
-      height: 44px;
-      background: rgba(255,255,255,0.15);
-      flex-shrink: 0;
-    }
-    .calc-note {
-      font-size: 11px;
-      color: rgba(255,255,255,0.6);
-      text-align: center;
-      margin-top: 12px;
-      letter-spacing: 0.5px;
-    }
+/* Loan summary strip inside modal */
+.loan-sum {
+  display:flex; gap:7px; margin-bottom:18px;
+  background:var(--page); border:1px solid var(--border);
+  border-radius:var(--r); overflow:hidden;
+}
+.ls-item { flex:1; padding:12px 14px; border-right:1px solid var(--border); }
+.ls-item:last-child { border-right:none; }
+.ls-lbl { font-size:9.5px; font-weight:600; letter-spacing:1.2px; text-transform:uppercase; color:var(--ink3); margin-bottom:4px; }
+.ls-val { font-family:Georgia,'Times New Roman',serif; font-size:18px; color:var(--ink); letter-spacing:-.5px; line-height:1; }
+.ls-val.g { color:var(--green); }
 
-    .btn-apply {
-      width: 100%;
-      background: var(--red);
-      color: white;
-      border: none;
-      padding: 14px;
-      border-radius: 4px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: 'Red Hat Text', sans-serif;
-      transition: all var(--transition);
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-    .btn-apply:hover { background: var(--red-dark); }
+/* Review */
+.rev-box {
+  background:var(--page); border:1px solid var(--border);
+  border-radius:var(--r); margin-bottom:12px; overflow:hidden;
+}
+.rev-row {
+  display:flex; justify-content:space-between;
+  padding:10px 15px; border-bottom:1px solid var(--border);
+  font-size:13.5px;
+}
+.rev-row:last-child { border-bottom:none; }
+.rr-l { color:var(--ink3); font-weight:400; }
+.rr-v { color:var(--ink); font-weight:500; }
+.rr-v.g { color:var(--green); }
 
-    /* ══════════════════════════════════
-       SECTION SHARED
-    ══════════════════════════════════ */
-    .section-inner { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+/* Buttons */
+.mbtns { display:flex; flex-direction:column; gap:0; }
+.btn-primary {
+  width:100%; background:var(--red); color:#fff; border:none;
+  padding:14px; border-radius:var(--r);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
+  font-size:13px; font-weight:600; cursor:pointer;
+  letter-spacing:.3px; box-shadow:var(--shadow-red);
+  transition:background .15s, transform .12s;
+}
+.btn-primary:hover { background:var(--red-d); transform:translateY(-1px); }
+.btn-back {
+  width:100%; background:transparent; color:var(--ink2);
+  border:1px solid var(--border2);
+  padding:12px; border-radius:var(--r);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
+  font-size:12.5px; font-weight:500; cursor:pointer;
+  letter-spacing:.3px; margin-top:8px;
+  transition:border-color .15s, color .15s;
+}
+.btn-back:hover { border-color:var(--red); color:var(--red); }
 
-    .section-header { text-align: center; margin-bottom: 56px; }
-    .section-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 2.5px;
-      color: var(--red);
-      margin-bottom: 14px;
-    }
-    .section-eyebrow::before,
-    .section-eyebrow::after {
-      content: '';
-      display: block;
-      width: 20px; height: 2px;
-      background: var(--red);
-    }
-    .section-title {
-      font-family: 'Red Hat Display', sans-serif;
-      font-size: 40px;
-      font-weight: 900;
-      color: var(--dark);
-      letter-spacing: -1px;
-      line-height: 1.1;
-    }
-    .section-sub {
-      font-size: 16px;
-      color: var(--grey);
-      margin-top: 12px;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-      font-weight: 400;
-    }
+/* ── FOOTER ── */
+footer { background:var(--ink); padding:56px 0 0; }
+.ft-inner { max-width:1180px; margin:0 auto; padding:0 32px; }
+.ft-top {
+  display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:44px;
+  padding-bottom:44px; border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.ft-brand p { font-size:13px; color:rgba(255,255,255,0.36); line-height:1.75; max-width:220px; margin-top:12px; }
+.ft-divider { width:24px; height:1.5px; background:var(--red); margin:12px 0; }
+.ft-col h4 { font-size:9.5px; font-weight:600; text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,0.2); margin-bottom:16px; }
+.ft-col a { display:block; font-size:13px; color:rgba(255,255,255,0.42); text-decoration:none; margin-bottom:10px; transition:color .15s; }
+.ft-col a:hover { color:#fff; }
+.ft-bottom {
+  padding:20px 0; display:flex; justify-content:space-between;
+  align-items:center; flex-wrap:wrap; gap:10px;
+}
+.ft-bottom p { font-size:12px; color:rgba(255,255,255,0.22); }
+.ft-badge { font-size:11px; color:rgba(255,255,255,0.22); display:flex; align-items:center; gap:6px; }
+.ft-dot { width:6px; height:6px; background:#16A34A; border-radius:50%; box-shadow:0 0 5px rgba(22,163,74,0.5); }
 
-    /* ══════════════════════════════════
-       QUICK STATS STRIP
-    ══════════════════════════════════ */
-    .stats-strip {
-      background: var(--red);
-      padding: 0;
-    }
-    .stats-grid {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 32px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-    }
-    .stat-item {
-      padding: 28px 24px;
-      text-align: center;
-      border-right: 1px solid rgba(255,255,255,0.2);
-      position: relative;
-    }
-    .stat-item:last-child { border-right: none; }
-    .stat-val {
-      font-family: 'Red Hat Display', sans-serif;
-      font-size: 34px;
-      font-weight: 900;
-      color: var(--white);
-      letter-spacing: -1px;
-      line-height: 1;
-    }
-    .stat-label {
-      font-size: 12px;
-      color: rgba(255,255,255,0.75);
-      font-weight: 600;
-      margin-top: 6px;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-
-    /* ══════════════════════════════════
-       HOW IT WORKS
-    ══════════════════════════════════ */
-    .how-it-works {
-      background: var(--off-white);
-      padding: 88px 0;
-    }
-    .how-it-works .section-title { color: var(--dark); }
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      position: relative;
-    }
-    .steps-connector {
-      position: absolute;
-      top: 28px;
-      left: 12.5%;
-      right: 12.5%;
-      height: 2px;
-      background: var(--grey-light);
-      z-index: 0;
-    }
-    .steps-connector::after {
-      content: '';
-      position: absolute;
-      left: 0; top: 0;
-      width: 50%; height: 100%;
-      background: var(--red);
-    }
-    .step-item {
-      text-align: center;
-      padding: 0 20px;
-      position: relative;
-      z-index: 1;
-    }
-    .step-num {
-      width: 56px; height: 56px;
-      background: var(--red);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Red Hat Display', sans-serif;
-      font-size: 20px;
-      font-weight: 900;
-      margin: 0 auto 20px;
-      border: 4px solid var(--off-white);
-      position: relative;
-    }
-    .step-item:nth-child(3) .step-num,
-    .step-item:nth-child(4) .step-num {
-      background: var(--dark);
-    }
-    .step-title {
-      font-family: 'Red Hat Display', sans-serif;
-      font-size: 16px;
-      font-weight: 800;
-      color: var(--dark);
-      margin-bottom: 10px;
-      letter-spacing: -0.2px;
-    }
-    .step-desc { font-size: 14px; color: var(--grey); line-height: 1.7; }
-
-    /* ══════════════════════════════════
-       BENEFITS — DARK CARDS
-    ══════════════════════════════════ */
-    .benefits { background: var(--white); padding: 88px 0; }
-    .benefits-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-    }
-    .benefit-card {
-      background: var(--dark);
-      padding: 36px 32px;
-      position: relative;
-      overflow: hidden;
-      transition: background var(--transition);
-      cursor: default;
-    }
-    .benefit-card::before {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--red);
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-      transform-origin: left;
-    }
-    .benefit-card:hover { background: var(--dark2); }
-    .benefit-card:hover::before { transform: scaleX(1); }
-    .benefit-icon {
-      width: 48px; height: 48px;
-      background: rgba(227,6,19,0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      margin-bottom: 20px;
-    }
-    .benefit-title {
-      font-family: 'Red Hat Display', sans-serif;
-      font-size: 17px;
-      font-weight: 800;
-      color: var(--white);
-      margin-bottom: 10px;
-      letter-spacing: -0.2px;
-    }
-    .benefit-desc { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.75; }
-
-    /* ══════════════════════════════════
-       FAQ
-    ══════════════════════════════════ */
-    .faq { background: var(--off-white); padding: 88px 0; }
-    .faq-inner-wrap { max-width: 800px; margin: 0 auto; }
-    .faq-item {
-      background: var(--white);
-      border-left: 4px solid transparent;
-      margin-bottom: 4px;
-      overflow: hidden;
-      transition: border-color var(--transition);
-    }
-    .faq-item.open { border-left-color: var(--red); }
-    .faq-q {
-      padding: 20px 24px;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--dark);
-      user-select: none;
-      gap: 16px;
-      font-family: 'Red Hat Display', sans-serif;
-      letter-spacing: -0.1px;
-    }
-    .faq-arrow {
-      width: 28px; height: 28px;
-      background: var(--off-white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: transform 0.28s, background var(--transition);
-      color: var(--red);
-      font-size: 12px;
-      font-weight: 900;
-    }
-    .faq-item.open .faq-arrow { transform: rotate(180deg); background: var(--red); color: white; }
-    .faq-ans { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-    .faq-item.open .faq-ans { max-height: 300px; }
-    .faq-ans-text {
-      padding: 4px 24px 20px;
-      font-size: 14.5px;
-      color: var(--grey);
-      line-height: 1.75;
-    }
-
-    /* ══════════════════════════════════
-       TESTIMONIALS
-    ══════════════════════════════════ */
-    .testimonials { background: var(--black); padding: 88px 0; }
-    .testimonials .section-title { color: var(--white); }
-    .testimonials .section-sub { color: rgba(255,255,255,0.5); }
-    .testimonials .section-eyebrow { color: var(--red); }
-    .testimonials .section-eyebrow::before,
-    .testimonials .section-eyebrow::after { background: var(--red); }
-
-    .testimonials-toggle-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      cursor: pointer;
-      user-select: none;
-    }
-    .t-arrow { font-size: 14px; color: var(--red); transition: transform 0.28s; }
-    .testimonials-toggle-btn.open .t-arrow { transform: rotate(180deg); }
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease, margin-top 0.3s;
-    }
-    .testimonials-grid.open { max-height: 600px; margin-top: 48px; }
-    .t-card {
-      background: var(--dark2);
-      padding: 32px 28px;
-      border-left: 3px solid var(--red);
-    }
-    .t-stars { color: var(--red); font-size: 14px; margin-bottom: 14px; letter-spacing: 3px; }
-    .t-text { font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.75; font-style: italic; margin-bottom: 20px; }
-    .t-author { font-family: 'Red Hat Display', sans-serif; font-size: 15px; font-weight: 800; color: var(--white); }
-    .t-role { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 3px; letter-spacing: 0.5px; }
-
-    /* ══════════════════════════════════
-       MODALS
-    ══════════════════════════════════ */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.75);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-      backdrop-filter: blur(6px);
-    }
-    .modal-overlay.open { display: flex; }
-    .modal-box {
-      background: white;
-      border-radius: 12px;
-      width: 100%;
-      max-width: 480px;
-      box-shadow: 0 20px 80px rgba(0,0,0,0.4);
-      overflow: hidden;
-      border-top: 4px solid var(--red);
-      animation: modalIn 0.28s cubic-bezier(.22,.8,.3,1) both;
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-    @keyframes modalIn {
-      from { opacity:0; transform: translateY(28px); }
-      to   { opacity:1; transform: translateY(0); }
-    }
-    .modal-head {
-      background: linear-gradient(135deg, #E30613 0%, #C0040F 100%);
-      padding: 20px 24px 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      position: relative;
-      overflow: hidden;
-      color: white;
-    }
-    .modal-head::before {
-      content: '';
-      position: absolute;
-      top: -40px; right: -40px;
-      width: 160px; height: 160px;
-      background: rgba(255,255,255,0.06);
-      border-radius: 50%;
-    }
-    .modal-head::after {
-      content: '';
-      position: absolute;
-      bottom: -30px; left: 30px;
-      width: 100px; height: 100px;
-      background: rgba(255,255,255,0.04);
-      border-radius: 50%;
-    }
-    .modal-head-left {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      position: relative;
-      z-index: 1;
-    }
-    .modal-logo {
-      background: white;
-      width: 48px; height: 48px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .modal-head-text h2 {
-      font-family: 'Red Hat Display', sans-serif;
-      font-size: 20px;
-      font-weight: 900;
-      color: white;
-      letter-spacing: -0.3px;
-      margin: 0;
-    }
-    .modal-head-text .mh-sub { font-size: 12px; color: rgba(255,255,255,0.75); margin-top: 4px; letter-spacing: 0.5px; }
-    .modal-close {
-      background: rgba(255,255,255,0.08);
-      border: none;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      width: 32px; height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background var(--transition);
-      flex-shrink: 0;
-      position: relative;
-      z-index: 2;
-    }
-    .modal-close:hover { background: var(--red); }
-    .modal-body { padding: 24px; }
-
-    .progress-bar {
-      display: flex;
-      gap: 4px;
-      margin-bottom: 28px;
-    }
-    .pbar-seg {
-      flex: 1;
-      height: 3px;
-      background: var(--grey-light);
-      transition: background 0.3s;
-    }
-    .pbar-seg.active { background: var(--red); }
-
-    .fgroup { margin-bottom: 18px; }
-    .flabel {
-      display: block;
-      font-size: 10.5px;
-      font-weight: 700;
-      color: var(--grey);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 8px;
-    }
-    .finput {
-      width: 100%;
-      padding: 13px 15px;
-      border: 2px solid var(--grey-light);
-      border-radius: 4px;
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--dark);
-      font-family: 'Red Hat Text', sans-serif;
-      outline: none;
-      transition: all var(--transition);
-      background: white;
-    }
-    .finput:focus {
-      border-color: var(--red);
-      background: white;
-      box-shadow: 0 0 0 3px rgba(227,6,19,0.1);
-    }
-
-    .loan-summary {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      background: var(--off-white);
-      padding: 16px;
-      margin-bottom: 20px;
-    }
-    .ls-item { display: flex; flex-direction: column; gap: 4px; }
-    .ls-label { font-size: 11px; font-weight: 700; color: var(--grey); text-transform: uppercase; letter-spacing: 0.5px; }
-    .ls-val { font-family: 'Red Hat Display', sans-serif; font-size: 20px; font-weight: 900; color: var(--dark); }
-    .ls-val.green { color: var(--green); }
-
-    .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
-    .review-box {
-      background: var(--off-white);
-      padding: 16px;
-      margin-bottom: 20px;
-    }
-    .review-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(0,0,0,0.05);
-    }
-    .review-row:last-child { border-bottom: none; }
-    .rr-label { color: var(--grey); font-weight: 500; }
-    .rr-val { color: var(--dark); font-weight: 700; }
-
-    .success-wrap { text-align: center; padding: 8px 0 4px; }
-    .success-icon-wrap {
-      width: 64px; height: 64px;
-      background: var(--red);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 18px;
-      font-size: 28px;
-      color: white;
-      font-weight: 900;
-    }
-    .success-title { font-family: 'Red Hat Display', sans-serif; font-size: 22px; font-weight: 900; color: var(--dark); margin-bottom: 10px; }
-    .success-desc { font-size: 14.5px; color: var(--grey); line-height: 1.7; }
-
-    .btn-primary {
-      width: 100%;
-      background: var(--red);
-      color: white;
-      border: none;
-      padding: 15px;
-      border-radius: 4px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: 'Red Hat Text', sans-serif;
-      transition: all var(--transition);
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-    .btn-primary:hover { background: var(--red-dark); transform: translateY(-2px); }
-    .btn-secondary {
-      width: 100%;
-      background: transparent;
-      color: var(--dark);
-      border: 2px solid var(--grey-light);
-      padding: 13px;
-      border-radius: 4px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: 'Red Hat Text', sans-serif;
-      transition: all var(--transition);
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-top: 10px;
-    }
-    .btn-secondary:hover { border-color: var(--red); color: var(--red); background: rgba(227,6,19,0.02); }
-    .modal-btns { display: flex; flex-direction: column; gap: 0; }
-
-    /* ══════════════════════════════════
-       FOOTER
-    ══════════════════════════════════ */
-    footer {
-      background: var(--black);
-      color: rgba(255,255,255,0.6);
-      padding: 56px 0 0;
-    }
-    .footer-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 32px;
-    }
-    .footer-top {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
-      gap: 48px;
-      padding-bottom: 48px;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-    }
-    .footer-brand-logo {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      margin-bottom: 18px;
-      text-decoration: none;
-    }
-    .footer-brand-logo .logo-icon { padding: 8px 12px; }
-    .footer-brand p {
-      font-size: 14px;
-      color: rgba(255,255,255,0.45);
-      line-height: 1.75;
-      max-width: 240px;
-    }
-    .footer-divider {
-      width: 32px; height: 2px;
-      background: var(--red);
-      margin: 16px 0;
-    }
-    .footer-col h4 {
-      font-size: 10.5px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 20px;
-      color: rgba(255,255,255,0.3);
-    }
-    .footer-col a {
-      display: block;
-      font-size: 14px;
-      color: rgba(255,255,255,0.6);
-      text-decoration: none;
-      margin-bottom: 12px;
-      transition: color var(--transition);
-      font-weight: 500;
-    }
-    .footer-col a:hover { color: white; }
-    .footer-bottom {
-      padding: 24px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-    .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.3); }
-    .footer-badge {
-      font-size: 12px;
-      color: rgba(255,255,255,0.3);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .footer-badge-dot {
-      width: 6px; height: 6px;
-      background: var(--green);
-      border-radius: 50%;
-    }
-
-    /* ══════════════════════════════════
-       RESPONSIVE
-    ══════════════════════════════════ */
-    @media (max-width: 1024px) {
-      .benefits-grid { grid-template-columns: repeat(2, 1fr); }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .stat-item:nth-child(2) { border-right: none; }
-    }
-    @media (max-width: 900px) {
-      .footer-top { grid-template-columns: 1fr 1fr; }
-      .steps-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
-      .steps-connector { display: none; }
-      .hero-title { font-size: 48px; }
-    }
-    @media (max-width: 768px) {
-      nav.desktop-nav { display: none; }
-      .hamburger { display: flex; }
-      .mobile-nav { display: flex; }
-      .top-bar { display: none; }
-      .hero-banner { padding: 60px 0 48px; }
-      .hero-title { font-size: 38px; letter-spacing: -1px; }
-      .hero-content { grid-template-columns: 1fr; gap: 40px; padding: 48px 0 64px; }
-      .section-title { font-size: 32px; }
-      .testimonials-grid { grid-template-columns: 1fr; }
-      .benefits-grid { grid-template-columns: 1fr; }
-      .section-inner { padding: 0 20px; }
-      .header-inner { padding: 0 20px; height: 70px; }
-      .stats-grid { padding: 0 20px; }
-      .logo-icon { width: 48px; height: 48px; }
-      .logo-text { font-size: 18px; }
-      .btn-login-header { font-size: 11px; padding: 6px 12px; }
-    }
-    @media (max-width: 480px) {
-      .hero-title { font-size: 30px; letter-spacing: -0.5px; }
-      .hero-banner { padding: 48px 0 36px; }
-      .calc-body { padding: 20px; }
-      .modal-body { padding: 20px; }
-      .modal-head { padding: 20px; }
-      .frow { grid-template-columns: 1fr; }
-      .footer-top { grid-template-columns: 1fr; gap: 28px; }
-      .footer-bottom { flex-direction: column; text-align: center; }
-      .period-grid { grid-template-columns: repeat(2, 1fr); }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .header-inner { height: 65px; }
-      .logo-icon { width: 44px; height: 44px; }
-      .logo-text { font-size: 16px; }
-      .btn-login-header { font-size: 10px; padding: 5px 10px; }
-    }
-  </style>
+/* ── RESPONSIVE ── */
+@media(max-width:1024px) {
+  .ben-grid { grid-template-columns:repeat(2,1fr); }
+  .strip-grid { grid-template-columns:repeat(2,1fr); }
+  .si:nth-child(2) { border-right:none; }
+  .elig-grid { grid-template-columns:repeat(2,1fr); }
+}
+@media(max-width:900px) {
+  .hero-inner { grid-template-columns:1fr; gap:44px; }
+  .steps { grid-template-columns:repeat(2,1fr); }
+  .ft-top { grid-template-columns:1fr 1fr; }
+  .hero-h1 { font-size:44px; }
+  .t-grid { grid-template-columns:1fr; }
+}
+@media(max-width:768px) {
+  nav.dn { display:none; }
+  .ham { display:flex; }
+  .mnav { display:flex; }
+  .hdr,.sec-inner,.hero-inner,.strip-grid,.ft-inner,.elig-inner { padding-left:18px; padding-right:18px; }
+  .hdr { height:60px; } .mnav { top:60px; }
+  .hero-inner { padding-top:48px; padding-bottom:52px; }
+  .ben-grid { grid-template-columns:1fr; }
+  .hero-h1 { font-size:36px; letter-spacing:-.8px; }
+  .elig-grid { grid-template-columns:1fr; }
+}
+@media(max-width:480px) {
+  .hero-h1 { font-size:30px; }
+  .ptabs { grid-template-columns:repeat(3,1fr); }
+  .frow { grid-template-columns:1fr; }
+  .loan-sum { flex-direction:column; }
+  .ft-top { grid-template-columns:1fr; gap:22px; }
+  .ft-bottom { flex-direction:column; text-align:center; }
+  .steps { grid-template-columns:1fr; }
+  .modal-ov { align-items:flex-end; }
+  .mbox { border-radius:20px 20px 0 0; max-width:100%; }
+}
+</style>
 </head>
 <body>
 
-<!-- ══ HEADER ══ -->
+<!-- HEADER -->
 <header>
-  <div class="header-inner">
+  <div class="hdr">
     <a href="#" class="logo">
-      <svg width="56" height="56" viewBox="0 0 141 140" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 12px; flex-shrink: 0;">
-<path d="M70.7739 41.8297C59.4621 41.7154 50.3693 51.0317 50.3985 62.0956C50.4277 73.8279 60.2714 82.4831 70.5454 82.296C81.4391 82.3981 90.7482 73.6894 90.8429 62.3557C90.9426 50.4873 81.5436 41.9415 70.7739 41.8297ZM78.8579 55.6546C78.6659 57.2807 77.7107 58.2408 76.228 58.756C75.4089 59.0428 74.5558 59.0501 73.6978 59.0501C73.1704 59.0477 72.6381 59.004 72.1107 59.089C71.7315 59.1522 71.5225 59.3418 71.469 59.7477C71.3912 60.297 71.5055 60.8317 71.5006 61.3737C71.4982 63.5953 71.5006 65.8217 71.4982 68.0432C71.4982 68.4126 71.5371 68.7772 71.6148 69.1345C71.9308 70.5515 73.1096 71.3925 74.5534 71.2151C75.6617 71.0765 76.7822 71.0692 77.8954 70.9744C78.362 70.9356 78.5103 71.1421 78.4763 71.638C78.4228 72.3817 78.4277 73.1255 78.4739 73.8717C78.5686 75.4175 77.8443 76.521 76.5245 77.0678C72.9565 78.5432 69.4346 78.5092 66.2166 76.1856C64.4471 74.9095 63.5016 73.0842 63.3995 70.831C63.2732 67.9363 63.2221 65.0415 63.1346 62.1418C63.0423 59.2154 63.0714 56.2866 63.0933 53.3602C63.1079 51.3963 64.0193 49.8019 65.468 48.5112C66.2725 47.7918 67.1693 47.206 68.144 46.7394C69.0287 46.314 69.9548 46.1536 70.927 46.1682C71.2745 46.1755 71.4058 46.3067 71.4398 46.664C71.5346 47.5901 71.4884 48.5185 71.5079 49.3668C71.5079 50.1178 71.5006 50.796 71.5079 51.4717C71.5103 52.0599 71.7193 52.2737 72.3148 52.3612C72.7256 52.4244 73.1339 52.371 73.5447 52.3685C74.9593 52.3515 76.369 52.3515 77.7836 52.3612C78.6173 52.371 78.8749 52.6262 78.8506 53.4501C78.8263 54.1866 78.9502 54.9133 78.8652 55.6546H78.8579Z" fill="#E32527"/>
-<path d="M71.4683 59.7455C71.3905 60.2948 71.5048 60.8295 71.4999 61.3715C71.4975 63.593 71.4999 65.8194 71.4975 68.0409C71.4975 68.4104 71.5364 68.775 71.6141 69.1323C71.9301 70.5493 73.1089 71.3902 74.5527 71.2128C75.661 71.0743 76.7815 71.067 77.8947 70.9722C78.3614 70.9333 78.5096 71.1399 78.4756 71.6357C78.4221 72.3795 78.427 73.1232 78.4732 73.8694C78.568 75.4153 77.8437 76.5187 76.5239 77.0656C72.9558 78.5409 69.4339 78.5069 66.2159 76.1833C64.4464 74.9073 63.5009 73.0819 63.3989 70.8288C63.2725 67.934 63.2214 65.0392 63.1339 62.1396C63.0416 59.2132 63.0707 56.2843 63.0926 53.358C63.1072 51.3941 64.0187 49.7996 65.4673 48.509C66.2718 47.7896 67.1687 47.2038 68.1433 46.7371C69.028 46.3118 69.9541 46.1514 70.9263 46.1659C71.2739 46.1732 71.4051 46.3045 71.4391 46.6618C71.5339 47.5878 71.4878 48.5163 71.5072 49.3646C71.5072 50.1156 71.4999 50.7937 71.5072 51.4694C71.5096 52.0576 71.7187 52.2715 72.3141 52.359C72.7249 52.4222 73.1332 52.3687 73.544 52.3663C74.9586 52.3493 76.3683 52.3493 77.7829 52.359C78.6166 52.3687 78.8742 52.6239 78.8499 53.4479C78.8256 54.1843 78.9496 54.9111 78.8645 55.6524C78.6725 57.2784 77.7173 58.2385 76.2346 58.7538C75.4155 59.0406 74.5624 59.0479 73.7044 59.0479C73.177 59.0455 72.6447 59.0017 72.1173 59.0868C71.7381 59.15 71.5291 59.3396 71.4756 59.7455H71.4683Z" fill="white"/>
-<path d="M103.955 102.837C105.246 102.863 106.736 102.679 108.146 102.035C108.488 101.879 108.551 102.139 108.598 102.38C108.882 103.85 108.148 105.367 106.804 106.101C105.939 106.572 105.013 106.852 104.04 106.954C102.018 107.165 100.025 107.092 98.1146 106.12C95.475 104.776 93.9122 101.974 93.9219 99.0109C93.9268 97.2123 94.2379 95.4939 95.2101 93.9408C96.7924 91.4081 99.0771 90.0689 102.086 90.0081C104.215 89.9644 106.118 90.5526 107.737 91.972C109.665 93.6612 110.002 95.946 109.293 98.2137C109.001 99.1421 108.184 99.6283 107.273 99.9102C106.182 100.248 105.042 100.272 103.919 100.384C102.601 100.513 101.287 100.627 99.9594 100.569C99.5681 100.552 99.4782 100.698 99.6337 101.067C100.047 102.056 100.854 102.535 101.865 102.727C102.475 102.844 103.095 102.824 103.953 102.834L103.955 102.837ZM100.961 96.923C101.826 96.9401 102.684 96.8599 103.535 96.7165C104.385 96.5731 104.718 95.8536 104.198 95.156C103.916 94.7793 103.566 94.4779 103.114 94.3321C101.182 93.7026 99.8063 94.9835 99.4004 96.5366C99.3275 96.8137 99.4757 96.9182 99.7261 96.9206C100.137 96.9231 100.55 96.9206 100.961 96.9206V96.923Z" fill="#E32527"/>
-<path d="M70.5666 102.832C72.0978 102.846 73.4881 102.666 74.786 102.03C75.1287 101.862 75.1919 102.044 75.2381 102.314C75.5249 104.001 74.7568 105.498 73.2062 106.244C72.3773 106.643 71.4975 106.881 70.5836 106.966C68.7655 107.134 66.9742 107.093 65.2582 106.344C62.7232 105.236 61.2065 103.291 60.7228 100.613C60.2075 97.7592 60.752 95.0904 62.66 92.83C64.1645 91.0484 66.0992 90.0641 68.469 90.0227C70.3162 89.9911 72.0808 90.2877 73.6291 91.3717C75.6805 92.8082 76.5287 94.7891 76.2225 97.2318C76.0645 98.4859 75.1506 99.5311 73.928 99.8519C72.3676 100.26 70.761 100.362 69.169 100.566C68.3621 100.671 67.5454 100.661 66.736 100.584C66.1721 100.53 66.0773 100.688 66.2985 101.201C66.578 101.855 67.0763 102.253 67.7496 102.453C68.7023 102.735 69.6721 102.871 70.5641 102.837L70.5666 102.832ZM66.9207 96.9887C67.8541 96.8745 68.96 96.9401 70.0489 96.7408C70.5447 96.6509 70.9384 96.4054 71.0624 95.8877C71.1888 95.3651 70.8655 95.02 70.4961 94.7332C69.0062 93.5835 66.702 94.3054 66.1259 96.0943C65.8537 96.9401 65.8975 97.0033 66.9232 96.9887H66.9207Z" fill="#E32527"/>
-<path d="M41.6208 102.834C43.0086 102.871 44.5156 102.681 45.9399 102.035C46.2316 101.904 46.3288 102.047 46.3871 102.317C46.7007 103.812 45.9691 105.367 44.5934 106.118C43.66 106.629 42.6514 106.874 41.5989 106.959C39.7954 107.105 38.0187 107.078 36.3222 106.293C33.4541 104.961 31.9982 102.693 31.7673 99.5824C31.6628 98.1897 31.7357 96.8115 32.2656 95.5039C33.4031 92.6966 35.2916 90.7036 38.3857 90.164C40.4906 89.797 42.5347 90.0254 44.4329 91.1386C45.8548 91.9723 46.8562 93.3942 47.2062 95.0032C47.8576 97.9976 46.8562 99.4049 45.0017 99.9178C43.9906 100.197 42.943 100.253 41.9052 100.363C41.0132 100.457 40.1211 100.54 39.2291 100.628C38.7284 100.676 38.2302 100.589 37.7319 100.567C37.3989 100.552 37.3066 100.708 37.4305 101.009C37.834 101.996 38.5899 102.533 39.6156 102.73C40.2257 102.847 40.8454 102.83 41.6208 102.834ZM37.8486 96.9914C38.9326 96.9282 40.0191 96.8796 41.1007 96.7921C41.5746 96.7532 42.0656 96.6438 42.2211 96.0945C42.3767 95.5452 42.1166 95.1296 41.7107 94.782C40.459 93.715 37.8777 94.0699 37.2604 96.1504C37.0222 96.9549 37.027 97.0036 37.851 96.989L37.8486 96.9914Z" fill="#E32527"/>
-<path d="M27.8097 90.1057C28.3104 90.13 28.9715 90.0668 29.6326 90.1592C30.0045 90.2102 30.1406 90.3998 30.1358 90.7449C30.1309 91.1265 30.1358 91.5106 30.1358 91.8922C30.1309 93.3942 29.2608 94.3592 27.7587 94.5585C27.1292 94.6436 26.4972 94.6557 25.8653 94.6387C25.5056 94.629 25.3743 94.7821 25.3549 95.1321C25.2649 96.9404 25.2309 98.7463 25.3694 100.552C25.4764 101.94 26.2056 102.516 27.574 102.348C28.2132 102.271 28.8646 102.263 29.5087 102.224C29.7736 102.207 29.9122 102.283 29.8927 102.601C29.8635 103.051 29.8174 103.503 29.866 103.95C29.9972 105.156 29.4965 105.963 28.4562 106.395C26.1594 107.35 23.9257 107.244 21.8767 105.778C20.6712 104.915 20.0003 103.666 19.9493 102.164C19.8278 98.5057 19.7524 94.8453 19.75 91.1824C19.75 89.4324 20.5399 88.188 21.8524 87.1793C22.6594 86.5595 23.5465 86.1172 24.5844 86.0515C25.2771 86.0078 25.3549 86.0831 25.3597 86.7661C25.3646 87.5609 25.3549 88.3557 25.3549 89.1481C25.3549 89.9939 25.4569 90.096 26.2833 90.1008C26.7403 90.1033 27.1948 90.1008 27.8122 90.1008L27.8097 90.1057Z" fill="#E32527"/>
-<path d="M92.0261 94.9252C91.9993 95.1124 92.1792 95.5353 91.9604 95.6933C91.7076 95.8756 91.433 95.4964 91.1656 95.3724C89.6587 94.6724 88.1031 94.4634 86.4917 94.9835C84.9701 95.4745 83.9566 96.9377 84.0684 98.5322C84.2021 100.481 85.2813 101.954 86.8806 102.159C88.3608 102.348 89.8507 102.297 91.2677 101.716C91.817 101.49 91.8729 101.527 91.9313 102.129C92.15 104.341 91.1729 105.768 89.1021 106.541C84.433 108.284 78.7576 104.786 78.551 99.2613C78.5219 98.4617 78.5438 97.6815 78.641 96.8915C79.0931 93.2311 82.9212 90.2099 86.1514 90.0787C86.9681 90.0447 87.7677 90.0787 88.5649 90.2148C90.6188 90.5648 91.9142 92.0644 92.0236 94.1887C92.0333 94.3953 92.0236 94.5995 92.0236 94.9252H92.0261Z" fill="#E32527"/>
-<path d="M117.893 91.6953C117.98 94.189 117.975 97.1178 117.978 100.044C117.978 100.265 117.978 100.487 118 100.705C118.072 101.515 118.746 102.142 119.555 102.207C120.051 102.246 120.547 102.275 121.045 102.28C121.376 102.283 121.538 102.397 121.531 102.742C121.519 103.316 121.558 103.889 121.483 104.461C121.351 105.467 120.795 106.14 119.847 106.458C117.844 107.132 115.948 106.918 114.244 105.63C112.963 104.662 112.443 103.27 112.412 101.729C112.327 97.604 112.234 93.4769 112.385 89.3498C112.434 88.0057 112.334 86.6616 112.346 85.3151C112.346 85.089 112.438 84.9408 112.674 84.9286C113.894 84.8703 115.124 84.7925 116.269 85.354C117.236 85.8279 117.754 86.6008 117.822 87.6897C117.895 88.8807 117.914 90.0717 117.895 91.6953H117.893Z" fill="#E32527"/>
-<path d="M50.1509 93.168C50.1509 90.6378 50.1509 88.11 50.1509 85.5798C50.1509 84.9722 50.2019 84.926 50.8023 84.909C51.772 84.8823 52.7394 84.8652 53.68 85.1934C54.9196 85.6284 55.5516 86.5059 55.6391 87.7965C55.6512 87.9861 55.6536 88.1781 55.6561 88.3701C55.7266 92.2225 55.7436 96.0725 55.7363 99.925C55.7363 100.234 55.7509 100.54 55.8141 100.846C55.9964 101.721 56.4557 102.139 57.3575 102.202C57.8557 102.239 58.354 102.273 58.8523 102.275C59.1901 102.275 59.3457 102.416 59.3384 102.744C59.3238 103.488 59.3043 104.232 59.1561 104.964C59.0613 105.435 58.772 105.86 58.3564 106.103C55.8311 107.586 51.7064 106.777 50.5495 103.534C50.2165 102.606 50.1752 101.631 50.1654 100.664C50.1411 98.1652 50.1582 95.6642 50.1582 93.1656H50.1484L50.1509 93.168Z" fill="#E32527"/>
-      </svg>
-      <div style="display: flex; flex-direction: column; justify-content: center;">
-        <div class="logo-text"><span class="t1">Telecel</span><span class="t2">Loans</span></div>
-        <div class="logo-sub">Fast &amp; Secure</div>
+      <div class="logo-mark">
+        <svg viewBox="0 0 141 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M70.77 41.83C59.46 41.72 50.37 51.03 50.4 62.1C50.43 73.83 60.27 82.48 70.55 82.3C81.44 82.4 90.75 73.69 90.84 62.36C90.94 50.49 81.54 41.94 70.77 41.83ZM78.86 55.65C78.67 57.28 77.71 58.24 76.23 58.76C75.41 59.04 74.56 59.05 73.7 59.05C73.17 59.05 72.64 59 72.11 59.09C71.73 59.15 71.52 59.34 71.47 59.75C71.39 60.3 71.51 60.83 71.5 61.37C71.5 63.6 71.5 65.82 71.5 68.04C71.5 68.41 71.54 68.78 71.61 69.13C71.93 70.55 73.11 71.39 74.55 71.22C75.66 71.08 76.78 71.07 77.9 70.97C78.36 70.94 78.51 71.14 78.48 71.64C78.42 72.38 78.43 73.13 78.47 73.87C78.57 75.42 77.84 76.52 76.52 77.07C72.96 78.54 69.43 78.51 66.22 76.19C64.45 74.91 63.5 73.08 63.4 70.83C63.27 67.94 63.22 65.04 63.13 62.14C63.04 59.22 63.07 56.29 63.09 53.36C63.11 51.4 64.02 49.8 65.47 48.51C66.27 47.79 67.17 47.21 68.14 46.74C69.03 46.31 69.95 46.15 70.93 46.17C71.27 46.18 71.41 46.31 71.44 46.66C71.53 47.59 71.49 48.52 71.51 49.37C71.51 50.12 71.5 50.8 71.51 51.47C71.51 52.06 71.72 52.27 72.31 52.36C72.73 52.42 73.13 52.37 73.54 52.37C74.96 52.35 76.37 52.35 77.78 52.36C78.62 52.37 78.87 52.63 78.85 53.45C78.83 54.19 78.95 54.91 78.86 55.65Z" fill="white"/>
+          <path d="M103.96 102.84C105.25 102.86 106.74 102.68 108.15 102.04C108.49 101.88 108.55 102.14 108.6 102.38C108.88 103.85 108.15 105.37 106.8 106.1C105.94 106.57 105.01 106.85 104.04 106.95C102.02 107.17 100.03 107.09 98.11 106.12C95.48 104.78 93.91 101.97 93.92 99.01C93.93 97.21 94.24 95.49 95.21 93.94C96.79 91.41 99.08 90.07 102.09 90.01C104.22 89.96 106.12 90.55 107.74 91.97C109.67 93.66 110 95.95 109.29 98.21C109 99.14 108.18 99.63 107.27 99.91C106.18 100.25 105.04 100.27 103.92 100.38C102.6 100.51 101.29 100.63 99.96 100.57C99.57 100.55 99.48 100.7 99.63 101.07C100.05 102.06 100.85 102.54 101.87 102.73C102.48 102.84 103.1 102.82 103.96 102.84ZM100.96 96.92C101.83 96.94 102.68 96.86 103.54 96.72C104.39 96.57 104.72 95.85 104.2 95.16C103.92 94.78 103.57 94.48 103.11 94.33C101.18 93.7 99.81 94.98 99.4 96.54C99.33 96.81 99.48 96.92 99.73 96.92C100.14 96.92 100.55 96.92 100.96 96.92Z" fill="white"/>
+          <path d="M27.81 90.11C28.31 90.13 28.97 90.07 29.63 90.16C30 90.21 30.14 90.4 30.14 90.74C30.13 91.13 30.14 91.51 30.14 91.89C30.13 93.39 29.26 94.36 27.76 94.56C27.13 94.64 26.5 94.66 25.87 94.64C25.51 94.63 25.37 94.78 25.35 95.13C25.26 96.94 25.23 98.75 25.37 100.55C25.48 101.94 26.21 102.52 27.57 102.35C28.21 102.27 28.86 102.26 29.51 102.22C29.77 102.21 29.91 102.28 29.89 102.6C29.86 103.05 29.82 103.5 29.87 103.95C30 105.16 29.5 105.96 28.46 106.4C26.16 107.35 23.93 107.24 21.88 105.78C20.67 104.92 20 103.67 19.95 102.16C19.83 98.51 19.75 94.85 19.75 91.18C19.75 89.43 20.54 88.19 21.85 87.18C22.66 86.56 23.55 86.12 24.58 86.05C25.28 86.01 25.35 86.08 25.36 86.77C25.36 87.56 25.35 88.36 25.35 89.15C25.35 89.99 25.46 90.1 26.28 90.1C26.74 90.1 27.19 90.1 27.81 90.11Z" fill="white"/>
+          <path d="M92.03 94.93C92 95.11 92.18 95.54 91.96 95.69C91.71 95.88 91.43 95.5 91.17 95.37C89.66 94.67 88.1 94.46 86.49 94.98C84.97 95.47 83.96 96.94 84.07 98.53C84.2 100.48 85.28 101.95 86.88 102.16C88.36 102.35 89.85 102.3 91.27 101.72C91.82 101.49 91.87 101.53 91.93 102.13C92.15 104.34 91.17 105.77 89.1 106.54C84.43 108.28 78.76 104.79 78.55 99.26C78.52 98.46 78.54 97.68 78.64 96.89C79.09 93.23 82.92 90.21 86.15 90.08C86.97 90.04 87.77 90.08 88.56 90.21C90.62 90.56 91.91 92.06 92.02 94.19C92.03 94.4 92.03 94.6 92.03 94.93Z" fill="white"/>
+          <path d="M117.89 91.7C117.98 94.19 117.97 97.12 117.98 100.04C117.98 100.27 117.98 100.49 118 100.71C118.07 101.52 118.75 102.14 119.56 102.21C120.05 102.25 120.55 102.27 121.05 102.28C121.38 102.28 121.54 102.4 121.53 102.74C121.52 103.32 121.56 103.89 121.48 104.46C121.35 105.47 120.8 106.14 119.85 106.46C117.84 107.13 115.95 106.92 114.24 105.63C112.96 104.66 112.44 103.27 112.41 101.73C112.33 97.6 112.23 93.48 112.39 89.35C112.43 88.01 112.33 86.66 112.35 85.32C112.35 85.09 112.44 84.94 112.67 84.93C113.89 84.87 115.12 84.79 116.27 85.35C117.24 85.83 117.75 86.6 117.82 87.69C117.89 88.88 117.91 90.07 117.89 91.7Z" fill="white"/>
+          <path d="M50.15 93.17C50.15 90.64 50.15 88.11 50.15 85.58C50.15 84.97 50.2 84.93 50.8 84.91C51.77 84.88 52.74 84.87 53.68 85.19C54.92 85.63 55.55 86.51 55.64 87.8C55.65 87.99 55.65 88.18 55.66 88.37C55.73 92.22 55.74 96.07 55.74 99.93C55.74 100.23 55.75 100.54 55.81 100.85C55.99 101.72 56.46 102.14 57.36 102.2C57.86 102.24 58.35 102.27 58.85 102.28C59.19 102.28 59.35 102.42 59.34 102.74C59.32 103.49 59.3 104.23 59.16 104.96C59.06 105.44 58.77 105.86 58.36 106.1C55.83 107.59 51.71 106.78 50.55 103.53C50.22 102.61 50.18 101.63 50.17 100.66C50.14 98.17 50.16 95.66 50.16 93.17H50.15Z" fill="white"/>
+          <path d="M70.57 102.83C72.1 102.85 73.49 102.67 74.79 102.03C75.13 101.86 75.19 102.04 75.24 102.31C75.52 104 74.76 105.5 73.21 106.24C72.38 106.64 71.5 106.88 70.58 106.97C68.77 107.13 66.97 107.09 65.26 106.34C62.72 105.24 61.21 103.29 60.72 100.61C60.21 97.76 60.75 95.09 62.66 92.83C64.16 91.05 66.1 90.06 68.47 90.02C70.32 89.99 72.08 90.29 73.63 91.37C75.68 92.81 76.53 94.79 76.22 97.23C76.06 98.49 75.15 99.53 73.93 99.85C72.37 100.26 70.76 100.36 69.17 100.57C68.36 100.67 67.55 100.66 66.74 100.58C66.17 100.53 66.08 100.69 66.3 101.2C66.58 101.86 67.08 102.25 67.75 102.45C68.7 102.74 69.67 102.87 70.57 102.83ZM66.92 96.99C67.85 96.87 68.96 96.94 70.05 96.74C70.54 96.65 70.94 96.41 71.06 95.89C71.19 95.37 70.87 95.02 70.5 94.73C69.01 93.58 66.7 94.31 66.13 96.09C65.85 96.94 65.9 97 66.92 96.99Z" fill="white"/>
+          <path d="M41.62 102.83C43.01 102.87 44.52 102.68 45.94 102.03C46.23 101.9 46.33 102.05 46.39 102.32C46.7 103.81 45.97 105.37 44.59 106.12C43.66 106.63 42.65 106.87 41.6 106.96C39.8 107.1 38.02 107.08 36.32 106.29C33.45 104.96 31.99 102.69 31.77 99.58C31.66 98.19 31.74 96.81 32.27 95.5C33.4 92.7 35.29 90.7 38.39 90.16C40.49 89.8 42.53 90.03 44.43 91.14C45.86 91.97 46.86 93.39 47.21 95C47.86 97.99 46.86 99.4 45 99.92C43.99 100.2 42.94 100.25 41.91 100.36C41.01 100.46 40.12 100.54 39.23 100.63C38.73 100.68 38.23 100.59 37.73 100.57C37.4 100.55 37.31 100.71 37.43 101.01C37.83 101.99 38.59 102.53 39.62 102.73C40.23 102.85 40.85 102.83 41.62 102.83ZM37.85 96.99C38.93 96.93 40.02 96.88 41.1 96.79C41.57 96.75 42.07 96.64 42.22 96.09C42.38 95.55 42.12 95.13 41.71 94.78C40.46 93.72 37.88 94.07 37.26 96.15C37.02 96.95 37.03 97 37.85 96.99Z" fill="white"/>
+        </svg>
       </div>
+      <div class="logo-name">Telecel<em>Loans</em></div>
     </a>
-
-    <nav class="desktop-nav">
-      <a href="#" class="active">Home</a>
-      <a href="#calculator">Loans</a>
+    <nav class="dn">
+      <a href="#" class="act">Home</a>
+      <a href="#calculator">Calculator</a>
+      <a href="#eligibility">Eligibility</a>
       <a href="#how">How It Works</a>
-      <a href="#benefits">Benefits</a>
       <a href="#faq">FAQ</a>
     </nav>
-
-    <div class="header-right">
-      <button class="btn-login-header" onclick="openLoginModal()">Login</button>
-      <button class="hamburger" id="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+    <div class="hdr-r">
+      <button class="btn-login" onclick="openLoginModal()">Login</button>
+      <button class="ham" id="ham" onclick="toggleMNav()">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
 </header>
 
-<!-- Mobile Nav -->
-<div class="mobile-nav" id="mobileNav">
-  <a href="#" onclick="closeMobileNav()">Home</a>
-  <a href="#calculator" onclick="closeMobileNav()">Loans</a>
-  <a href="#how" onclick="closeMobileNav()">How It Works</a>
-  <a href="#benefits" onclick="closeMobileNav()">Benefits</a>
-  <a href="#faq" onclick="closeMobileNav()">FAQ</a>
-  <button class="mobile-login-btn" onclick="closeMobileNav(); openLoginModal();">Login to Your Account</button>
+<div class="mnav" id="mnav">
+  <a href="#" onclick="closeMNav()">Home</a>
+  <a href="#calculator" onclick="closeMNav()">Calculator</a>
+  <a href="#eligibility" onclick="closeMNav()">Eligibility</a>
+  <a href="#how" onclick="closeMNav()">How It Works</a>
+  <a href="#faq" onclick="closeMNav()">FAQ</a>
+  <button class="mnav-cta" onclick="closeMNav();openLoginModal()">Login to Account</button>
 </div>
 
-<!-- ══ HERO ══ -->
+<!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-inner">
-    <div class="hero-banner">
-      <div class="hero-badge"><span class="dot"></span> Telecel Subscribers Only</div>
-      <h1 class="hero-title">Get Your Loan in<span class="line-red">15 Minutes.</span></h1>
-      <p class="hero-desc">Fast approval, flexible terms from 1 to 6 months, and transparent rates. No hidden fees — just the funds you need, when you need them.</p>
+    <div>
+      <div class="pill">
+        <div class="pill-dot"></div>
+        Telecel Subscribers Only
+      </div>
+      <h1 class="hero-h1">
+        Get Cash Fast —
+        <em>Only on Telecel.</em>
+      </h1>
+      <p class="hero-sub">
+        Active Telecel subscribers qualify for instant loans from GHS 1,000 to GHS 50,000. The longer you've been on Telecel, the more you unlock. Transparent rates, zero hidden fees.
+      </p>
+      <div class="hero-ctas">
+        <button class="btn-main" onclick="openAppModal()">Apply Now &rarr;</button>
+        <button class="btn-ghost" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">How It Works</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat">
+          <div class="hstat-v"><em>15</em> min</div>
+          <div class="hstat-l">Approval</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-v">8.9<em>%</em></div>
+          <div class="hstat-l">Monthly Rate</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-v">GHS <em>50K</em></div>
+          <div class="hstat-l">Max Loan</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-v"><em>6</em> Mo</div>
+          <div class="hstat-l">Max Term</div>
+        </div>
+      </div>
     </div>
 
-    <div class="hero-content" id="calculator">
-      <div class="calc-card">
-        <div class="calc-card-header">
-          <div class="calc-card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 9h8M8 13h5M8 17h3"/></svg>
-          </div>
+    <!-- CALCULATOR -->
+    <div class="calc-wrap" id="calculator">
+      <div class="calc-top-bar"></div>
+      <div class="calc-head">
+        <div class="calc-head-l">
+          <div class="calc-ico">⚡</div>
           <div>
-            <div class="calc-card-title">Loan Calculator</div>
-            <div class="calc-card-sub">Calculate your repayment instantly</div>
+            <div class="calc-ht">Loan Calculator</div>
+            <div class="calc-hs">See your repayment instantly</div>
           </div>
         </div>
-
-        <div class="calc-body">
-          <div class="calc-field">
-            <label class="calc-label">Loan Amount</label>
-            <div class="calc-input-wrap">
-              <span class="calc-prefix">GHS</span>
-              <input type="number" class="calc-input" id="loanAmount" value="500" min="500" max="50000" step="500" oninput="updateCalc()">
-            </div>
-            <div class="range-track">
-              <input type="range" id="loanSlider" min="500" max="50000" value="500" step="500"
-                oninput="document.getElementById('loanAmount').value=this.value; updateCalc()">
-              <div class="range-labels"><span>GHS 1,000</span><span>GHS 50,000</span></div>
-            </div>
+        <div class="live-badge"><div class="live-dot"></div>LIVE</div>
+      </div>
+      <div class="calc-body">
+        <div class="fg">
+          <label class="clabel">Loan Amount (GHS)</label>
+          <div class="amt-field">
+            <span class="amt-prefix">GHS</span>
+            <input type="number" class="amt-input" id="amtInput"
+              value="5000" min="1000" max="50000" step="500"
+              placeholder="5000" oninput="onAmtInput(this.value)">
           </div>
-
-          <div class="calc-field">
-            <label class="calc-label">Repayment Period</label>
-            <div class="period-grid" id="periodGrid">
-              <button class="period-btn active" data-months="1" onclick="selectPeriod(1)">1 Month</button>
-              <button class="period-btn" data-months="2" onclick="selectPeriod(2)">2 Months</button>
-              <button class="period-btn" data-months="3" onclick="selectPeriod(3)">3 Months</button>
-              <button class="period-btn" data-months="4" onclick="selectPeriod(4)">4 Months</button>
-              <button class="period-btn" data-months="5" onclick="selectPeriod(5)">5 Months</button>
-              <button class="period-btn" data-months="6" onclick="selectPeriod(6)">6 Months</button>
-            </div>
+          <div class="slider-row">
+            <span class="s-bound">GHS 1K</span>
+            <input type="range" id="amtSlider" min="1000" max="50000" value="5000" step="500" oninput="onSlider(this.value)">
+            <span class="s-bound">GHS 50K</span>
           </div>
-
-          <div class="calc-results">
-            <div class="calc-results-row">
-              <div class="result-item">
-                <div class="result-label">Monthly Payment</div>
-                <div class="result-val" id="monthlyDisplay">GHS 1,091</div>
-              </div>
-              <div class="result-divider"></div>
-              <div class="result-item right">
-                <div class="result-label">Total Repayment</div>
-                <div class="result-val green" id="repayDisplay">GHS 1,091</div>
-              </div>
-            </div>
-            <div class="calc-note">Rate: 8.9% per month &nbsp;·&nbsp; <span id="rateNote">1 month</span></div>
-          </div>
-
-          <button class="btn-apply" onclick="openApplicationModal()">Apply Now →</button>
         </div>
+        <div class="fg">
+          <label class="clabel">Repayment Period</label>
+          <div class="ptabs" id="periodTabs">
+            <button class="ptab" data-m="1" onclick="selPeriod(1)">1 Mo</button>
+            <button class="ptab" data-m="2" onclick="selPeriod(2)">2 Mo</button>
+            <button class="ptab act" data-m="3" onclick="selPeriod(3)">3 Mo</button>
+            <button class="ptab" data-m="4" onclick="selPeriod(4)">4 Mo</button>
+            <button class="ptab" data-m="5" onclick="selPeriod(5)">5 Mo</button>
+            <button class="ptab" data-m="6" onclick="selPeriod(6)">6 Mo</button>
+          </div>
+        </div>
+        <div class="calc-result">
+          <div class="cr-row">
+            <div class="cr-col">
+              <div class="cr-lbl">Monthly Payment</div>
+              <div class="cr-val" id="crMonthly">—</div>
+            </div>
+            <div class="cr-sep"></div>
+            <div class="cr-col">
+              <div class="cr-lbl">Total Repayment</div>
+              <div class="cr-val green" id="crTotal">—</div>
+            </div>
+          </div>
+          <div class="cr-foot">
+            <span class="cr-note" id="crNote">3 month term</span>
+            <span class="rate-pill">8.9% / month</span>
+          </div>
+        </div>
+        <button class="btn-calc" onclick="openAppModal()">Apply for This Loan &rarr;</button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ STATS STRIP ══ -->
-<div class="stats-strip">
-  <div class="stats-grid">
-    <div class="stat-item">
-      <div class="stat-val">15 min</div>
-      <div class="stat-label">Approval Time</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-val">GHS 50K</div>
-      <div class="stat-label">Max Loan Amount</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-val">8.9%</div>
-      <div class="stat-label">Monthly Rate</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-val">6 Mo.</div>
-      <div class="stat-label">Max Term</div>
-    </div>
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-grid">
+    <div class="si"><div class="si-v">15 min</div><div class="si-l">Approval Time</div></div>
+    <div class="si"><div class="si-v">GHS 50K</div><div class="si-l">Max Loan</div></div>
+    <div class="si"><div class="si-v">8.9%</div><div class="si-l">Monthly Rate</div></div>
+    <div class="si"><div class="si-v">6 Mo</div><div class="si-l">Max Term</div></div>
   </div>
 </div>
 
-<!-- ══ HOW IT WORKS ══ -->
-<section class="how-it-works" id="how">
-  <div class="section-inner">
-    <div class="section-header">
-      <div class="section-eyebrow">Simple Process</div>
-      <h2 class="section-title">How to Apply</h2>
-      <p class="section-sub">Four easy steps and your funds are ready in under 15 minutes.</p>
+<!-- ELIGIBILITY -->
+<section class="elig" id="eligibility">
+  <div class="elig-inner">
+    <div class="elig-head">
+      <div class="eyebrow" style="color:var(--red)">Who Qualifies</div>
+      <h2 class="sec-title light">Built for Loyal Telecel Users</h2>
+      <p class="sec-sub light">The more actively you use Telecel, the higher your loan limit. Consistent Telecel usage is your credit score here.</p>
     </div>
-    <div class="steps-grid">
-      <div class="steps-connector"></div>
-      <div class="step-item">
-        <div class="step-num">1</div>
-        <h3 class="step-title">Fill Application</h3>
-        <p class="step-desc">Complete your application with basic personal and income information. Takes less than 2 minutes from your phone.</p>
+    <div class="elig-grid">
+      <div class="ecard">
+        <div class="ecard-num">01</div>
+        <div class="ecard-title">Active Telecel Subscriber</div>
+        <p class="ecard-desc">Must be an active Telecel subscriber with regular usage — calls, data, or Telecel Cash transactions. Longer subscriber history = bigger loan limit.</p>
       </div>
-      <div class="step-item">
-        <div class="step-num">2</div>
-        <h3 class="step-title">Verify Identity</h3>
-        <p class="step-desc">Confirm your Telecel number to proceed. Our system instantly verifies your account and eligibility.</p>
+      <div class="ecard">
+        <div class="ecard-num">02</div>
+        <div class="ecard-title">Telecel Cash Account</div>
+        <p class="ecard-desc">You need a registered, active Telecel Cash mobile money account. Funds are disbursed directly and repayments auto-deducted from it.</p>
       </div>
-      <div class="step-item">
-        <div class="step-num">3</div>
-        <h3 class="step-title">Get Approved</h3>
-        <p class="step-desc">Receive your approval decision in under 15 minutes. Fully automated, no human wait time involved.</p>
+      <div class="ecard">
+        <div class="ecard-num">03</div>
+        <div class="ecard-title">Age 18+ &amp; Income Source</div>
+        <p class="ecard-desc">Must be at least 18 years old with a verifiable income. Employed, self-employed, business owners, and traders all qualify.</p>
       </div>
-      <div class="step-item">
-        <div class="step-num">4</div>
-        <h3 class="step-title">Receive Funds</h3>
-        <p class="step-desc">Approved amount is transferred directly into your Telecel Cash account — instantly, ready to use.</p>
+      <div class="ecard">
+        <div class="ecard-num">04</div>
+        <div class="ecard-title">Regular Telecel Activity</div>
+        <p class="ecard-desc">Telecel monitors your usage patterns to set your limit. Regular airtime top-ups, data bundles, and Telecel Cash transactions boost your eligible amount.</p>
+      </div>
+      <div class="ecard">
+        <div class="ecard-num">05</div>
+        <div class="ecard-title">No Active Default</div>
+        <p class="ecard-desc">Must not have a defaulted TelecelLoans repayment. Good repayment history on previous loans increases your limit with every cycle.</p>
+      </div>
+      <div class="ecard">
+        <div class="ecard-num">06</div>
+        <div class="ecard-title">Ghana Resident</div>
+        <p class="ecard-desc">Available exclusively to residents of Ghana using a Ghanaian Telecel SIM registered under your valid national ID.</p>
+      </div>
+    </div>
+    <div class="elig-note">
+      <div class="elig-note-icon">⚡</div>
+      <p>Qualified Telecel subscribers are <strong>approved within 15 minutes</strong> — fully automated, available 24/7 including weekends. Funds land on your Telecel Cash dashboard instantly after approval.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="sec how" id="how">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="eyebrow">Simple Process</div>
+      <h2 class="sec-title">Four Steps to Funding</h2>
+      <p class="sec-sub">Complete entirely on your phone — no branch visit, no paperwork, no waiting room.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">01</div>
+        <span class="step-tag">Start</span>
+        <div class="step-title">Fill Application</div>
+        <p class="step-desc">Basic personal and income info. Under 2 minutes on your phone using your Telecel number as your identifier.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">02</div>
+        <span class="step-tag">Verify</span>
+        <div class="step-title">Verify Your Telecel Number</div>
+        <p class="step-desc">Confirm your Telecel SIM via OTP. Automated eligibility check runs instantly based on your Telecel usage history.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">03</div>
+        <span class="step-tag">Approve</span>
+        <div class="step-title">Get Approved in 15 Minutes</div>
+        <p class="step-desc">Decision in under 15 minutes. Fully automated — no human wait. Active Telecel users get priority fast-tracking.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">04</div>
+        <span class="step-tag">Receive</span>
+        <div class="step-title">Funds on Telecel Cash</div>
+        <p class="step-desc">Approved amount sent directly to your Telecel Cash dashboard. Available for use immediately. Track everything in your account.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ BENEFITS ══ -->
-<section class="benefits" id="benefits">
-  <div class="section-inner">
-    <div class="section-header">
-      <div class="section-eyebrow">Why Us</div>
-      <h2 class="section-title">Built for Telecel Users</h2>
-      <p class="section-sub">Everything you need, designed around your Telecel life.</p>
+<!-- BENEFITS -->
+<section class="sec benefits" id="benefits">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="eyebrow">Why TelecelLoans</div>
+      <h2 class="sec-title">Built Around Your Telecel Life</h2>
+      <p class="sec-sub">Every feature designed for Telecel subscribers — fast, transparent, and entirely mobile-first.</p>
     </div>
-    <div class="benefits-grid">
-      <div class="benefit-card">
-        <div class="benefit-icon"><span>⚡</span></div>
-        <h3 class="benefit-title">Fast Approval</h3>
-        <p class="benefit-desc">Get approved in just 15 minutes. Our instant verification system processes your application in real-time, 24/7.</p>
+    <div class="ben-grid">
+      <div class="bcard">
+        <div class="bcard-ico">⚡</div>
+        <div class="bcard-title">15-Minute Approval</div>
+        <p class="bcard-desc">Real-time automated approval, any time of day, including weekends and public holidays. No human delays.</p>
       </div>
-      <div class="benefit-card">
-        <div class="benefit-icon"><span>💰</span></div>
-        <h3 class="benefit-title">Flexible Terms</h3>
-        <p class="benefit-desc">Choose repayment from 1 to 6 months. Pick what fits your budget — no pressure, no penalties for early payment.</p>
+      <div class="bcard">
+        <div class="bcard-ico">💰</div>
+        <div class="bcard-title">Flexible Repayment Terms</div>
+        <p class="bcard-desc">1 to 6 months — pick what fits your budget. No early repayment penalties whatsoever. Pay ahead anytime.</p>
       </div>
-      <div class="benefit-card">
-        <div class="benefit-icon"><span>🔒</span></div>
-        <h3 class="benefit-title">Secure &amp; Safe</h3>
-        <p class="benefit-desc">Bank-level 256-bit encryption protects your data. Your information is never shared without your consent.</p>
+      <div class="bcard">
+        <div class="bcard-ico">🔒</div>
+        <div class="bcard-title">Bank-Grade Security</div>
+        <p class="bcard-desc">256-bit encryption on every transaction. Your personal data is never sold or shared without your consent.</p>
       </div>
-      <div class="benefit-card">
-        <div class="benefit-icon"><span>📲</span></div>
-        <h3 class="benefit-title">Mobile-First</h3>
-        <p class="benefit-desc">Everything happens on your phone. Apply, track, and repay your loan directly through Telecel Cash — no branch visit needed.</p>
+      <div class="bcard">
+        <div class="bcard-ico">📲</div>
+        <div class="bcard-title">Telecel Cash Integration</div>
+        <p class="bcard-desc">Apply, receive, track, and repay entirely through Telecel Cash. Zero branch visits, zero paperwork.</p>
       </div>
-      <div class="benefit-card">
-        <div class="benefit-icon"><span>🎯</span></div>
-        <h3 class="benefit-title">Transparent Rates</h3>
-        <p class="benefit-desc">What you see is what you pay. No hidden charges, no surprises. Our rate calculator shows your exact repayment upfront.</p>
+      <div class="bcard">
+        <div class="bcard-ico">🎯</div>
+        <div class="bcard-title">Zero Hidden Fees</div>
+        <p class="bcard-desc">Our calculator shows your exact repayment before you apply. What you see is exactly what you pay.</p>
       </div>
-      <div class="benefit-card">
-        <div class="benefit-icon"><span>📈</span></div>
-        <h3 class="benefit-title">Grow Your Limit</h3>
-        <p class="benefit-desc">The longer and more consistently you use Telecel, the higher your eligible loan amount. Loyalty is rewarded.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ FAQ ══ -->
-<section class="faq" id="faq">
-  <div class="section-inner">
-    <div class="faq-inner-wrap">
-      <div class="section-header">
-        <div class="section-eyebrow">Got Questions?</div>
-        <h2 class="section-title">Frequently Asked Questions</h2>
-      </div>
-      <div class="faq-items">
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span>How long does approval take?</span><div class="faq-arrow">▼</div></div>
-          <div class="faq-ans"><div class="faq-ans-text">Most applications are approved within 15 minutes. Our instant verification system checks your eligibility in real-time, any time of day, including weekends.</div></div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span>Who is eligible for TelecelLoans?</span><div class="faq-arrow">▼</div></div>
-          <div class="faq-ans"><div class="faq-ans-text">Only active Telecel subscribers are eligible. You need to be at least 18 years old with a registered Telecel Cash account and a verifiable income source. The longer your Telecel history, the higher your eligible amount.</div></div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span>What is the maximum loan amount?</span><div class="faq-arrow">▼</div></div>
-          <div class="faq-ans"><div class="faq-ans-text">You can borrow between GHS 1,000 and GHS 50,000 depending on your Telecel subscriber history, income level, and credit profile. First-time borrowers may start at a lower limit which increases with good repayment behaviour.</div></div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span>What is the interest rate?</span><div class="faq-arrow">▼</div></div>
-          <div class="faq-ans"><div class="faq-ans-text">A flat monthly rate of 10.9% applies to all loans. This is calculated on the principal for each month of your chosen repayment period. All amounts are shown upfront in the calculator — no surprises at repayment time.</div></div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span>How do I repay my loan?</span><div class="faq-arrow">▼</div></div>
-          <div class="faq-ans"><div class="faq-ans-text">Repayment is automatic — the total amount is deducted from your Telecel Cash account on the due date. You can also make early repayments any time without any penalty fee.</div></div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span>Is my personal data secure?</span><div class="faq-arrow">▼</div></div>
-          <div class="faq-ans"><div class="faq-ans-text">Yes. We use 256-bit bank-level encryption and strict security protocols. Your data is never sold or shared with third parties without your explicit consent.</div></div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span>What happens if I miss a repayment?</span><div class="faq-arrow">▼</div></div>
-          <div class="faq-ans"><div class="faq-ans-text">Missing a repayment may affect your future borrowing limit and incur a small late fee. We recommend ensuring sufficient funds in your Telecel Cash account before the due date. Contact support if you anticipate difficulty.</div></div>
-        </div>
+      <div class="bcard">
+        <div class="bcard-ico">📈</div>
+        <div class="bcard-title">Grow Your Limit</div>
+        <p class="bcard-desc">Consistent Telecel usage and good repayment history automatically increase your eligible loan amount over time.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ TESTIMONIALS ══ -->
-<section class="testimonials" id="testimonials">
-  <div class="section-inner">
-    <div class="section-header">
-      <div class="testimonials-toggle-btn" id="testimonialsToggle" onclick="toggleTestimonials()">
-        <h2 class="section-title">What Our Customers Say</h2>
-        <span class="t-arrow">▼</span>
+<!-- FAQ -->
+<section class="sec faq" id="faq">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <div class="eyebrow">Got Questions</div>
+      <h2 class="sec-title">Frequently Asked</h2>
+    </div>
+    <div class="faq-inner">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>How long does Telecel loan approval take?</span><div class="faq-arr">▼</div></div>
+        <div class="faq-ans"><div class="faq-ans-text">Most active Telecel subscribers are approved within 15 minutes. The system checks your Telecel usage history and eligibility in real-time, 24/7 including weekends and public holidays.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>Who is eligible for TelecelLoans?</span><div class="faq-arr">▼</div></div>
+        <div class="faq-ans"><div class="faq-ans-text">Active Telecel subscribers aged 18+ with a registered Telecel Cash account and a verifiable income. The longer and more actively you've used Telecel — calls, data, Telecel Cash — the higher your eligible loan amount.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>Does my Telecel usage affect how much I can borrow?</span><div class="faq-arr">▼</div></div>
+        <div class="faq-ans"><div class="faq-ans-text">Yes, directly. Regular Telecel activity — consistent airtime top-ups, active data usage, and Telecel Cash transactions — increases your eligible loan limit. Think of your Telecel activity as your credit history with us.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>What is the maximum loan amount?</span><div class="faq-arr">▼</div></div>
+        <div class="faq-ans"><div class="faq-ans-text">GHS 1,000 to GHS 50,000 depending on your Telecel subscriber history, income, and repayment track record. First-time borrowers may start lower — limits grow automatically with good repayment behaviour.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>What is the interest rate?</span><div class="faq-arr">▼</div></div>
+        <div class="faq-ans"><div class="faq-ans-text">A flat 8.9% per month applied to the principal for each month of your chosen repayment period. All amounts are shown upfront in our calculator before you apply — no surprises.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>How do I repay my TelecelLoan?</span><div class="faq-arr">▼</div></div>
+        <div class="faq-ans"><div class="faq-ans-text">Repayment is automatic — deducted from your Telecel Cash account on the due date. You can also make early repayments anytime without any penalty fee. Everything is trackable from your dashboard.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>What if I miss a repayment?</span><div class="faq-arr">▼</div></div>
+        <div class="faq-ans"><div class="faq-ans-text">Missing a repayment may affect your future borrowing limit and incur a small late fee. Ensure sufficient funds in your Telecel Cash account before the due date. Contact Telecel support early if you anticipate difficulty.</div></div>
       </div>
     </div>
-    <div class="testimonials-grid" id="testimonialsGrid">
-      <div class="t-card">
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="sec testimonials" id="testimonials">
+  <div class="sec-inner">
+    <div class="t-toggle" id="tToggle" onclick="toggleTestimonials()">
+      <div>
+        <div class="eyebrow">Customer Stories</div>
+        <h2 class="sec-title">What Telecel Users Say</h2>
+      </div>
+      <div class="t-arr">▼</div>
+    </div>
+    <div class="t-grid" id="tGrid">
+      <div class="tcard">
         <div class="t-stars">★★★★★</div>
-        <p class="t-text">"Fast, reliable, and easy to use. I got my loan approved in just 15 minutes. Highly recommended for any Telecel user!"</p>
-        <div class="t-author">Kwame Asante</div>
-        <div class="t-role">Business Owner, Accra</div>
+        <p class="t-text">"As a long-time Telecel subscriber, I qualified instantly. Approved in under 15 minutes. The whole thing happened on my phone!"</p>
+        <div class="t-name">Kwame Asante</div>
+        <div class="t-role">Business Owner · Accra</div>
       </div>
-      <div class="t-card">
+      <div class="tcard">
         <div class="t-stars">★★★★★</div>
-        <p class="t-text">"The process was so simple. No hidden fees, no surprises at all. Exactly what I needed when I needed it most."</p>
-        <div class="t-author">Ama Osei</div>
-        <div class="t-role">Entrepreneur, Kumasi</div>
+        <p class="t-text">"No hidden fees, no surprises. Exactly what I saw in the calculator is what I paid. Telecel made it so simple."</p>
+        <div class="t-name">Ama Osei</div>
+        <div class="t-role">Entrepreneur · Kumasi</div>
       </div>
-      <div class="t-card">
+      <div class="tcard">
         <div class="t-stars">★★★★★</div>
-        <p class="t-text">"TelecelLoans helped me expand my shop stock. The flexible repayment terms made it so easy to manage without stress."</p>
-        <div class="t-author">Yaw Mensah</div>
-        <div class="t-role">Trader, Takoradi</div>
+        <p class="t-text">"My Telecel loyalty actually paid off — got a higher limit than I expected. Funds were on my Telecel Cash in minutes."</p>
+        <div class="t-name">Yaw Mensah</div>
+        <div class="t-role">Trader · Takoradi</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ LOGIN MODAL ══ -->
-<div class="modal-overlay" id="loginModal">
-  <div class="modal-box">
-    <div class="modal-head">
-      <div class="modal-head-left">
-        <div class="modal-logo">
-          <svg width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 15C30.67 15 15 30.67 15 50C15 69.33 30.67 85 50 85C69.33 85 85 69.33 85 50C85 30.67 69.33 15 50 15ZM50 75C36.19 75 25 63.81 25 50C25 36.19 36.19 25 50 25C63.81 25 75 36.19 75 50C75 63.81 63.81 75 50 75Z" fill="#E30613"/>
-            <path d="M50 35C44.48 35 40 39.48 40 45V55C40 60.52 44.48 65 50 65C55.52 65 60 60.52 60 55V45C60 39.48 55.52 35 50 35ZM55 55C55 58.31 52.31 61 50 61C47.69 61 45 58.31 45 55V45C45 41.69 47.69 39 50 39C52.31 39 55 41.69 55 45V55Z" fill="#E30613"/>
-          </svg>
-        </div>
-        <div class="modal-head-text">
-          <h2>Login</h2>
-          <div class="mh-sub">Access your account</div>
-        </div>
-      </div>
-      <button class="modal-close" onclick="closeLoginModal()">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="fgroup">
-        <label class="flabel">Telecel Phone Number</label>
-        <input type="tel" class="finput" id="loginPhone" placeholder="050XXXXXXXX" maxlength="10" inputmode="numeric">
-      </div>
-      <div class="modal-btns">
-        <button class="btn-primary" onclick="verifyLogin()">Verify &amp; Continue →</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══ APPLICATION MODAL ══ -->
-<div class="modal-overlay" id="applicationModal">
-  <div class="modal-box">
-    <div class="modal-head">
-      <div class="modal-head-left">
-        <div class="modal-logo">
-          <svg width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 15C30.67 15 15 30.67 15 50C15 69.33 30.67 85 50 85C69.33 85 85 69.33 85 50C85 30.67 69.33 15 50 15ZM50 75C36.19 75 25 63.81 25 50C25 36.19 36.19 25 50 25C63.81 25 75 36.19 75 50C75 63.81 63.81 75 50 75Z" fill="#E30613"/>
-            <path d="M50 35C44.48 35 40 39.48 40 45V55C40 60.52 44.48 65 50 65C55.52 65 60 60.52 60 55V45C60 39.48 55.52 35 50 35ZM55 55C55 58.31 52.31 61 50 61C47.69 61 45 58.31 45 55V45C45 41.69 47.69 39 50 39C52.31 39 55 41.69 55 45V55Z" fill="#E30613"/>
-          </svg>
-        </div>
-        <div class="modal-head-text">
-          <h2><span style="color:white;">Telecel</span><span style="color:#0066CC;">Loans</span></h2>
-          <div class="mh-sub" id="modalSubtitle">Step 1 of 3 — Your Details</div>
-        </div>
-      </div>
-      <button class="modal-close" onclick="closeApplicationModal()">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="progress-bar">
-        <div class="pbar-seg active" id="seg1"></div>
-        <div class="pbar-seg" id="seg2"></div>
-        <div class="pbar-seg" id="seg3"></div>
-      </div>
-
-      <!-- STEP 1 -->
-      <div id="step1" class="step-content">
-        <div class="loan-summary">
-          <div class="ls-item">
-            <div class="ls-label">Loan Amount</div>
-            <div class="ls-val">GHS <span id="sumAmount">1,000</span></div>
-          </div>
-          <div class="ls-item" style="text-align:right;">
-            <div class="ls-label">Total Repayment</div>
-            <div class="ls-val green">GHS <span id="sumRepay">1,091</span></div>
-          </div>
-        </div>
-        <div class="fgroup">
-          <label class="flabel">Full Name</label>
-          <input type="text" class="finput" id="fullName" placeholder="e.g. Kwame Asante">
-        </div>
-        <div class="fgroup">
-          <label class="flabel">Telecel Phone Number</label>
-          <input type="tel" class="finput" id="appPhone" placeholder="050XXXXXXXX" maxlength="10" inputmode="numeric">
-        </div>
-        <div class="frow">
-          <div class="fgroup">
-            <label class="flabel">Employment Status</label>
-            <select class="finput" id="employment" style="appearance:auto;-webkit-appearance:auto;">
-              <option value="">Select…</option>
-              <option value="Employed">Employed</option>
-              <option value="Self-Employed">Self-Employed</option>
-              <option value="Business Owner">Business Owner</option>
-              <option value="Student">Student</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-          <div class="fgroup">
-            <label class="flabel">Monthly Income (GHS)</label>
-            <input type="number" class="finput" id="income" placeholder="e.g. 2000" min="0">
-          </div>
-        </div>
-        <div class="modal-btns">
-          <button class="btn-primary" onclick="goToStep(2)">Review Details →</button>
-        </div>
-      </div>
-
-      <!-- STEP 2 -->
-      <div id="step2" class="step-content" style="display:none;">
-        <p style="font-family:'Red Hat Display',sans-serif;font-size:16px;font-weight:800;color:var(--dark);margin-bottom:16px;letter-spacing:-0.2px;">Review Your Information</p>
-        <div class="review-box">
-          <div class="review-row"><span class="rr-label">Full Name</span><span class="rr-val" id="revName">—</span></div>
-          <div class="review-row"><span class="rr-label">Phone Number</span><span class="rr-val" id="revPhone">—</span></div>
-          <div class="review-row"><span class="rr-label">Employment</span><span class="rr-val" id="revEmployment">—</span></div>
-          <div class="review-row"><span class="rr-label">Monthly Income</span><span class="rr-val" id="revIncome">—</span></div>
-        </div>
-        <div class="review-box">
-          <div class="review-row"><span class="rr-label">Loan Amount</span><span class="rr-val" id="revAmount">—</span></div>
-          <div class="review-row"><span class="rr-label">Repayment Period</span><span class="rr-val" id="revDays">—</span></div>
-          <div class="review-row"><span class="rr-label">Interest Rate</span><span class="rr-val" id="revRate">—</span></div>
-          <div class="review-row"><span class="rr-label">Total Repayment</span><span class="rr-val" id="revTotal" style="color:var(--green);">—</span></div>
-        </div>
-        <div class="modal-btns">
-          <button class="btn-primary" onclick="goToStep(3)">Confirm &amp; Proceed →</button>
-          <button class="btn-secondary" onclick="goToStep(1)">← Back</button>
-        </div>
-      </div>
-
-      <!-- STEP 3 -->
-      <div id="step3" class="step-content" style="display:none;">
-        <div class="success-wrap">
-          <div class="success-icon-wrap">✓</div>
-          <div class="success-title">Application Submitted!</div>
-          <div class="success-desc">Your application has been received. You'll be redirected to the verification page to finalise your loan.</div>
-        </div>
-        <div class="review-box" style="margin-top:20px;">
-          <div class="review-row">
-            <span class="rr-label">Amount Borrowed</span>
-            <span class="rr-val">GHS <span id="finalAmt">—</span></span>
-          </div>
-          <div class="review-row">
-            <span class="rr-label">Repayment Amount</span>
-            <span class="rr-val" style="color:var(--green);">GHS <span id="finalRepay">—</span></span>
-          </div>
-        </div>
-        <div class="modal-btns">
-          <button class="btn-primary" onclick="submitApplication()">Go to Verification →</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/694a65c91f0ade19740a3331/1jd59r7eu';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
-
-<!-- ══ FOOTER ══ -->
+<!-- FOOTER -->
 <footer>
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <a href="#" class="footer-brand-logo">
-          <svg width="72" height="72" viewBox="0 0 141 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M70.7739 41.8297C59.4621 41.7154 50.3693 51.0317 50.3985 62.0956C50.4277 73.8279 60.2714 82.4831 70.5454 82.296C81.4391 82.3981 90.7482 73.6894 90.8429 62.3557C90.9426 50.4873 81.5436 41.9415 70.7739 41.8297ZM78.8579 55.6546C78.6659 57.2807 77.7107 58.2408 76.228 58.756C75.4089 59.0428 74.5558 59.0501 73.6978 59.0501C73.1704 59.0477 72.6381 59.004 72.1107 59.089C71.7315 59.1522 71.5225 59.3418 71.469 59.7477C71.3912 60.297 71.5055 60.8317 71.5006 61.3737C71.4982 63.5953 71.5006 65.8217 71.4982 68.0432C71.4982 68.4126 71.5371 68.7772 71.6148 69.1345C71.9308 70.5515 73.1096 71.3925 74.5534 71.2151C75.6617 71.0765 76.7822 71.0692 77.8954 70.9744C78.362 70.9356 78.5103 71.1421 78.4763 71.638C78.4228 72.3817 78.4277 73.1255 78.4739 73.8717C78.5686 75.4175 77.8443 76.521 76.5245 77.0678C72.9565 78.5432 69.4346 78.5092 66.2166 76.1856C64.4471 74.9095 63.5016 73.0842 63.3995 70.831C63.2732 67.9363 63.2221 65.0415 63.1346 62.1418C63.0423 59.2154 63.0714 56.2866 63.0933 53.3602C63.1079 51.3963 64.0193 49.8019 65.468 48.5112C66.2725 47.7918 67.1693 47.206 68.144 46.7394C69.0287 46.314 69.9548 46.1536 70.927 46.1682C71.2745 46.1755 71.4058 46.3067 71.4398 46.664C71.5346 47.5901 71.4884 48.5185 71.5079 49.3668C71.5079 50.1178 71.5006 50.796 71.5079 51.4717C71.5103 52.0599 71.7193 52.2737 72.3148 52.3612C72.7256 52.4244 73.1339 52.371 73.5447 52.3685C74.9593 52.3515 76.369 52.3515 77.7836 52.3612C78.6173 52.371 78.8749 52.6262 78.8506 53.4501C78.8263 54.1866 78.9502 54.9133 78.8652 55.6546H78.8579Z" fill="#E32527"/>
-<path d="M71.4683 59.7455C71.3905 60.2948 71.5048 60.8295 71.4999 61.3715C71.4975 63.593 71.4999 65.8194 71.4975 68.0409C71.4975 68.4104 71.5364 68.775 71.6141 69.1323C71.9301 70.5493 73.1089 71.3902 74.5527 71.2128C75.661 71.0743 76.7815 71.067 77.8947 70.9722C78.3614 70.9333 78.5096 71.1399 78.4756 71.6357C78.4221 72.3795 78.427 73.1232 78.4732 73.8694C78.568 75.4153 77.8437 76.5187 76.5239 77.0656C72.9558 78.5409 69.4339 78.5069 66.2159 76.1833C64.4464 74.9073 63.5009 73.0819 63.3989 70.8288C63.2725 67.934 63.2214 65.0392 63.1339 62.1396C63.0416 59.2132 63.0707 56.2843 63.0926 53.358C63.1072 51.3941 64.0187 49.7996 65.4673 48.509C66.2718 47.7896 67.1687 47.2038 68.1433 46.7371C69.028 46.3118 69.9541 46.1514 70.9263 46.1659C71.2739 46.1732 71.4051 46.3045 71.4391 46.6618C71.5339 47.5878 71.4878 48.5163 71.5072 49.3646C71.5072 50.1156 71.4999 50.7937 71.5072 51.4694C71.5096 52.0576 71.7187 52.2715 72.3141 52.359C72.7249 52.4222 73.1332 52.3687 73.544 52.3663C74.9586 52.3493 76.3683 52.3493 77.7829 52.359C78.6166 52.3687 78.8742 52.6239 78.8499 53.4479C78.8256 54.1843 78.9496 54.9111 78.8645 55.6524C78.6725 57.2784 77.7173 58.2385 76.2346 58.7538C75.4155 59.0406 74.5624 59.0479 73.7044 59.0479C73.177 59.0455 72.6447 59.0017 72.1173 59.0868C71.7381 59.15 71.5291 59.3396 71.4756 59.7455H71.4683Z" fill="white"/>
-<path d="M103.955 102.837C105.246 102.863 106.736 102.679 108.146 102.035C108.488 101.879 108.551 102.139 108.598 102.38C108.882 103.85 108.148 105.367 106.804 106.101C105.939 106.572 105.013 106.852 104.04 106.954C102.018 107.165 100.025 107.092 98.1146 106.12C95.475 104.776 93.9122 101.974 93.9219 99.0109C93.9268 97.2123 94.2379 95.4939 95.2101 93.9408C96.7924 91.4081 99.0771 90.0689 102.086 90.0081C104.215 89.9644 106.118 90.5526 107.737 91.972C109.665 93.6612 110.002 95.946 109.293 98.2137C109.001 99.1421 108.184 99.6283 107.273 99.9102C106.182 100.248 105.042 100.272 103.919 100.384C102.601 100.513 101.287 100.627 99.9594 100.569C99.5681 100.552 99.4782 100.698 99.6337 101.067C100.047 102.056 100.854 102.535 101.865 102.727C102.475 102.844 103.095 102.824 103.953 102.834L103.955 102.837ZM100.961 96.923C101.826 96.9401 102.684 96.8599 103.535 96.7165C104.385 96.5731 104.718 95.8536 104.198 95.156C103.916 94.7793 103.566 94.4779 103.114 94.3321C101.182 93.7026 99.8063 94.9835 99.4004 96.5366C99.3275 96.8137 99.4757 96.9182 99.7261 96.9206C100.137 96.9231 100.55 96.9206 100.961 96.9206V96.923Z" fill="#E32527"/>
-<path d="M70.5666 102.832C72.0978 102.846 73.4881 102.666 74.786 102.03C75.1287 101.862 75.1919 102.044 75.2381 102.314C75.5249 104.001 74.7568 105.498 73.2062 106.244C72.3773 106.643 71.4975 106.881 70.5836 106.966C68.7655 107.134 66.9742 107.093 65.2582 106.344C62.7232 105.236 61.2065 103.291 60.7228 100.613C60.2075 97.7592 60.752 95.0904 62.66 92.83C64.1645 91.0484 66.0992 90.0641 68.469 90.0227C70.3162 89.9911 72.0808 90.2877 73.6291 91.3717C75.6805 92.8082 76.5287 94.7891 76.2225 97.2318C76.0645 98.4859 75.1506 99.5311 73.928 99.8519C72.3676 100.26 70.761 100.362 69.169 100.566C68.3621 100.671 67.5454 100.661 66.736 100.584C66.1721 100.53 66.0773 100.688 66.2985 101.201C66.578 101.855 67.0763 102.253 67.7496 102.453C68.7023 102.735 69.6721 102.871 70.5641 102.837L70.5666 102.832ZM66.9207 96.9887C67.8541 96.8745 68.96 96.9401 70.0489 96.7408C70.5447 96.6509 70.9384 96.4054 71.0624 95.8877C71.1888 95.3651 70.8655 95.02 70.4961 94.7332C69.0062 93.5835 66.702 94.3054 66.1259 96.0943C65.8537 96.9401 65.8975 97.0033 66.9232 96.9887H66.9207Z" fill="#E32527"/>
-<path d="M41.6208 102.834C43.0086 102.871 44.5156 102.681 45.9399 102.035C46.2316 101.904 46.3288 102.047 46.3871 102.317C46.7007 103.812 45.9691 105.367 44.5934 106.118C43.66 106.629 42.6514 106.874 41.5989 106.959C39.7954 107.105 38.0187 107.078 36.3222 106.293C33.4541 104.961 31.9982 102.693 31.7673 99.5824C31.6628 98.1897 31.7357 96.8115 32.2656 95.5039C33.4031 92.6966 35.2916 90.7036 38.3857 90.164C40.4906 89.797 42.5347 90.0254 44.4329 91.1386C45.8548 91.9723 46.8562 93.3942 47.2062 95.0032C47.8576 97.9976 46.8562 99.4049 45.0017 99.9178C43.9906 100.197 42.943 100.253 41.9052 100.363C41.0132 100.457 40.1211 100.54 39.2291 100.628C38.7284 100.676 38.2302 100.589 37.7319 100.567C37.3989 100.552 37.3066 100.708 37.4305 101.009C37.834 101.996 38.5899 102.533 39.6156 102.73C40.2257 102.847 40.8454 102.83 41.6208 102.834ZM37.8486 96.9914C38.9326 96.9282 40.0191 96.8796 41.1007 96.7921C41.5746 96.7532 42.0656 96.6438 42.2211 96.0945C42.3767 95.5452 42.1166 95.1296 41.7107 94.782C40.459 93.715 37.8777 94.0699 37.2604 96.1504C37.0222 96.9549 37.027 97.0036 37.851 96.989L37.8486 96.9914Z" fill="#E32527"/>
-<path d="M27.8097 90.1057C28.3104 90.13 28.9715 90.0668 29.6326 90.1592C30.0045 90.2102 30.1406 90.3998 30.1358 90.7449C30.1309 91.1265 30.1358 91.5106 30.1358 91.8922C30.1309 93.3942 29.2608 94.3592 27.7587 94.5585C27.1292 94.6436 26.4972 94.6557 25.8653 94.6387C25.5056 94.629 25.3743 94.7821 25.3549 95.1321C25.2649 96.9404 25.2309 98.7463 25.3694 100.552C25.4764 101.94 26.2056 102.516 27.574 102.348C28.2132 102.271 28.8646 102.263 29.5087 102.224C29.7736 102.207 29.9122 102.283 29.8927 102.601C29.8635 103.051 29.8174 103.503 29.866 103.95C29.9972 105.156 29.4965 105.963 28.4562 106.395C26.1594 107.35 23.9257 107.244 21.8767 105.778C20.6712 104.915 20.0003 103.666 19.9493 102.164C19.8278 98.5057 19.7524 94.8453 19.75 91.1824C19.75 89.4324 20.5399 88.188 21.8524 87.1793C22.6594 86.5595 23.5465 86.1172 24.5844 86.0515C25.2771 86.0078 25.3549 86.0831 25.3597 86.7661C25.3646 87.5609 25.3549 88.3557 25.3549 89.1481C25.3549 89.9939 25.4569 90.096 26.2833 90.1008C26.7403 90.1033 27.1948 90.1008 27.8122 90.1008L27.8097 90.1057Z" fill="#E32527"/>
-<path d="M92.0261 94.9252C91.9993 95.1124 92.1792 95.5353 91.9604 95.6933C91.7076 95.8756 91.433 95.4964 91.1656 95.3724C89.6587 94.6724 88.1031 94.4634 86.4917 94.9835C84.9701 95.4745 83.9566 96.9377 84.0684 98.5322C84.2021 100.481 85.2813 101.954 86.8806 102.159C88.3608 102.348 89.8507 102.297 91.2677 101.716C91.817 101.49 91.8729 101.527 91.9313 102.129C92.15 104.341 91.1729 105.768 89.1021 106.541C84.433 108.284 78.7576 104.786 78.551 99.2613C78.5219 98.4617 78.5438 97.6815 78.641 96.8915C79.0931 93.2311 82.9212 90.2099 86.1514 90.0787C86.9681 90.0447 87.7677 90.0787 88.5649 90.2148C90.6188 90.5648 91.9142 92.0644 92.0236 94.1887C92.0333 94.3953 92.0236 94.5995 92.0236 94.9252H92.0261Z" fill="#E32527"/>
-<path d="M117.893 91.6953C117.98 94.189 117.975 97.1178 117.978 100.044C117.978 100.265 117.978 100.487 118 100.705C118.072 101.515 118.746 102.142 119.555 102.207C120.051 102.246 120.547 102.275 121.045 102.28C121.376 102.283 121.538 102.397 121.531 102.742C121.519 103.316 121.558 103.889 121.483 104.461C121.351 105.467 120.795 106.14 119.847 106.458C117.844 107.132 115.948 106.918 114.244 105.63C112.963 104.662 112.443 103.27 112.412 101.729C112.327 97.604 112.234 93.4769 112.385 89.3498C112.434 88.0057 112.334 86.6616 112.346 85.3151C112.346 85.089 112.438 84.9408 112.674 84.9286C113.894 84.8703 115.124 84.7925 116.269 85.354C117.236 85.8279 117.754 86.6008 117.822 87.6897C117.895 88.8807 117.914 90.0717 117.895 91.6953H117.893Z" fill="#E32527"/>
-<path d="M50.1509 93.168C50.1509 90.6378 50.1509 88.11 50.1509 85.5798C50.1509 84.9722 50.2019 84.926 50.8023 84.909C51.772 84.8823 52.7394 84.8652 53.68 85.1934C54.9196 85.6284 55.5516 86.5059 55.6391 87.7965C55.6512 87.9861 55.6536 88.1781 55.6561 88.3701C55.7266 92.2225 55.7436 96.0725 55.7363 99.925C55.7363 100.234 55.7509 100.54 55.8141 100.846C55.9964 101.721 56.4557 102.139 57.3575 102.202C57.8557 102.239 58.354 102.273 58.8523 102.275C59.1901 102.275 59.3457 102.416 59.3384 102.744C59.3238 103.488 59.3043 104.232 59.1561 104.964C59.0613 105.435 58.772 105.86 58.3564 106.103C55.8311 107.586 51.7064 106.777 50.5495 103.534C50.2165 102.606 50.1752 101.631 50.1654 100.664C50.1411 98.1652 50.1582 95.6642 50.1582 93.1656H50.1484L50.1509 93.168Z" fill="#E32527"/>
-          </svg>
-          <div style="font-family:'Red Hat Display',sans-serif;font-size:18px;font-weight:900;color:white;letter-spacing:-0.5px;"><span style="color:white;">Telecel</span><span style="color:#0066CC;">Loans</span></div>
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <a href="#" class="logo">
+          <div class="logo-mark" style="width:34px;height:34px">
+            <svg viewBox="0 0 141 140" fill="none" width="18" height="18"><path d="M70.77 41.83C59.46 41.72 50.37 51.03 50.4 62.1C50.43 73.83 60.27 82.48 70.55 82.3C81.44 82.4 90.75 73.69 90.84 62.36C90.94 50.49 81.54 41.94 70.77 41.83Z" fill="white"/></svg>
+          </div>
+          <div class="logo-name" style="color:#fff">Telecel<em style="color:var(--red)">Loans</em></div>
         </a>
-        <div class="footer-divider"></div>
+        <div class="ft-divider"></div>
         <p>Fast, secure, and flexible loans exclusively for Telecel subscribers across Ghana. Licensed and regulated.</p>
       </div>
-      <div class="footer-col">
+      <div class="ft-col">
         <h4>Product</h4>
-        <a href="#calculator">Loans Calculator</a>
+        <a href="#calculator">Loan Calculator</a>
         <a href="#benefits">Benefits</a>
         <a href="#how">How It Works</a>
+        <a href="#eligibility">Eligibility</a>
         <a href="#faq">FAQ</a>
       </div>
-      <div class="footer-col">
+      <div class="ft-col">
         <h4>Company</h4>
         <a href="#">About Us</a>
         <a href="#">Contact</a>
         <a href="#">Blog</a>
+        <a href="#">Careers</a>
       </div>
-      <div class="footer-col">
+      <div class="ft-col">
         <h4>Legal &amp; Support</h4>
         <a href="#">Terms of Service</a>
         <a href="#">Privacy Policy</a>
@@ -1622,170 +1048,252 @@ s0.parentNode.insertBefore(s1,s0);
         <a href="#">Report Issue</a>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>© 2026 TelecelLoans. All rights reserved.</p>
-      <div class="footer-badge"><div class="footer-badge-dot"></div> Licensed &amp; regulated by Bank of Ghana</div>
+    <div class="ft-bottom">
+      <p>&copy; 2026 TelecelLoans. All rights reserved.</p>
+      <div class="ft-badge"><div class="ft-dot"></div>Licensed &amp; regulated by Bank of Ghana</div>
     </div>
   </div>
 </footer>
 
+<!-- LOGIN MODAL -->
+<div class="modal-ov" id="loginModal">
+  <div class="mbox" style="max-width:420px">
+    <div class="mhead">
+      <div class="mhead-l">
+        <div class="mhead-ico">🔐</div>
+        <div>
+          <div class="mhead-title">Login to TelecelLoans</div>
+          <div class="mhead-sub">Enter your Telecel number to continue</div>
+        </div>
+      </div>
+      <button class="mclose" onclick="closeLoginModal()">&#10005;</button>
+    </div>
+    <div class="mbody">
+      <div class="fg">
+        <label class="fl">Telecel Phone Number</label>
+        <input type="tel" class="fi" id="loginPhone" placeholder="050XXXXXXXX" maxlength="10" inputmode="numeric">
+      </div>
+      <div class="mbtns">
+        <button class="btn-primary" onclick="doLogin()">Verify &amp; Continue &rarr;</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- APPLICATION MODAL -->
+<div class="modal-ov" id="appModal">
+  <div class="mbox" style="max-width:420px">
+    <div class="mhead">
+      <div class="mhead-l">
+        <div class="mhead-ico">📋</div>
+        <div>
+          <div class="mhead-title">TelecelLoans Application</div>
+          <div class="mhead-sub" id="mSub">Step 1 of 2 — Your Details</div>
+        </div>
+      </div>
+      <button class="mclose" onclick="closeAppModal()">&#10005;</button>
+    </div>
+    <div class="mbody">
+      <div class="prog">
+        <div class="prog-seg act" id="ps1"></div>
+        <div class="prog-seg" id="ps2"></div>
+      </div>
+
+      <!-- STEP 1 -->
+      <div id="mStep1">
+        <div class="loan-sum">
+          <div class="ls-item">
+            <div class="ls-lbl">Loan Amount</div>
+            <div class="ls-val">GHS <span id="sAmt">5,000</span></div>
+          </div>
+          <div class="ls-item">
+            <div class="ls-lbl">Total Repayment</div>
+            <div class="ls-val g">GHS <span id="sRepay">—</span></div>
+          </div>
+          <div class="ls-item">
+            <div class="ls-lbl">Period</div>
+            <div class="ls-val"><span id="sPer">3</span> Mo</div>
+          </div>
+        </div>
+        <div class="fg">
+          <label class="fl">Full Name</label>
+          <input type="text" class="fi" id="fName" placeholder="e.g. Kwame Asante">
+        </div>
+        <div class="fg">
+          <label class="fl">Telecel Phone Number</label>
+          <input type="tel" class="fi" id="fPhone" placeholder="050XXXXXXXX" maxlength="10" inputmode="numeric">
+        </div>
+        <div class="frow">
+          <div class="fg">
+            <label class="fl">Employment Status</label>
+            <select class="fi" id="fJob">
+              <option value="">Select…</option>
+              <option>Employed</option>
+              <option>Self-Employed</option>
+              <option>Business Owner</option>
+              <option>Trader</option>
+              <option>Student</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label class="fl">Monthly Income (GHS)</label>
+            <input type="number" class="fi" id="fIncome" placeholder="e.g. 2000" min="0">
+          </div>
+        </div>
+        <div class="mbtns">
+          <button class="btn-primary" onclick="goStep2()">Review &amp; Confirm &rarr;</button>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div id="mStep2" style="display:none">
+        <p style="font-family:Georgia,'Times New Roman',serif;font-size:15px;color:var(--ink);margin-bottom:14px;">Review Your Application</p>
+        <div class="rev-box">
+          <div class="rev-row"><span class="rr-l">Full Name</span><span class="rr-v" id="rvName">—</span></div>
+          <div class="rev-row"><span class="rr-l">Phone Number</span><span class="rr-v" id="rvPhone">—</span></div>
+          <div class="rev-row"><span class="rr-l">Employment</span><span class="rr-v" id="rvJob">—</span></div>
+          <div class="rev-row"><span class="rr-l">Monthly Income</span><span class="rr-v" id="rvInc">—</span></div>
+        </div>
+        <div class="rev-box">
+          <div class="rev-row"><span class="rr-l">Loan Amount</span><span class="rr-v" id="rvAmt">—</span></div>
+          <div class="rev-row"><span class="rr-l">Repayment Period</span><span class="rr-v" id="rvPer">—</span></div>
+          <div class="rev-row"><span class="rr-l">Interest Rate</span><span class="rr-v">8.9% per month</span></div>
+          <div class="rev-row"><span class="rr-l">Total Repayment</span><span class="rr-v g" id="rvTotal">—</span></div>
+        </div>
+        <div class="mbtns">
+          <button class="btn-primary" onclick="submitApp()">Confirm &amp; Submit &rarr;</button>
+          <button class="btn-back" onclick="backStep1()">&larr; Edit Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tawk.to -->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{},Tawk_LoadStart=new Date();
+(function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;s1.src='https://embed.tawk.to/6a15835d36ad8d1c38c4154d/default';
+  s1.charset='UTF-8';s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+
 <script>
-  /* ── RATE: 10.9% per month ── */
-  const MONTHLY_RATE = 0.109;
-  let selectedMonths = 1;
+const RATE = 0.089;
+let curAmt = 5000, curMonths = 3;
 
-  function selectPeriod(months) {
-    selectedMonths = months;
-    document.querySelectorAll('.period-btn').forEach(btn => {
-      btn.classList.toggle('active', parseInt(btn.dataset.months) === months);
-    });
-    updateCalc();
-  }
+function calcUpdate() {
+  const interest = curAmt * RATE * curMonths;
+  const total    = Math.round(curAmt + interest);
+  const monthly  = Math.round(total / curMonths);
+  document.getElementById('crMonthly').textContent = 'GHS ' + monthly.toLocaleString();
+  document.getElementById('crTotal').textContent   = 'GHS ' + total.toLocaleString();
+  document.getElementById('crNote').textContent    = curMonths + ' month' + (curMonths > 1 ? 's' : '') + ' term · GHS ' + Math.round(interest).toLocaleString() + ' interest';
+  document.getElementById('sAmt').textContent    = curAmt.toLocaleString();
+  document.getElementById('sRepay').textContent  = total.toLocaleString();
+  document.getElementById('sPer').textContent    = curMonths;
+  window._ld = { amount: curAmt, months: curMonths, total, monthly, interest: Math.round(interest) };
+}
 
-  function updateCalc() {
-    const amountInput = document.getElementById('loanAmount');
-    let amount = parseInt(amountInput.value) || 500;
-    amount = Math.max(500, Math.min(50000, amount));
-    document.getElementById('loanSlider').value = amount;
+function onAmtInput(val) {
+  let v = parseInt(val) || 1000;
+  curAmt = Math.max(1000, Math.min(50000, v));
+  document.getElementById('amtSlider').value = curAmt;
+  calcUpdate();
+}
+function onSlider(val) {
+  curAmt = parseInt(val);
+  document.getElementById('amtInput').value = curAmt;
+  calcUpdate();
+}
+function selPeriod(m) {
+  curMonths = m;
+  document.querySelectorAll('.ptab').forEach(b => b.classList.toggle('act', parseInt(b.dataset.m) === m));
+  calcUpdate();
+}
 
-    const totalInterest = amount * MONTHLY_RATE * selectedMonths;
-    const total = Math.round(amount + totalInterest);
-    const monthly = Math.round(total / selectedMonths);
+function toggleMNav() {
+  document.getElementById('mnav').classList.toggle('open');
+  document.getElementById('ham').classList.toggle('open');
+}
+function closeMNav() {
+  document.getElementById('mnav').classList.remove('open');
+  document.getElementById('ham').classList.remove('open');
+}
 
-    document.getElementById('monthlyDisplay').textContent = 'GHS ' + monthly.toLocaleString();
-    document.getElementById('repayDisplay').textContent = 'GHS ' + total.toLocaleString();
-    document.getElementById('rateNote').textContent = selectedMonths + ' month' + (selectedMonths > 1 ? 's' : '');
+function openLoginModal() { document.getElementById('loginModal').classList.add('open'); }
+function closeLoginModal() { document.getElementById('loginModal').classList.remove('open'); }
+function doLogin() {
+  const ph = document.getElementById('loginPhone').value.trim();
+  if (!ph || ph.length < 9) { alert('Please enter a valid Telecel number.'); return; }
+  const d = window._ld || { amount: curAmt, months: curMonths, total: Math.round(curAmt*(1+RATE*curMonths)), interest: Math.round(curAmt*RATE*curMonths) };
+  const p = new URLSearchParams({ phone:ph, amount:d.amount, days:d.months*30, fee:d.interest, repay:d.total, name:'', employment:'', income:'' });
+  window.location.href = 'verify.html?' + p.toString();
+}
 
-    document.getElementById('sumAmount').textContent = amount.toLocaleString();
-    document.getElementById('sumRepay').textContent = total.toLocaleString();
+function openAppModal() {
+  calcUpdate();
+  document.getElementById('appModal').classList.add('open');
+  showStep(1);
+}
+function closeAppModal() { document.getElementById('appModal').classList.remove('open'); }
 
-    window.loanData = {
-      amount, months: selectedMonths,
-      rate: MONTHLY_RATE,
-      total,
-      monthly,
-      interest: Math.round(totalInterest)
-    };
-  }
+function showStep(n) {
+  document.getElementById('mStep1').style.display = n === 1 ? 'block' : 'none';
+  document.getElementById('mStep2').style.display = n === 2 ? 'block' : 'none';
+  document.getElementById('ps1').classList.toggle('act', n >= 1);
+  document.getElementById('ps2').classList.toggle('act', n >= 2);
+  document.getElementById('mSub').textContent = n === 1 ? 'Step 1 of 2 — Your Details' : 'Step 2 of 2 — Confirm & Submit';
+}
 
-  /* ── MOBILE NAV ── */
-  function toggleMobileNav() {
-    document.getElementById('mobileNav').classList.toggle('open');
-    document.getElementById('hamburger').classList.toggle('open');
-  }
-  function closeMobileNav() {
-    document.getElementById('mobileNav').classList.remove('open');
-    document.getElementById('hamburger').classList.remove('open');
-  }
+function goStep2() {
+  const name  = document.getElementById('fName').value.trim();
+  const phone = document.getElementById('fPhone').value.trim();
+  if (!name)                   { alert('Please enter your full name.'); return; }
+  if (!phone || phone.length < 9) { alert('Please enter a valid Telecel number.'); return; }
+  const d = window._ld;
+  document.getElementById('rvName').textContent  = name;
+  document.getElementById('rvPhone').textContent = phone;
+  document.getElementById('rvJob').textContent   = document.getElementById('fJob').value || '—';
+  document.getElementById('rvInc').textContent   = 'GHS ' + (parseInt(document.getElementById('fIncome').value) || 0).toLocaleString();
+  document.getElementById('rvAmt').textContent   = 'GHS ' + d.amount.toLocaleString();
+  document.getElementById('rvPer').textContent   = d.months + ' month' + (d.months > 1 ? 's' : '');
+  document.getElementById('rvTotal').textContent = 'GHS ' + d.total.toLocaleString();
+  showStep(2);
+}
 
-  /* ── LOGIN MODAL ── */
-  function openLoginModal() {
-    document.getElementById('loginModal').classList.add('open');
-  }
-  function closeLoginModal() {
-    document.getElementById('loginModal').classList.remove('open');
-  }
-  function verifyLogin() {
-    const phone = document.getElementById('loginPhone').value.trim();
-    if (!phone || phone.length < 9) {
-      alert('Please enter a valid Telecel number.');
-      return;
-    }
-    document.getElementById('appPhone').value = phone;
-    closeLoginModal();
-    const d = window.loanData || { amount: 500, months: 1, total: 1091, interest: 91 };
-    const params = new URLSearchParams({
-      phone,
-      amount: d.amount,
-      days: d.months * 30,
-      fee: d.interest,
-      repay: d.total,
-      name: '',
-      employment: '',
-      income: ''
-    });
-    window.location.href = 'verify.html?' + params.toString();
-  }
+function backStep1() { showStep(1); }
 
-  /* ── APPLICATION MODAL ── */
-  function openApplicationModal() {
-    updateCalc();
-    document.getElementById('applicationModal').classList.add('open');
-    goToStep(1);
-  }
-  function closeApplicationModal() {
-    document.getElementById('applicationModal').classList.remove('open');
-  }
-  function goToStep(step) {
-    document.querySelectorAll('.step-content').forEach(s => s.style.display = 'none');
-    document.getElementById('step' + step).style.display = 'block';
-    ['seg1','seg2','seg3'].forEach((id, i) => {
-      document.getElementById(id).classList.toggle('active', i < step);
-    });
-    const subs = ['Step 1 of 3 — Your Details', 'Step 2 of 3 — Review Information', 'Step 3 of 3 — Confirmation'];
-    document.getElementById('modalSubtitle').textContent = subs[step - 1];
-    if (step === 2) populateReview();
-    if (step === 3) populateFinal();
-  }
-  function populateReview() {
-    const d = window.loanData;
-    document.getElementById('revName').textContent       = document.getElementById('fullName').value || '—';
-    document.getElementById('revPhone').textContent      = document.getElementById('appPhone').value || '—';
-    document.getElementById('revEmployment').textContent = document.getElementById('employment').value || '—';
-    document.getElementById('revIncome').textContent     = 'GHS ' + (parseInt(document.getElementById('income').value)||0).toLocaleString();
-    document.getElementById('revAmount').textContent     = 'GHS ' + d.amount.toLocaleString();
-    document.getElementById('revDays').textContent       = d.months + ' month' + (d.months > 1 ? 's' : '');
-    document.getElementById('revRate').textContent       = '10.9% per month';
-    document.getElementById('revTotal').textContent      = 'GHS ' + d.total.toLocaleString();
-  }
-  function populateFinal() {
-    const d = window.loanData;
-    document.getElementById('finalAmt').textContent   = d.amount.toLocaleString();
-    document.getElementById('finalRepay').textContent = d.total.toLocaleString();
-  }
-  function submitApplication() {
-    const d = window.loanData;
-    const name       = document.getElementById('fullName').value;
-    const phone      = document.getElementById('appPhone').value;
-    const employment = document.getElementById('employment').value;
-    const income     = document.getElementById('income').value;
-    const payload = {
-      fullName: name, phone, employment, income,
-      loanAmount: d.amount,
-      repaymentMonths: d.months,
-      interestRate: '10.9%',
-      totalRepayment: d.total,
-      totalInterest: d.interest,
-      timestamp: new Date().toISOString()
-    };
-    sessionStorage.setItem('loanApplicationData', JSON.stringify(payload));
-    const params = new URLSearchParams({
-      phone, amount: d.amount, days: d.months * 30,
-      fee: d.interest, repay: d.total,
-      name, employment, income
-    });
-    window.location.href = 'verify.html?' + params.toString();
-  }
+function submitApp() {
+  const d          = window._ld;
+  const name       = document.getElementById('fName').value;
+  const phone      = document.getElementById('fPhone').value;
+  const employment = document.getElementById('fJob').value;
+  const income     = document.getElementById('fIncome').value;
+  sessionStorage.setItem('loanApplicationData', JSON.stringify({
+    fullName:name, phone, employment, income,
+    loanAmount:d.amount, repaymentMonths:d.months,
+    interestRate:'8.9%', totalRepayment:d.total, totalInterest:d.interest,
+    timestamp:new Date().toISOString()
+  }));
+  const p = new URLSearchParams({ phone, amount:d.amount, days:d.months*30, fee:d.interest, repay:d.total, name, employment, income });
+  window.location.href = 'verify.html?' + p.toString();
+}
 
-  /* ── FAQ ── */
-  function toggleFaq(el) { el.parentElement.classList.toggle('open'); }
+function toggleFaq(el) { el.parentElement.classList.toggle('open'); }
 
-  /* ── TESTIMONIALS ── */
-  function toggleTestimonials() {
-    document.getElementById('testimonialsToggle').classList.toggle('open');
-    document.getElementById('testimonialsGrid').classList.toggle('open');
-  }
+function toggleTestimonials() {
+  document.getElementById('tToggle').classList.toggle('open');
+  document.getElementById('tGrid').classList.toggle('open');
+}
 
-  /* ── CLOSE ON BACKDROP ── */
-  document.getElementById('loginModal').addEventListener('click', function(e) {
-    if (e.target === this) closeLoginModal();
-  });
-  document.getElementById('applicationModal').addEventListener('click', function(e) {
-    if (e.target === this) closeApplicationModal();
-  });
+document.getElementById('loginModal').addEventListener('click', function(e) { if (e.target === this) closeLoginModal(); });
+document.getElementById('appModal').addEventListener('click',  function(e) { if (e.target === this) closeAppModal();   });
 
-  /* ── INIT ── */
-  updateCalc();
+calcUpdate();
 </script>
 </body>
 </html>
