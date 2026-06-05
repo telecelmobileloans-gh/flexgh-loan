@@ -5,526 +5,432 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TelecelLoans — Instant Loans for Telecel Subscribers</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root {
-  --red: #E30613;
-  --red-d: #B8040F;
-  --red-l: #ff1f2e;
-  --red-bg: rgba(227,6,19,0.07);
-  --white: #fff;
-  --ink: #111;
-  --ink2: #444;
-  --ink3: #888;
-  --page: #f7f7f8;
-  --border: #e8e8e8;
-  --green: #059669;
-  --ff: 'Manrope', sans-serif;
-  --r: 12px;
+:root{
+  --red:#E30613;--red-d:#B8040F;--red-bg:rgba(227,6,19,0.07);
+  --dark:#111118;--dark2:#1a1a24;--dark3:#22222e;
+  --white:#fff;--ink:#111;--ink2:#444;--ink3:#777;
+  --page:#f4f4f6;--border:#e4e4e8;--border-d:rgba(255,255,255,0.09);
+  --green:#10b981;
+  --ff:'Inter',sans-serif;
+  --r:10px;--rl:16px;
 }
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { font-family: var(--ff); background: var(--white); color: var(--ink); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--ff);background:var(--dark);color:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
 /* ─── NAV ─── */
-nav {
-  position: sticky; top: 0; z-index: 100;
-  background: rgba(255,255,255,0.96);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-  padding: 0 24px;
+nav{
+  position:sticky;top:0;z-index:200;
+  background:rgba(17,17,24,0.96);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border-d);
 }
-.nav-inner {
-  max-width: 1100px; margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between;
-  height: 62px; gap: 16px;
+.nav-inner{
+  max-width:1100px;margin:0 auto;padding:0 20px;
+  display:flex;align-items:center;justify-content:space-between;
+  height:56px;gap:12px;
 }
-.logo { display: flex; align-items: center; gap: 9px; text-decoration: none; flex-shrink: 0; }
-.logo-mark {
-  width: 34px; height: 34px; background: var(--red); border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0}
+.logo-mark{width:30px;height:30px;background:var(--red);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-mark svg{width:15px;height:15px}
+.logo-text{font-size:16px;font-weight:800;color:#fff;letter-spacing:-0.3px}
+.logo-text em{font-style:normal;color:var(--red)}
+.nav-links{display:flex;gap:2px}
+.nav-links a{font-size:12.5px;font-weight:500;color:rgba(255,255,255,0.5);text-decoration:none;padding:6px 11px;border-radius:6px;transition:color .15s,background .15s}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,0.07)}
+.nav-cta{background:var(--red);color:#fff;border:none;padding:8px 18px;border-radius:8px;font-family:var(--ff);font-size:12.5px;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .15s,transform .1s}
+.nav-cta:hover{background:var(--red-d);transform:translateY(-1px)}
+.ham{display:none;flex-direction:column;gap:4px;cursor:pointer;background:none;border:none;padding:4px}
+.ham span{display:block;width:20px;height:1.8px;background:#fff;border-radius:1px;transition:all .2s}
+.ham.open span:nth-child(1){transform:translateY(5.8px) rotate(45deg)}
+.ham.open span:nth-child(2){opacity:0}
+.ham.open span:nth-child(3){transform:translateY(-5.8px) rotate(-45deg)}
+.mob-menu{
+  display:none;flex-direction:column;
+  position:fixed;top:56px;left:0;right:0;
+  background:var(--dark2);border-bottom:1px solid var(--border-d);
+  z-index:190;overflow:hidden;max-height:0;transition:max-height .28s;
 }
-.logo-mark svg { width: 18px; height: 18px; }
-.logo-text { font-size: 18px; font-weight: 800; color: var(--ink); letter-spacing: -0.3px; }
-.logo-text em { font-style: normal; color: var(--red); }
-.nav-links { display: flex; gap: 4px; }
-.nav-links a {
-  font-size: 13px; font-weight: 600; color: var(--ink3);
-  text-decoration: none; padding: 7px 12px; border-radius: 8px;
-  transition: color .15s, background .15s;
-}
-.nav-links a:hover { color: var(--ink); background: var(--page); }
-.nav-cta {
-  background: var(--red); color: #fff; border: none;
-  padding: 9px 20px; border-radius: 8px;
-  font-family: var(--ff); font-size: 13px; font-weight: 700;
-  cursor: pointer; white-space: nowrap;
-  transition: background .15s, transform .12s;
-}
-.nav-cta:hover { background: var(--red-d); transform: translateY(-1px); }
-.ham { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
-.ham span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 1px; transition: all .22s; }
-.ham.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.ham.open span:nth-child(2) { opacity: 0; }
-.ham.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-.mob-menu {
-  display: none; flex-direction: column;
-  position: fixed; top: 62px; left: 0; right: 0;
-  background: #fff; border-bottom: 1px solid var(--border);
-  z-index: 90; overflow: hidden; max-height: 0;
-  transition: max-height .28s;
-}
-.mob-menu.open { max-height: 400px; }
-.mob-menu a {
-  display: block; padding: 14px 24px;
-  font-size: 14px; font-weight: 600; color: var(--ink2);
-  text-decoration: none; border-bottom: 1px solid var(--border);
-}
-.mob-menu a:hover { color: var(--red); background: var(--red-bg); }
-.mob-cta {
-  margin: 14px 20px;
-  background: var(--red); color: #fff; border: none;
-  padding: 14px; border-radius: var(--r);
-  font-family: var(--ff); font-size: 13px; font-weight: 700;
-  cursor: pointer; text-align: center;
-}
+.mob-menu.open{max-height:360px}
+.mob-menu a{display:block;padding:13px 20px;font-size:13.5px;font-weight:500;color:rgba(255,255,255,0.6);text-decoration:none;border-bottom:1px solid var(--border-d)}
+.mob-menu a:hover{color:#fff;background:rgba(255,255,255,0.05)}
+.mob-cta{margin:14px 18px;background:var(--red);color:#fff;border:none;padding:13px;border-radius:var(--r);font-family:var(--ff);font-size:13px;font-weight:700;cursor:pointer;display:block}
 
 /* ─── HERO ─── */
-.hero {
-  background: linear-gradient(160deg, #fff 0%, #fff8f8 100%);
-  padding: 0 24px;
-  min-height: calc(100vh - 62px);
-  display: flex; align-items: flex-start;
-  position: relative; overflow: hidden;
+.hero{
+  background:var(--dark);
+  padding:0 20px;
+  position:relative;overflow:hidden;
 }
-.hero::before {
-  content: '';
-  position: absolute; top: -200px; right: -200px;
-  width: 700px; height: 700px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(227,6,19,0.06) 0%, transparent 60%);
-  pointer-events: none;
+.hero::before{
+  content:'';position:absolute;top:-200px;right:-200px;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(227,6,19,0.12) 0%,transparent 65%);
+  pointer-events:none;
 }
-.hero::after {
-  content: '';
-  position: absolute; bottom: -100px; left: -100px;
-  width: 400px; height: 400px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(227,6,19,0.04) 0%, transparent 60%);
-  pointer-events: none;
-}
-.hero-inner {
-  max-width: 1100px; margin: 0 auto; width: 100%;
-  display: grid; grid-template-columns: 1fr 440px;
-  gap: 60px; align-items: start;
-  padding-top: 64px; padding-bottom: 64px;
-  position: relative; z-index: 1;
+.hero-inner{
+  max-width:1100px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 420px;
+  gap:52px;align-items:start;
+  padding:52px 0 60px;
+  position:relative;z-index:1;
 }
 
-/* Left copy */
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: var(--red-bg); border: 1px solid rgba(227,6,19,0.15);
-  padding: 5px 14px 5px 8px; border-radius: 40px;
-  font-size: 10.5px; font-weight: 800; letter-spacing: 1.2px;
-  text-transform: uppercase; color: var(--red); margin-bottom: 22px;
+/* copy */
+.hero-badge{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(227,6,19,0.12);border:1px solid rgba(227,6,19,0.25);
+  padding:4px 12px 4px 7px;border-radius:40px;
+  font-size:10px;font-weight:700;letter-spacing:1.2px;
+  text-transform:uppercase;color:var(--red);margin-bottom:18px;
 }
-.hero-badge-dot {
-  width: 18px; height: 18px; background: var(--red); border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-}
-.hero-badge-dot::after {
-  content: ''; width: 6px; height: 6px;
-  background: #fff; border-radius: 50%;
-  animation: pulse 1.8s infinite;
-}
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+.badge-dot{width:16px;height:16px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.badge-dot::after{content:'';width:5px;height:5px;background:#fff;border-radius:50%;animation:blink 1.8s infinite}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)}}
+.hero-h1{font-size:48px;font-weight:900;letter-spacing:-2px;line-height:1.02;color:#fff;margin-bottom:14px}
+.hero-h1 em{font-style:normal;color:var(--red)}
+.hero-p{font-size:15px;color:rgba(255,255,255,0.45);line-height:1.75;max-width:380px;margin-bottom:28px;font-weight:400}
 
-.hero-h1 {
-  font-size: 52px; font-weight: 900; letter-spacing: -2px;
-  line-height: 1.03; color: var(--ink); margin-bottom: 18px;
+.trust-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
+.tbadge{
+  display:flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+  padding:6px 13px;border-radius:40px;
+  font-size:11.5px;font-weight:600;color:rgba(255,255,255,0.7);
 }
-.hero-h1 em { font-style: normal; color: var(--red); }
-.hero-p {
-  font-size: 16px; color: var(--ink3); line-height: 1.75;
-  max-width: 380px; margin-bottom: 32px; font-weight: 500;
-}
+.tbadge .ti{font-size:13px}
 
-/* Trust badges row */
-.trust-row {
-  display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 36px;
+.hero-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border:1px solid var(--border-d);border-radius:var(--r);overflow:hidden;
 }
-.tbadge {
-  display: flex; align-items: center; gap: 7px;
-  background: #fff; border: 1px solid var(--border);
-  padding: 8px 14px; border-radius: 40px;
-  font-size: 12px; font-weight: 700; color: var(--ink2);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-}
-.tbadge .ico { font-size: 14px; }
+.hstat{background:rgba(255,255,255,0.04);padding:16px 12px;text-align:center;border-right:1px solid var(--border-d)}
+.hstat:last-child{border-right:none}
+.hstat-v{font-size:20px;font-weight:800;color:#fff;letter-spacing:-0.5px;line-height:1}
+.hstat-v em{font-style:normal;color:var(--red)}
+.hstat-l{font-size:9.5px;color:rgba(255,255,255,0.35);font-weight:600;letter-spacing:0.8px;text-transform:uppercase;margin-top:4px}
 
-/* Stats */
-.hero-stats {
-  display: grid; grid-template-columns: repeat(3,1fr);
-  gap: 1px; background: var(--border);
-  border: 1px solid var(--border); border-radius: var(--r);
-  overflow: hidden;
+/* ─── APPLY CARD (white) ─── */
+.apply-card{
+  background:#fff;
+  border-radius:18px;
+  box-shadow:0 0 0 1px rgba(0,0,0,0.08),0 20px 60px rgba(0,0,0,0.35);
+  overflow:hidden;
+  position:relative;
 }
-.hstat {
-  background: #fff; padding: 18px 14px; text-align: center;
+.card-top-bar{height:4px;background:var(--red);width:100%}
+.card-hd{
+  padding:18px 22px 14px;
+  border-bottom:1px solid var(--border);
 }
-.hstat-v { font-size: 22px; font-weight: 900; color: var(--ink); letter-spacing: -0.6px; line-height: 1; }
-.hstat-v em { font-style: normal; color: var(--red); }
-.hstat-l { font-size: 10px; color: var(--ink3); font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; margin-top: 4px; }
+.card-hd-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px}
+.card-title{font-size:15px;font-weight:800;color:var(--ink)}
+.live-tag{
+  display:flex;align-items:center;gap:5px;
+  font-size:9px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;
+  color:var(--green);background:rgba(16,185,129,0.09);border:1px solid rgba(16,185,129,0.2);
+  padding:3px 9px;border-radius:20px;
+}
+.live-tag span{width:5px;height:5px;background:var(--green);border-radius:50%;animation:blink 2s infinite}
+.card-sub{font-size:11.5px;color:var(--ink3);font-weight:400}
+.card-body{padding:18px 22px 22px}
 
-/* ─── APPLY FORM CARD ─── */
-.apply-card {
-  background: #fff;
-  border-radius: 20px;
-  border: 1.5px solid var(--border);
-  box-shadow: 0 8px 40px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.05);
-  overflow: hidden;
-  position: relative;
+/* step indicator */
+.step-ind{display:flex;align-items:center;gap:5px;margin-bottom:16px}
+.si-n{
+  width:20px;height:20px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:9.5px;font-weight:800;
+  background:var(--border);color:var(--ink3);
+  flex-shrink:0;transition:all .2s;
 }
-.apply-card::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0;
-  height: 4px; background: var(--red);
-}
-.card-hd {
-  padding: 20px 24px 16px;
-  border-bottom: 1px solid var(--border);
-}
-.card-hd-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
-.card-title { font-size: 16px; font-weight: 800; color: var(--ink); }
-.live-tag {
-  display: flex; align-items: center; gap: 5px;
-  font-size: 9.5px; font-weight: 800; letter-spacing: 1.2px;
-  text-transform: uppercase; color: var(--green);
-  background: rgba(5,150,105,0.08); border: 1px solid rgba(5,150,105,0.15);
-  padding: 3px 9px; border-radius: 20px;
-}
-.live-tag span { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
-.card-sub { font-size: 12px; color: var(--ink3); font-weight: 500; }
-.card-body { padding: 20px 24px 24px; }
+.si-n.act{background:var(--red);color:#fff}
+.si-n.done{background:var(--green);color:#fff}
+.si-lbl{font-size:10px;font-weight:600;color:var(--ink3)}
+.si-div{flex:1;height:1.5px;background:var(--border)}
 
 /* Amount display */
-.amt-display {
-  text-align: center; margin-bottom: 4px;
-  font-size: 44px; font-weight: 900; color: var(--ink);
-  letter-spacing: -2px; line-height: 1;
+.amt-display{
+  text-align:center;line-height:1;margin-bottom:2px;
 }
-.amt-display em { font-style: normal; color: var(--red); font-size: 26px; letter-spacing: 0; }
-.amt-sublabel { text-align: center; font-size: 10.5px; color: var(--ink3); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+.amt-currency{font-size:18px;font-weight:800;color:var(--ink3);vertical-align:top;margin-top:8px;display:inline-block}
+.amt-number{font-size:46px;font-weight:900;color:var(--ink);letter-spacing:-2px}
+.amt-sublabel{text-align:center;font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink3);margin-bottom:14px}
 
-/* Slider */
-.slider-wrap { position: relative; margin-bottom: 8px; }
-input[type="range"] {
-  width: 100%; height: 6px; border-radius: 3px;
-  -webkit-appearance: none; appearance: none;
-  background: var(--border); cursor: pointer; outline: none;
+/* Range slider */
+input[type="range"]{
+  width:100%;height:5px;border-radius:3px;
+  -webkit-appearance:none;appearance:none;
+  cursor:pointer;outline:none;margin-bottom:6px;
 }
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none; width: 22px; height: 22px;
-  border-radius: 50%; background: var(--red);
-  border: 3px solid #fff; box-shadow: 0 2px 8px rgba(227,6,19,0.4);
-  cursor: pointer; transition: transform .12s;
+input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:20px;height:20px;
+  border-radius:50%;background:var(--red);
+  border:3px solid #fff;box-shadow:0 2px 8px rgba(227,6,19,0.4);
+  cursor:pointer;transition:transform .12s;
 }
-input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
-.slider-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--ink3); font-weight: 700; margin-bottom: 18px; }
+input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.2)}
+.slider-labels{display:flex;justify-content:space-between;font-size:9.5px;color:var(--ink3);font-weight:600;margin-bottom:16px}
 
-/* Period tabs */
-.period-label { font-size: 10px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink3); margin-bottom: 8px; display: block; }
-.period-tabs { display: grid; grid-template-columns: repeat(6,1fr); gap: 5px; margin-bottom: 18px; }
-.ptab {
-  padding: 9px 2px; border: 1.5px solid var(--border);
-  border-radius: 8px; background: var(--page);
-  font-family: var(--ff); font-size: 11px; font-weight: 700;
-  color: var(--ink3); cursor: pointer; text-align: center;
-  transition: all .13s;
+/* period tabs */
+.period-lbl{display:block;font-size:9.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink3);margin-bottom:7px}
+.period-tabs{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin-bottom:16px}
+.ptab{
+  padding:8px 2px;border:1.5px solid var(--border);
+  border-radius:7px;background:var(--page);
+  font-family:var(--ff);font-size:11px;font-weight:700;
+  color:var(--ink3);cursor:pointer;text-align:center;
+  transition:all .13s;
 }
-.ptab:hover { border-color: rgba(227,6,19,0.3); color: var(--ink); }
-.ptab.act { background: var(--red); border-color: var(--red); color: #fff; box-shadow: 0 2px 8px rgba(227,6,19,0.3); }
+.ptab:hover{border-color:rgba(227,6,19,0.3);color:var(--ink)}
+.ptab.act{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 2px 8px rgba(227,6,19,0.3)}
 
-/* Repayment summary */
-.repay-box {
-  background: var(--page); border: 1px solid var(--border);
-  border-radius: 10px; overflow: hidden; margin-bottom: 18px;
+/* repayment summary */
+.repay-box{
+  background:var(--page);border:1px solid var(--border);
+  border-radius:10px;overflow:hidden;margin-bottom:16px;
 }
-.repay-row { display: grid; grid-template-columns: 1fr 1fr; }
-.repay-cell { padding: 14px 16px; }
-.repay-cell:first-child { border-right: 1px solid var(--border); }
-.repay-lbl { font-size: 9.5px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink3); margin-bottom: 5px; }
-.repay-val { font-size: 20px; font-weight: 900; color: var(--ink); letter-spacing: -0.5px; }
-.repay-val.g { color: var(--green); }
-.repay-foot {
-  border-top: 1px solid var(--border); padding: 8px 16px;
-  display: flex; justify-content: space-between; align-items: center;
-}
-.repay-note { font-size: 11px; color: var(--ink3); font-weight: 500; }
-.rate-pill {
-  font-size: 9.5px; font-weight: 800; letter-spacing: 0.5px;
-  text-transform: uppercase; background: var(--red-bg);
-  color: var(--red); border: 1px solid rgba(227,6,19,0.15);
-  padding: 3px 9px; border-radius: 20px;
-}
+.repay-row{display:grid;grid-template-columns:1fr 1fr}
+.repay-cell{padding:12px 14px}
+.repay-cell:first-child{border-right:1px solid var(--border)}
+.repay-lbl{font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink3);margin-bottom:4px}
+.repay-val{font-size:19px;font-weight:900;color:var(--ink);letter-spacing:-0.5px}
+.repay-val.g{color:#059669}
+.repay-foot{border-top:1px solid var(--border);padding:7px 14px;display:flex;justify-content:space-between;align-items:center}
+.repay-note{font-size:10.5px;color:var(--ink3)}
+.rate-pill{font-size:9.5px;font-weight:700;background:rgba(227,6,19,0.08);color:var(--red);border:1px solid rgba(227,6,19,0.18);padding:2px 8px;border-radius:20px}
 
-/* form fields */
-.fg { margin-bottom: 11px; }
-.fl { display: block; font-size: 10px; font-weight: 800; color: var(--ink3); text-transform: uppercase; letter-spacing: 1.3px; margin-bottom: 6px; }
-.fi {
-  width: 100%; padding: 11px 13px;
-  background: var(--page); border: 1.5px solid var(--border);
-  border-radius: 9px; font-family: var(--ff);
-  font-size: 14px; color: var(--ink); outline: none;
-  transition: border-color .15s, background .15s;
+/* form */
+.fg{margin-bottom:10px}
+.fl{display:block;font-size:9.5px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:1.3px;margin-bottom:5px}
+.fi{
+  width:100%;padding:10px 12px;
+  background:var(--page);border:1.5px solid var(--border);
+  border-radius:8px;font-family:var(--ff);
+  font-size:13.5px;color:var(--ink);outline:none;
+  transition:border-color .15s,background .15s;
 }
-.fi:focus { border-color: var(--red); background: #fff; }
-.fi::placeholder { color: #bbb; }
-select.fi { appearance: auto; }
-.frow { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.fi:focus{border-color:var(--red);background:#fff}
+.fi::placeholder{color:#bbb}
+select.fi{appearance:auto;cursor:pointer}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:9px}
 
-/* Big apply button */
-.btn-apply {
-  width: 100%; padding: 15px;
-  background: var(--red); color: #fff; border: none;
-  border-radius: 10px; font-family: var(--ff);
-  font-size: 15px; font-weight: 800; cursor: pointer;
-  letter-spacing: 0.2px;
-  box-shadow: 0 4px 18px rgba(227,6,19,0.35);
-  transition: background .15s, transform .12s, box-shadow .15s;
-  margin-top: 4px;
-}
-.btn-apply:hover { background: var(--red-d); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(227,6,19,0.45); }
-.apply-disclaimer { font-size: 10.5px; color: var(--ink3); text-align: center; margin-top: 10px; font-weight: 500; }
+/* review */
+.rev{background:var(--page);border:1px solid var(--border);border-radius:9px;overflow:hidden;margin-bottom:10px}
+.rr{display:flex;justify-content:space-between;align-items:center;padding:9px 13px;border-bottom:1px solid var(--border);font-size:12.5px}
+.rr:last-child{border-bottom:none}
+.rr-l{color:var(--ink3);font-weight:400}
+.rr-v{color:var(--ink);font-weight:700}
+.rr-v.g{color:#059669}
 
-/* Steps in form */
-.steps-mini { display: flex; align-items: center; gap: 6px; margin-bottom: 16px; }
-.step-mini {
-  display: flex; align-items: center; gap: 5px;
-  font-size: 10px; font-weight: 800; color: var(--ink3);
-  text-transform: uppercase; letter-spacing: 0.8px;
+/* buttons */
+.btn-apply{
+  width:100%;padding:13px;
+  background:var(--red);color:#fff;border:none;
+  border-radius:9px;font-family:var(--ff);
+  font-size:14px;font-weight:700;cursor:pointer;
+  box-shadow:0 4px 16px rgba(227,6,19,0.35);
+  transition:background .15s,transform .1s;
+  margin-top:2px;
 }
-.step-mini-n {
-  width: 20px; height: 20px; border-radius: 50%;
-  background: var(--border); display: flex; align-items: center;
-  justify-content: center; font-size: 10px; font-weight: 900;
-  color: var(--ink3); flex-shrink: 0;
-  transition: all .2s;
+.btn-apply:hover{background:var(--red-d);transform:translateY(-1px)}
+.btn-back{
+  width:100%;padding:11px;
+  background:transparent;color:var(--ink2);
+  border:1.5px solid var(--border);border-radius:9px;
+  font-family:var(--ff);font-size:13px;font-weight:600;
+  cursor:pointer;margin-top:7px;
+  transition:border-color .15s,color .15s;
 }
-.step-mini-n.act { background: var(--red); color: #fff; }
-.step-mini-n.done { background: var(--green); color: #fff; }
-.step-div { flex: 1; height: 1.5px; background: var(--border); }
+.btn-back:hover{border-color:var(--red);color:var(--red)}
+.card-disclaimer{font-size:10.5px;color:var(--ink3);text-align:center;margin-top:9px}
 
-/* Review items */
-.rev { background: var(--page); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 12px; }
-.rr { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-bottom: 1px solid var(--border); font-size: 13px; }
-.rr:last-child { border-bottom: none; }
-.rr-l { color: var(--ink3); font-weight: 500; }
-.rr-v { color: var(--ink); font-weight: 700; }
-.rr-v.g { color: var(--green); }
-
-/* Section shared */
-.section { padding: 80px 24px; }
-.section-inner { max-width: 1100px; margin: 0 auto; }
-.eyebrow {
-  display: inline-block; font-size: 10px; font-weight: 800;
-  letter-spacing: 2px; text-transform: uppercase; color: var(--red);
-  margin-bottom: 10px;
-}
-.sec-h { font-size: 34px; font-weight: 900; letter-spacing: -1px; color: var(--ink); line-height: 1.1; margin-bottom: 10px; }
-.sec-h.w { color: #fff; }
-.sec-p { font-size: 15px; color: var(--ink3); line-height: 1.75; max-width: 440px; font-weight: 500; }
-.sec-p.w { color: rgba(255,255,255,0.5); }
-.sec-head { margin-bottom: 48px; }
+/* ─── SECTION BASE ─── */
+.section{padding:72px 20px}
+.sec-inner{max-width:1100px;margin:0 auto}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);display:block;margin-bottom:9px}
+.sec-h{font-size:32px;font-weight:900;letter-spacing:-1px;line-height:1.1;margin-bottom:10px}
+.sec-h.w{color:#fff}
+.sec-h.dk{color:var(--ink)}
+.sec-p{font-size:14.5px;line-height:1.75;max-width:440px}
+.sec-p.muted{color:rgba(255,255,255,0.42)}
+.sec-p.dk{color:var(--ink3)}
+.sec-head{margin-bottom:44px}
 
 /* ─── HOW IT WORKS ─── */
-.how { background: var(--page); }
-.how-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
-.how-step {
-  background: #fff; border: 1px solid var(--border);
-  border-radius: var(--r); padding: 26px 20px;
-  position: relative; overflow: hidden;
-  transition: border-color .18s, box-shadow .18s;
+.how{background:var(--dark2)}
+.how-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border-d)}
+.how-step{
+  background:var(--dark3);padding:26px 20px;
+  position:relative;overflow:hidden;
+  transition:background .18s;
 }
-.how-step::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: var(--border); transition: background .2s;
-}
-.how-step:hover::before { background: var(--red); }
-.how-step:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-.step-num { font-size: 48px; font-weight: 900; color: rgba(227,6,19,0.08); letter-spacing: -2px; line-height: 1; margin-bottom: 14px; }
-.step-chip {
-  display: inline-block; background: var(--red); color: #fff;
-  font-size: 9px; font-weight: 800; padding: 3px 9px;
-  border-radius: 5px; letter-spacing: 1px; text-transform: uppercase;
-  margin-bottom: 10px;
-}
-.step-t { font-size: 14px; font-weight: 800; color: var(--ink); margin-bottom: 7px; }
-.step-d { font-size: 12.5px; color: var(--ink3); line-height: 1.7; font-weight: 500; }
+.how-step:hover{background:rgba(255,255,255,0.04)}
+.step-num{font-size:44px;font-weight:900;color:rgba(227,6,19,0.1);letter-spacing:-2px;line-height:1;margin-bottom:14px}
+.step-chip{display:inline-block;background:var(--red);color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:4px;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:9px}
+.step-t{font-size:13.5px;font-weight:700;color:#fff;margin-bottom:6px}
+.step-d{font-size:12px;color:rgba(255,255,255,0.38);line-height:1.7}
 
 /* ─── ELIGIBILITY ─── */
-.elig { background: var(--ink); }
-.elig-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; margin-top: 40px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--r); overflow: hidden; }
-.ecard { background: rgba(255,255,255,0.03); padding: 26px 22px; transition: background .2s; }
-.ecard:hover { background: rgba(255,255,255,0.06); }
-.ecard-n { font-size: 40px; font-weight: 900; color: rgba(227,6,19,0.15); letter-spacing: -2px; line-height: 1; margin-bottom: 12px; }
-.ecard-t { font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 7px; }
-.ecard-d { font-size: 12.5px; color: rgba(255,255,255,0.38); line-height: 1.7; font-weight: 500; }
-.elig-note {
-  margin-top: 24px; padding: 16px 20px;
-  background: rgba(227,6,19,0.1); border: 1px solid rgba(227,6,19,0.2);
-  border-radius: var(--r); display: flex; align-items: flex-start; gap: 12px;
+.elig{background:var(--dark)}
+.elig-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--border-d);
+  border:1px solid var(--border-d);border-radius:var(--rl);
+  overflow:hidden;margin-top:38px;
 }
-.elig-note p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.65; font-weight: 500; }
-.elig-note strong { color: #fff; font-weight: 700; }
+.ecard{background:rgba(255,255,255,0.025);padding:24px 20px;transition:background .18s}
+.ecard:hover{background:rgba(255,255,255,0.05)}
+.ecard-n{font-size:38px;font-weight:900;color:rgba(227,6,19,0.12);letter-spacing:-2px;line-height:1;margin-bottom:11px}
+.ecard-t{font-size:13.5px;font-weight:700;color:#fff;margin-bottom:6px}
+.ecard-d{font-size:12px;color:rgba(255,255,255,0.35);line-height:1.7}
+.elig-note{
+  margin-top:22px;padding:15px 18px;
+  background:rgba(227,6,19,0.1);border:1px solid rgba(227,6,19,0.2);
+  border-radius:var(--r);display:flex;align-items:flex-start;gap:11px;
+}
+.elig-note p{font-size:12.5px;color:rgba(255,255,255,0.45);line-height:1.65}
+.elig-note strong{color:#fff;font-weight:600}
 
 /* ─── BENEFITS ─── */
-.ben { background: #fff; }
-.ben-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
-.bcard {
-  background: var(--page); border: 1px solid var(--border);
-  border-radius: var(--r); padding: 26px 22px;
-  transition: border-color .18s, transform .18s, box-shadow .18s;
+.ben{background:var(--dark2)}
+.ben-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border-d)}
+.bcard{
+  background:var(--dark3);padding:24px 20px;
+  transition:background .18s;
 }
-.bcard:hover { border-color: rgba(227,6,19,0.25); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.07); }
-.bcard-ico {
-  width: 44px; height: 44px; background: var(--red-bg);
-  border: 1px solid rgba(227,6,19,0.15); border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 20px; margin-bottom: 14px;
+.bcard:hover{background:rgba(255,255,255,0.04)}
+.bcard-ico{
+  width:40px;height:40px;background:rgba(227,6,19,0.12);
+  border:1px solid rgba(227,6,19,0.2);border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:19px;margin-bottom:13px;
 }
-.bcard-t { font-size: 14px; font-weight: 800; color: var(--ink); margin-bottom: 7px; }
-.bcard-d { font-size: 12.5px; color: var(--ink3); line-height: 1.7; font-weight: 500; }
+.bcard-t{font-size:13.5px;font-weight:700;color:#fff;margin-bottom:6px}
+.bcard-d{font-size:12px;color:rgba(255,255,255,0.38);line-height:1.7}
 
 /* ─── FAQ ─── */
-.faq { background: var(--page); }
-.faq-wrap { max-width: 680px; }
-.faq-item {
-  background: #fff; border: 1px solid var(--border);
-  border-radius: var(--r); margin-bottom: 6px; overflow: hidden;
-  transition: border-color .18s;
+.faq{background:var(--dark)}
+.faq-wrap{max-width:660px}
+.faq-item{
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border-d);border-radius:var(--r);
+  margin-bottom:5px;overflow:hidden;transition:border-color .18s;
 }
-.faq-item.open { border-color: rgba(227,6,19,0.25); }
-.faq-q {
-  padding: 16px 20px; cursor: pointer;
-  display: flex; justify-content: space-between; align-items: center;
-  font-size: 13.5px; font-weight: 700; color: var(--ink);
-  user-select: none; gap: 14px; transition: color .15s;
+.faq-item.open{border-color:rgba(227,6,19,0.3)}
+.faq-q{
+  padding:15px 18px;cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:13.5px;font-weight:600;color:rgba(255,255,255,0.75);
+  user-select:none;gap:12px;transition:color .15s;
 }
-.faq-item.open .faq-q { color: var(--red); }
-.faq-arr {
-  width: 26px; height: 26px; background: var(--page);
-  border-radius: 6px; display: flex; align-items: center; justify-content: center;
-  color: var(--ink3); font-size: 10px; flex-shrink: 0;
-  transition: transform .22s, background .15s, color .15s;
+.faq-item.open .faq-q{color:var(--red)}
+.faq-arr{
+  width:24px;height:24px;background:rgba(255,255,255,0.06);
+  border-radius:5px;display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,0.4);font-size:9px;flex-shrink:0;
+  transition:transform .22s,background .15s,color .15s;
 }
-.faq-item.open .faq-arr { transform: rotate(180deg); background: var(--red); color: #fff; }
-.faq-ans { max-height: 0; overflow: hidden; transition: max-height .3s; }
-.faq-item.open .faq-ans { max-height: 200px; }
-.faq-ans p { padding: 0 20px 16px; font-size: 13px; color: var(--ink3); line-height: 1.75; font-weight: 500; }
+.faq-item.open .faq-arr{transform:rotate(180deg);background:var(--red);color:#fff}
+.faq-ans{max-height:0;overflow:hidden;transition:max-height .3s}
+.faq-item.open .faq-ans{max-height:200px}
+.faq-ans p{padding:0 18px 14px;font-size:12.5px;color:rgba(255,255,255,0.38);line-height:1.75}
 
 /* ─── TESTIMONIALS ─── */
-.testi { background: #fff; }
-.t-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 40px; }
-.tcard {
-  background: var(--page); border: 1px solid var(--border);
-  border-top: 3px solid var(--red); border-radius: var(--r);
-  padding: 22px 20px; transition: transform .18s, box-shadow .18s;
+.testi{background:var(--dark2)}
+.t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:40px}
+.tcard{
+  background:var(--dark3);
+  border:1px solid var(--border-d);border-top:3px solid var(--red);
+  border-radius:var(--rl);padding:20px 18px;
+  transition:transform .18s;
 }
-.tcard:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.07); }
-.t-stars { color: var(--red); font-size: 12px; letter-spacing: 2px; margin-bottom: 10px; }
-.t-text { font-size: 13px; color: var(--ink2); line-height: 1.75; font-style: italic; margin-bottom: 14px; font-weight: 500; }
-.t-name { font-size: 13.5px; font-weight: 800; color: var(--ink); }
-.t-role { font-size: 11px; color: var(--ink3); margin-top: 2px; font-weight: 500; }
+.tcard:hover{transform:translateY(-2px)}
+.t-stars{color:var(--red);font-size:11px;letter-spacing:2px;margin-bottom:9px}
+.t-text{font-size:12.5px;color:rgba(255,255,255,0.45);line-height:1.75;font-style:italic;margin-bottom:13px}
+.t-name{font-size:13px;font-weight:700;color:#fff}
+.t-role{font-size:10.5px;color:rgba(255,255,255,0.3);margin-top:2px}
 
 /* ─── CTA STRIP ─── */
-.cta-strip {
-  background: var(--red); padding: 60px 24px; text-align: center;
-}
-.cta-strip h2 { font-size: 36px; font-weight: 900; color: #fff; letter-spacing: -1px; margin-bottom: 10px; }
-.cta-strip p { font-size: 15px; color: rgba(255,255,255,0.7); margin-bottom: 28px; font-weight: 500; }
-.btn-cta-white {
-  background: #fff; color: var(--red); border: none;
-  padding: 15px 36px; border-radius: 10px;
-  font-family: var(--ff); font-size: 15px; font-weight: 800;
-  cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-  transition: transform .12s, box-shadow .15s;
-}
-.btn-cta-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+.cta-strip{background:var(--red);padding:60px 20px;text-align:center}
+.cta-strip h2{font-size:34px;font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:10px}
+.cta-strip p{font-size:15px;color:rgba(255,255,255,0.65);margin-bottom:26px}
+.btn-white{background:#fff;color:var(--red);border:none;padding:14px 34px;border-radius:9px;font-family:var(--ff);font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,0.15);transition:transform .1s}
+.btn-white:hover{transform:translateY(-2px)}
 
 /* ─── FOOTER ─── */
-footer { background: #0f0f0f; padding: 52px 24px 0; }
-.ft { max-width: 1100px; margin: 0 auto; }
-.ft-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.07); }
-.ft-brand p { font-size: 12.5px; color: rgba(255,255,255,0.3); line-height: 1.75; max-width: 200px; margin-top: 12px; font-weight: 500; }
-.ft-div { width: 24px; height: 2px; background: var(--red); margin: 12px 0; }
-.ft-col h4 { font-size: 9.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.2); margin-bottom: 16px; }
-.ft-col a { display: block; font-size: 12.5px; color: rgba(255,255,255,0.38); text-decoration: none; margin-bottom: 9px; transition: color .15s; font-weight: 500; }
-.ft-col a:hover { color: #fff; }
-.ft-bot { padding: 18px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
-.ft-bot p { font-size: 11.5px; color: rgba(255,255,255,0.2); font-weight: 500; }
-.ft-badge { font-size: 11px; color: rgba(255,255,255,0.2); display: flex; align-items: center; gap: 6px; font-weight: 500; }
-.ft-dot { width: 6px; height: 6px; background: #16a34a; border-radius: 50%; box-shadow: 0 0 5px rgba(22,163,74,0.5); }
-
-/* ─── MODAL (confirmation) ─── */
-.ov {
-  display: none; position: fixed; inset: 0;
-  background: rgba(0,0,0,0.5); z-index: 1000;
-  align-items: center; justify-content: center;
-  padding: 20px; backdrop-filter: blur(6px);
-}
-.ov.open { display: flex; }
-.mbox {
-  background: #fff; border-radius: 20px;
-  width: 100%; max-width: 400px;
-  border-top: 4px solid var(--red);
-  animation: mup .25s cubic-bezier(.22,.8,.3,1) both;
-  max-height: 90vh; overflow-y: auto;
-}
-@keyframes mup { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-.mhd {
-  padding: 18px 20px; border-bottom: 1px solid var(--border);
-  display: flex; justify-content: space-between; align-items: center;
-  position: sticky; top: 0; background: #fff; z-index: 1;
-}
-.mhd-t { font-size: 15px; font-weight: 800; color: var(--ink); }
-.mhd-s { font-size: 11px; color: var(--ink3); margin-top: 2px; font-weight: 500; }
-.mclose {
-  background: var(--page); border: none; color: var(--ink3);
-  width: 30px; height: 30px; border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; font-size: 14px; transition: background .13s, color .13s;
-}
-.mclose:hover { background: var(--red); color: #fff; }
-.mbody { padding: 18px 20px; }
+footer{background:#0a0a0f;padding:48px 20px 0}
+.ft{max-width:1100px;margin:0 auto}
+.ft-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.ft-brand p{font-size:12px;color:rgba(255,255,255,0.25);line-height:1.75;max-width:200px;margin-top:11px}
+.ft-div{width:22px;height:2px;background:var(--red);margin:11px 0}
+.ft-col h4{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.18);margin-bottom:14px}
+.ft-col a{display:block;font-size:12px;color:rgba(255,255,255,0.32);text-decoration:none;margin-bottom:8px;transition:color .15s}
+.ft-col a:hover{color:#fff}
+.ft-bot{padding:16px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.ft-bot p{font-size:11px;color:rgba(255,255,255,0.18)}
+.ft-badge{font-size:11px;color:rgba(255,255,255,0.18);display:flex;align-items:center;gap:5px}
+.ft-dot{width:5px;height:5px;background:#16a34a;border-radius:50%;box-shadow:0 0 5px rgba(22,163,74,0.5)}
 
 /* ─── RESPONSIVE ─── */
-@media(max-width:900px){
-  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
-  .hero-h1 { font-size: 40px; }
-  .how-steps { grid-template-columns: repeat(2,1fr); }
-  .elig-grid { grid-template-columns: repeat(2,1fr); }
-  .ft-top { grid-template-columns: 1fr 1fr; }
-  .t-grid { grid-template-columns: 1fr; }
+@media(max-width:960px){
+  .hero-inner{grid-template-columns:1fr;gap:36px;padding:40px 0 48px}
+  .hero-h1{font-size:38px}
+  .how-steps{grid-template-columns:repeat(2,1fr)}
+  .elig-grid{grid-template-columns:repeat(2,1fr)}
+  .ben-grid{grid-template-columns:repeat(2,1fr)}
+  .t-grid{grid-template-columns:repeat(2,1fr)}
+  .ft-top{grid-template-columns:1fr 1fr}
 }
-@media(max-width:768px){
-  .nav-links { display: none; }
-  .ham { display: flex; }
-  .mob-menu { display: flex; }
-  .hero-h1 { font-size: 32px; letter-spacing: -1px; }
-  .hero-stats { grid-template-columns: repeat(3,1fr); }
-  .ben-grid { grid-template-columns: 1fr; }
-  .how-steps { grid-template-columns: 1fr; }
-  .t-grid { grid-template-columns: 1fr; }
+@media(max-width:700px){
+  .nav-links{display:none}
+  .ham{display:flex}
+  .mob-menu{display:flex}
 }
-@media(max-width:520px){
-  .elig-grid { grid-template-columns: 1fr; }
-  .ft-top { grid-template-columns: 1fr; gap: 20px; }
-  .hero-stats { grid-template-columns: 1fr 1fr; }
-  .hstat:nth-child(3) { border-top: 1px solid var(--border); grid-column: span 2; }
-  .period-tabs { grid-template-columns: repeat(3,1fr); }
-  .frow { grid-template-columns: 1fr; }
+@media(max-width:600px){
+  .section{padding:52px 16px}
+  .hero{padding:0 16px}
+  .hero-inner{padding:32px 0 40px;gap:28px}
+  .hero-h1{font-size:30px;letter-spacing:-1px}
+  .hero-p{font-size:13.5px}
+  .hero-stats{grid-template-columns:repeat(3,1fr)}
+  .hstat{padding:12px 8px}
+  .hstat-v{font-size:16px}
+
+  /* ── MOBILE CARD COMPACT ── */
+  .apply-card{border-radius:14px}
+  .card-hd{padding:12px 16px 10px}
+  .card-title{font-size:13.5px}
+  .card-sub{font-size:10.5px}
+  .card-body{padding:14px 16px 16px}
+  .step-ind{margin-bottom:12px}
+  .amt-number{font-size:36px}
+  .amt-currency{font-size:15px}
+  .period-tabs{grid-template-columns:repeat(3,1fr);gap:4px}
+  .repay-cell{padding:10px 12px}
+  .repay-val{font-size:16px}
+  .trust-row{gap:6px}
+  .tbadge{font-size:10.5px;padding:5px 10px}
+
+  .how-steps{grid-template-columns:1fr}
+  .elig-grid{grid-template-columns:1fr}
+  .ben-grid{grid-template-columns:1fr}
+  .t-grid{grid-template-columns:1fr}
+  .sec-h{font-size:26px}
+  .ft-top{grid-template-columns:1fr;gap:18px}
+  .ft-bot{flex-direction:column;text-align:center;align-items:center}
+  .frow{grid-template-columns:1fr}
+
+  /* mobile hero stats: horizontal compact row */
+  .hero-stats{
+    grid-template-columns:repeat(3,1fr);
+    border-radius:8px;
+  }
+  .hstat{padding:10px 6px}
+  .hstat-v{font-size:14px}
+  .hstat-l{font-size:8.5px}
 }
 </style>
 </head>
@@ -560,78 +466,74 @@ footer { background: #0f0f0f; padding: 52px 24px 0; }
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-inner">
-    <!-- Left -->
+    <!-- LEFT COPY -->
     <div>
       <div class="hero-badge">
-        <div class="hero-badge-dot"></div>
+        <div class="badge-dot"></div>
         Telecel Subscribers Only
       </div>
-      <h1 class="hero-h1">Fast Cash<br>for <em>Telecel</em><br>Subscribers.</h1>
-      <p class="hero-p">Get GHS 1,000 – 50,000 approved in 15 minutes. No paperwork, no branch visits. Your Telecel activity is your credit score.</p>
+      <h1 class="hero-h1">Fast Cash for<br><em>Telecel</em> Users.<br>In 15 Minutes.</h1>
+      <p class="hero-p">Get GHS 1,000 – 50,000 approved instantly. No paperwork, no branch visits. Your Telecel activity is your credit score.</p>
 
       <div class="trust-row">
-        <div class="tbadge"><span class="ico">⚡</span> 15-Min Approval</div>
-        <div class="tbadge"><span class="ico">🔒</span> Bank-Grade Security</div>
-        <div class="tbadge"><span class="ico">✅</span> Zero Hidden Fees</div>
-        <div class="tbadge"><span class="ico">🏦</span> BoG Licensed</div>
+        <div class="tbadge"><span class="ti">⚡</span> 15-Min Approval</div>
+        <div class="tbadge"><span class="ti">🔒</span> Bank-Grade Security</div>
+        <div class="tbadge"><span class="ti">✅</span> Zero Hidden Fees</div>
+        <div class="tbadge"><span class="ti">🏦</span> BoG Licensed</div>
       </div>
 
       <div class="hero-stats">
         <div class="hstat">
-          <div class="hstat-v"><em>15</em> min</div>
+          <div class="hstat-v"><em>15</em>min</div>
           <div class="hstat-l">Approval</div>
         </div>
         <div class="hstat">
-          <div class="hstat-v">GHS <em>50K</em></div>
+          <div class="hstat-v">GHS<em>50K</em></div>
           <div class="hstat-l">Max Loan</div>
         </div>
         <div class="hstat">
           <div class="hstat-v">8.9<em>%</em></div>
-          <div class="hstat-l">Monthly Rate</div>
+          <div class="hstat-l">Monthly</div>
         </div>
       </div>
     </div>
 
-    <!-- RIGHT: Application form -->
+    <!-- RIGHT: WHITE CALCULATOR CARD -->
     <div class="apply-card" id="applyCard">
+      <div class="card-top-bar"></div>
       <div class="card-hd">
-        <div class="card-hd-top">
+        <div class="card-hd-row">
           <div class="card-title">Apply for a Loan</div>
           <div class="live-tag"><span></span>INSTANT</div>
         </div>
-        <div class="card-sub">Fill in the form below — approval in under 15 minutes</div>
+        <div class="card-sub">Approval in under 15 minutes · 24/7</div>
       </div>
       <div class="card-body">
 
-        <!-- STEP INDICATOR -->
-        <div class="steps-mini" id="stepInd">
-          <div class="step-mini">
-            <div class="step-mini-n act" id="si1">1</div>
-            <span>Amount</span>
-          </div>
-          <div class="step-div"></div>
-          <div class="step-mini">
-            <div class="step-mini-n" id="si2">2</div>
-            <span>Details</span>
-          </div>
-          <div class="step-div"></div>
-          <div class="step-mini">
-            <div class="step-mini-n" id="si3">3</div>
-            <span>Confirm</span>
-          </div>
+        <!-- step indicator -->
+        <div class="step-ind" id="stepInd">
+          <div class="si-n act" id="si1">1</div>
+          <span class="si-lbl">Amount</span>
+          <div class="si-div"></div>
+          <div class="si-n" id="si2">2</div>
+          <span class="si-lbl">Details</span>
+          <div class="si-div"></div>
+          <div class="si-n" id="si3">3</div>
+          <span class="si-lbl">Confirm</span>
         </div>
 
-        <!-- ── STEP 1: Amount & Period ── -->
+        <!-- STEP 1 -->
         <div id="step1">
-          <div class="amt-display"><em>GHS</em> <span id="amtDisplay">5,000</span></div>
+          <div class="amt-display">
+            <span class="amt-currency">GHS</span>
+            <span class="amt-number" id="amtDisplay">5,000</span>
+          </div>
           <div class="amt-sublabel">Loan Amount</div>
 
-          <div class="slider-wrap">
-            <input type="range" id="amtSlider" min="1000" max="50000" value="5000" step="500" oninput="onSlider(this.value)">
-          </div>
+          <input type="range" id="amtSlider" min="1000" max="50000" value="5000" step="500" oninput="onSlider(this.value)">
           <div class="slider-labels"><span>GHS 1,000</span><span>GHS 50,000</span></div>
 
-          <span class="period-label">Repayment Period</span>
+          <span class="period-lbl">Repayment Period</span>
           <div class="period-tabs" id="ptabs">
             <button class="ptab" data-m="1" onclick="selPeriod(1)">1 Mo</button>
             <button class="ptab" data-m="2" onclick="selPeriod(2)">2 Mo</button>
@@ -659,10 +561,10 @@ footer { background: #0f0f0f; padding: 52px 24px 0; }
           </div>
 
           <button class="btn-apply" onclick="goStep(2)">Continue →</button>
-          <p class="apply-disclaimer">No credit checks · Funds via Telecel Cash · 24/7</p>
+          <p class="card-disclaimer">No hidden fees · Telecel Cash · No credit checks</p>
         </div>
 
-        <!-- ── STEP 2: Personal Details ── -->
+        <!-- STEP 2 -->
         <div id="step2" style="display:none">
           <div class="fg">
             <label class="fl">Full Name</label>
@@ -691,17 +593,17 @@ footer { background: #0f0f0f; padding: 52px 24px 0; }
             </div>
           </div>
           <button class="btn-apply" onclick="goStep(3)">Review Application →</button>
-          <button class="btn-apply" style="background:transparent;color:var(--ink2);box-shadow:none;border:1.5px solid var(--border);margin-top:8px;font-weight:600;font-size:13px;" onclick="goStep(1)">← Back</button>
+          <button class="btn-back" onclick="goStep(1)">← Back</button>
         </div>
 
-        <!-- ── STEP 3: Review & Submit ── -->
+        <!-- STEP 3 -->
         <div id="step3" style="display:none">
-          <p style="font-size:13px;font-weight:800;color:var(--ink);margin-bottom:12px;">Review Your Application</p>
+          <p style="font-size:12.5px;font-weight:700;color:var(--ink);margin-bottom:10px">Review Your Application</p>
           <div class="rev">
             <div class="rr"><span class="rr-l">Full Name</span><span class="rr-v" id="rvName">—</span></div>
             <div class="rr"><span class="rr-l">Phone</span><span class="rr-v" id="rvPhone">—</span></div>
             <div class="rr"><span class="rr-l">Employment</span><span class="rr-v" id="rvJob">—</span></div>
-            <div class="rr"><span class="rr-l">Monthly Income</span><span class="rr-v" id="rvInc">—</span></div>
+            <div class="rr"><span class="rr-l">Income</span><span class="rr-v" id="rvInc">—</span></div>
           </div>
           <div class="rev">
             <div class="rr"><span class="rr-l">Loan Amount</span><span class="rr-v" id="rvAmt">—</span></div>
@@ -710,7 +612,7 @@ footer { background: #0f0f0f; padding: 52px 24px 0; }
             <div class="rr"><span class="rr-l">Total Repayment</span><span class="rr-v g" id="rvTotal">—</span></div>
           </div>
           <button class="btn-apply" onclick="submitApp()">Confirm & Submit →</button>
-          <button class="btn-apply" style="background:transparent;color:var(--ink2);box-shadow:none;border:1.5px solid var(--border);margin-top:8px;font-weight:600;font-size:13px;" onclick="goStep(2)">← Edit Details</button>
+          <button class="btn-back" onclick="goStep(2)">← Edit Details</button>
         </div>
 
       </div>
@@ -720,36 +622,36 @@ footer { background: #0f0f0f; padding: 52px 24px 0; }
 
 <!-- HOW IT WORKS -->
 <section class="section how" id="how">
-  <div class="section-inner">
+  <div class="sec-inner">
     <div class="sec-head">
-      <div class="eyebrow">Simple Process</div>
-      <h2 class="sec-h">Four Steps to Funding</h2>
-      <p class="sec-p">Entirely on your phone. No branch visit, no paperwork, no waiting lines.</p>
+      <span class="eyebrow">Simple Process</span>
+      <h2 class="sec-h w">Four Steps to Funding</h2>
+      <p class="sec-p muted">Entirely on your phone. No branch visit, no paperwork, no queues.</p>
     </div>
     <div class="how-steps">
       <div class="how-step">
         <div class="step-num">01</div>
         <span class="step-chip">Start</span>
         <div class="step-t">Fill Application</div>
-        <p class="step-d">Basic personal and income info. Under 2 minutes on your phone using your Telecel number as your identifier.</p>
+        <p class="step-d">Basic personal and income info. Under 2 minutes using your Telecel number as your identifier.</p>
       </div>
       <div class="how-step">
         <div class="step-num">02</div>
         <span class="step-chip">Verify</span>
         <div class="step-t">Verify Your Number</div>
-        <p class="step-d">Confirm your Telecel SIM via OTP. Automated eligibility check runs instantly based on your Telecel usage history.</p>
+        <p class="step-d">Confirm your Telecel SIM via OTP. Eligibility check runs instantly based on your usage history.</p>
       </div>
       <div class="how-step">
         <div class="step-num">03</div>
         <span class="step-chip">Approve</span>
         <div class="step-t">Approved in 15 Minutes</div>
-        <p class="step-d">Fully automated decision in under 15 minutes. No human wait. Active Telecel users get priority fast-tracking.</p>
+        <p class="step-d">Fully automated decision in under 15 minutes. No human wait. Active Telecel users get priority.</p>
       </div>
       <div class="how-step">
         <div class="step-num">04</div>
         <span class="step-chip">Receive</span>
         <div class="step-t">Funds on Telecel Cash</div>
-        <p class="step-d">Loan sent directly to your Telecel Cash dashboard. Available immediately. Track everything in your account.</p>
+        <p class="step-d">Loan sent directly to your Telecel Cash account. Available immediately. Track everything in-app.</p>
       </div>
     </div>
   </div>
@@ -757,20 +659,20 @@ footer { background: #0f0f0f; padding: 52px 24px 0; }
 
 <!-- ELIGIBILITY -->
 <section class="section elig" id="eligibility">
-  <div class="section-inner">
-    <div class="eyebrow">Who Qualifies</div>
+  <div class="sec-inner">
+    <span class="eyebrow">Who Qualifies</span>
     <h2 class="sec-h w">Built for Loyal Telecel Users</h2>
-    <p class="sec-p w">Your Telecel activity is your credit score. The more actively you use Telecel, the higher your limit.</p>
+    <p class="sec-p muted">Your Telecel activity is your credit score. The more actively you use Telecel, the higher your limit.</p>
     <div class="elig-grid">
-      <div class="ecard"><div class="ecard-n">01</div><div class="ecard-t">Active Telecel Subscriber</div><p class="ecard-d">Must be an active Telecel subscriber with regular usage — calls, data, or Telecel Cash transactions. Longer history means a bigger limit.</p></div>
-      <div class="ecard"><div class="ecard-n">02</div><div class="ecard-t">Telecel Cash Account</div><p class="ecard-d">You need a registered, active Telecel Cash mobile money account. Funds are disbursed directly and repayments are auto-deducted.</p></div>
-      <div class="ecard"><div class="ecard-n">03</div><div class="ecard-t">Age 18+ with Income</div><p class="ecard-d">Must be at least 18 years old with verifiable income. Employed, self-employed, business owners, and traders all qualify.</p></div>
-      <div class="ecard"><div class="ecard-n">04</div><div class="ecard-t">Regular Telecel Activity</div><p class="ecard-d">Regular airtime top-ups, data bundles, and Telecel Cash transactions directly boost your eligible loan amount over time.</p></div>
-      <div class="ecard"><div class="ecard-n">05</div><div class="ecard-t">No Active Default</div><p class="ecard-d">Must not have a defaulted TelecelLoans repayment. Good repayment history increases your limit automatically each cycle.</p></div>
-      <div class="ecard"><div class="ecard-n">06</div><div class="ecard-t">Ghana Resident</div><p class="ecard-d">Available exclusively to residents of Ghana using a Ghanaian Telecel SIM registered under a valid national ID.</p></div>
+      <div class="ecard"><div class="ecard-n">01</div><div class="ecard-t">Active Telecel Subscriber</div><p class="ecard-d">Must be an active subscriber with regular usage — calls, data, or Telecel Cash. Longer history means a bigger limit.</p></div>
+      <div class="ecard"><div class="ecard-n">02</div><div class="ecard-t">Telecel Cash Account</div><p class="ecard-d">A registered, active Telecel Cash account is required. Funds disbursed directly; repayments auto-deducted.</p></div>
+      <div class="ecard"><div class="ecard-n">03</div><div class="ecard-t">Age 18+ with Income</div><p class="ecard-d">Must be at least 18 with verifiable income. Employed, self-employed, business owners, and traders all qualify.</p></div>
+      <div class="ecard"><div class="ecard-n">04</div><div class="ecard-t">Regular Telecel Activity</div><p class="ecard-d">Regular airtime, data bundles, and Telecel Cash transactions directly boost your eligible loan amount over time.</p></div>
+      <div class="ecard"><div class="ecard-n">05</div><div class="ecard-t">No Active Default</div><p class="ecard-d">Must not have a defaulted TelecelLoans repayment. Good repayment history grows your limit automatically.</p></div>
+      <div class="ecard"><div class="ecard-n">06</div><div class="ecard-t">Ghana Resident</div><p class="ecard-d">Available exclusively to Ghana residents using a Ghanaian Telecel SIM registered under a valid national ID.</p></div>
     </div>
     <div class="elig-note">
-      <span style="font-size:18px;flex-shrink:0;margin-top:1px">⚡</span>
+      <span style="font-size:17px;flex-shrink:0;margin-top:1px">⚡</span>
       <p>Qualified subscribers are <strong>approved within 15 minutes</strong> — fully automated, 24/7 including weekends. Funds land on Telecel Cash instantly after approval.</p>
     </div>
   </div>
@@ -778,46 +680,46 @@ footer { background: #0f0f0f; padding: 52px 24px 0; }
 
 <!-- BENEFITS -->
 <section class="section ben" id="benefits">
-  <div class="section-inner">
+  <div class="sec-inner">
     <div class="sec-head">
-      <div class="eyebrow">Why TelecelLoans</div>
-      <h2 class="sec-h">Built Around Your Telecel Life</h2>
-      <p class="sec-p">Every feature designed for Telecel subscribers — fast, transparent, and mobile-first.</p>
+      <span class="eyebrow">Why TelecelLoans</span>
+      <h2 class="sec-h w">Built Around Your Telecel Life</h2>
+      <p class="sec-p muted">Every feature designed for Telecel subscribers — fast, transparent, and mobile-first.</p>
     </div>
     <div class="ben-grid">
-      <div class="bcard"><div class="bcard-ico">⚡</div><div class="bcard-t">15-Minute Approval</div><p class="bcard-d">Real-time automated approval, any time of day, including weekends and public holidays. No human delays, ever.</p></div>
-      <div class="bcard"><div class="bcard-ico">💰</div><div class="bcard-t">Flexible Terms</div><p class="bcard-d">1 to 6 months — pick what fits your budget. No early repayment penalties. Pay ahead anytime you like.</p></div>
-      <div class="bcard"><div class="bcard-ico">🔒</div><div class="bcard-t">Bank-Grade Security</div><p class="bcard-d">256-bit encryption on every transaction. Your data is never sold or shared without your explicit consent.</p></div>
-      <div class="bcard"><div class="bcard-ico">📱</div><div class="bcard-t">Telecel Cash Integration</div><p class="bcard-d">Apply, receive, track, and repay entirely through Telecel Cash. Zero branch visits, zero paperwork required.</p></div>
-      <div class="bcard"><div class="bcard-ico">🎯</div><div class="bcard-t">Zero Hidden Fees</div><p class="bcard-d">Our calculator shows your exact repayment before you apply. What you see is exactly what you pay — always.</p></div>
-      <div class="bcard"><div class="bcard-ico">📈</div><div class="bcard-t">Grow Your Limit</div><p class="bcard-d">Consistent Telecel usage and good repayment history automatically increase your eligible amount over time.</p></div>
+      <div class="bcard"><div class="bcard-ico">⚡</div><div class="bcard-t">15-Minute Approval</div><p class="bcard-d">Real-time automated approval, any time of day, including weekends and public holidays. No human delays.</p></div>
+      <div class="bcard"><div class="bcard-ico">💰</div><div class="bcard-t">Flexible Terms</div><p class="bcard-d">1 to 6 months — pick what fits your budget. No early repayment penalties. Pay ahead anytime.</p></div>
+      <div class="bcard"><div class="bcard-ico">🔒</div><div class="bcard-t">Bank-Grade Security</div><p class="bcard-d">256-bit encryption on every transaction. Your data is never sold or shared without explicit consent.</p></div>
+      <div class="bcard"><div class="bcard-ico">📱</div><div class="bcard-t">Telecel Cash Integration</div><p class="bcard-d">Apply, receive, track, and repay entirely through Telecel Cash. Zero branch visits, zero paperwork.</p></div>
+      <div class="bcard"><div class="bcard-ico">🎯</div><div class="bcard-t">Zero Hidden Fees</div><p class="bcard-d">Calculator shows your exact repayment before you apply. What you see is exactly what you pay.</p></div>
+      <div class="bcard"><div class="bcard-ico">📈</div><div class="bcard-t">Grow Your Limit</div><p class="bcard-d">Consistent Telecel usage and good repayment history automatically increase your eligible amount.</p></div>
     </div>
   </div>
 </section>
 
 <!-- TESTIMONIALS -->
 <section class="section testi" id="testimonials">
-  <div class="section-inner">
+  <div class="sec-inner">
     <div class="sec-head">
-      <div class="eyebrow">Customer Stories</div>
-      <h2 class="sec-h">What Telecel Users Say</h2>
+      <span class="eyebrow">Customer Stories</span>
+      <h2 class="sec-h w">What Telecel Users Say</h2>
     </div>
     <div class="t-grid">
       <div class="tcard">
         <div class="t-stars">★★★★★</div>
-        <p class="t-text">"As a long-time Telecel subscriber I qualified instantly. Approved in under 15 minutes. The whole process happened right on my phone!"</p>
+        <p class="t-text">"As a long-time Telecel subscriber I qualified instantly. Approved in under 15 minutes. The whole process was on my phone!"</p>
         <div class="t-name">Kwame Asante</div>
         <div class="t-role">Business Owner · Accra</div>
       </div>
       <div class="tcard">
         <div class="t-stars">★★★★★</div>
-        <p class="t-text">"No hidden fees, no surprises. Exactly what I saw in the calculator is what I paid. Telecel made this incredibly simple and honest."</p>
+        <p class="t-text">"No hidden fees, no surprises. Exactly what the calculator showed is what I paid. Telecel made this incredibly simple."</p>
         <div class="t-name">Ama Osei</div>
         <div class="t-role">Entrepreneur · Kumasi</div>
       </div>
       <div class="tcard">
         <div class="t-stars">★★★★★</div>
-        <p class="t-text">"My Telecel loyalty actually paid off — got a higher limit than expected. Funds were on my Telecel Cash in minutes after approval."</p>
+        <p class="t-text">"My Telecel loyalty paid off — got a higher limit than expected. Funds were on Telecel Cash in minutes after approval."</p>
         <div class="t-name">Yaw Mensah</div>
         <div class="t-role">Trader · Takoradi</div>
       </div>
@@ -827,39 +729,39 @@ footer { background: #0f0f0f; padding: 52px 24px 0; }
 
 <!-- FAQ -->
 <section class="section faq" id="faq">
-  <div class="section-inner">
+  <div class="sec-inner">
     <div class="sec-head">
-      <div class="eyebrow">Got Questions</div>
-      <h2 class="sec-h">Frequently Asked</h2>
+      <span class="eyebrow">Got Questions</span>
+      <h2 class="sec-h w">Frequently Asked</h2>
     </div>
     <div class="faq-wrap">
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)"><span>How long does approval take?</span><div class="faq-arr">▼</div></div>
-        <div class="faq-ans"><p>Most active Telecel subscribers are approved within 15 minutes. Our system checks eligibility in real-time, 24/7 including weekends and public holidays — fully automated, no human wait.</p></div>
+        <div class="faq-ans"><p>Most active Telecel subscribers are approved within 15 minutes. Our system checks eligibility in real-time, 24/7 including weekends — fully automated, no human wait.</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)"><span>Who is eligible for TelecelLoans?</span><div class="faq-arr">▼</div></div>
-        <div class="faq-ans"><p>Active Telecel subscribers aged 18+ with a registered Telecel Cash account and a verifiable income. The longer and more actively you've used Telecel — calls, data, Telecel Cash — the higher your eligible loan amount.</p></div>
+        <div class="faq-ans"><p>Active Telecel subscribers aged 18+ with a registered Telecel Cash account and verifiable income. The more actively you use Telecel — calls, data, Telecel Cash — the higher your eligible loan amount.</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)"><span>Does my Telecel usage affect how much I can borrow?</span><div class="faq-arr">▼</div></div>
-        <div class="faq-ans"><p>Yes, directly. Regular Telecel activity — consistent airtime top-ups, active data usage, and Telecel Cash transactions — increases your eligible loan limit. Your Telecel usage history is your credit profile with us.</p></div>
+        <div class="faq-ans"><p>Yes, directly. Regular Telecel activity — airtime top-ups, active data usage, and Telecel Cash transactions — increases your eligible loan limit. Your usage history is your credit profile.</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)"><span>What is the maximum loan amount?</span><div class="faq-arr">▼</div></div>
-        <div class="faq-ans"><p>GHS 1,000 to GHS 50,000 depending on your Telecel subscriber history, income, and repayment track record. First-time borrowers may start lower — limits grow automatically with good repayment behaviour.</p></div>
+        <div class="faq-ans"><p>GHS 1,000 to GHS 50,000 depending on your Telecel subscriber history, income, and repayment track record. Limits grow automatically with good repayment behaviour.</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)"><span>What is the interest rate?</span><div class="faq-arr">▼</div></div>
-        <div class="faq-ans"><p>A flat 8.9% per month applied to the principal for each month of your chosen repayment period. All amounts are shown upfront in our calculator before you apply — no surprises at repayment time.</p></div>
+        <div class="faq-ans"><p>A flat 8.9% per month on the principal for each month of your chosen repayment period. All amounts are shown upfront in the calculator — no surprises at repayment time.</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)"><span>How do I repay my TelecelLoan?</span><div class="faq-arr">▼</div></div>
-        <div class="faq-ans"><p>Repayment is automatic — deducted from your Telecel Cash account on the due date. You can also repay early anytime without any penalty fee. Everything is trackable on your dashboard.</p></div>
+        <div class="faq-ans"><p>Repayment is automatic — deducted from your Telecel Cash account on the due date. You can also repay early anytime with no penalty fee. Everything is trackable on your dashboard.</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)"><span>What if I miss a repayment?</span><div class="faq-arr">▼</div></div>
-        <div class="faq-ans"><p>Missing a repayment may affect your future borrowing limit and incur a small late fee. Ensure sufficient funds in your Telecel Cash account before the due date. Contact Telecel support early if you anticipate difficulty.</p></div>
+        <div class="faq-ans"><p>Missing a repayment may affect your future borrowing limit and incur a small late fee. Ensure sufficient funds in your Telecel Cash account before the due date. Contact Telecel support early if needed.</p></div>
       </div>
     </div>
   </div>
@@ -868,8 +770,8 @@ footer { background: #0f0f0f; padding: 52px 24px 0; }
 <!-- CTA STRIP -->
 <div class="cta-strip">
   <h2>Ready to Apply?</h2>
-  <p>Join thousands of Telecel subscribers who've already unlocked instant loans.</p>
-  <button class="btn-cta-white" onclick="scrollToForm()">Apply Now — It's Free →</button>
+  <p>Join thousands of Telecel subscribers who've unlocked instant loans.</p>
+  <button class="btn-white" onclick="scrollToForm()">Apply Now — It's Free →</button>
 </div>
 
 <!-- FOOTER -->
@@ -878,10 +780,10 @@ footer { background: #0f0f0f; padding: 52px 24px 0; }
     <div class="ft-top">
       <div class="ft-brand">
         <a href="#" class="logo">
-          <div class="logo-mark" style="width:30px;height:30px">
-            <svg viewBox="0 0 141 140" fill="none" width="15" height="15"><path d="M70.77 41.83C59.46 41.72 50.37 51.03 50.4 62.1C50.43 73.83 60.27 82.48 70.55 82.3C81.44 82.4 90.75 73.69 90.84 62.36C90.94 50.49 81.54 41.94 70.77 41.83Z" fill="white"/></svg>
+          <div class="logo-mark" style="width:28px;height:28px">
+            <svg viewBox="0 0 141 140" fill="none" width="13" height="13"><path d="M70.77 41.83C59.46 41.72 50.37 51.03 50.4 62.1C50.43 73.83 60.27 82.48 70.55 82.3C81.44 82.4 90.75 73.69 90.84 62.36C90.94 50.49 81.54 41.94 70.77 41.83Z" fill="white"/></svg>
           </div>
-          <span class="logo-text" style="color:#fff;font-size:16px">Telecel<em>Loans</em></span>
+          <span class="logo-text" style="font-size:14px">Telecel<em>Loans</em></span>
         </a>
         <div class="ft-div"></div>
         <p>Fast, secure, and flexible loans exclusively for Telecel subscribers across Ghana. Licensed and regulated.</p>
@@ -924,99 +826,94 @@ var Tawk_API=Tawk_API||{},Tawk_LoadStart=new Date();
 </script>
 
 <script>
-const RATE = 0.089;
-let amt = 5000, months = 3;
+const RATE=0.089;
+let amt=5000,months=3;
 
-function calc() {
-  const interest = amt * RATE * months;
-  const total = Math.round(amt + interest);
-  const monthly = Math.round(total / months);
-  document.getElementById('amtDisplay').textContent = amt.toLocaleString();
-  document.getElementById('crM').textContent = 'GHS ' + monthly.toLocaleString();
-  document.getElementById('crT').textContent = 'GHS ' + total.toLocaleString();
-  document.getElementById('crNote').textContent = months + ' month' + (months > 1 ? 's' : '') + ' · GHS ' + Math.round(interest).toLocaleString() + ' interest';
-  // Update slider fill
-  const slider = document.getElementById('amtSlider');
-  const pct = ((amt - 1000) / (50000 - 1000)) * 100;
-  slider.style.background = `linear-gradient(to right, #E30613 ${pct}%, #e8e8e8 ${pct}%)`;
-  window._ld = { amount: amt, months, total, monthly, interest: Math.round(interest) };
+function updateSliderFill(){
+  const s=document.getElementById('amtSlider');
+  const pct=((amt-1000)/(50000-1000))*100;
+  s.style.background=`linear-gradient(to right,#E30613 ${pct}%,#e4e4e8 ${pct}%)`;
 }
 
-function onSlider(v) {
-  amt = parseInt(v);
+function calc(){
+  const interest=amt*RATE*months;
+  const total=Math.round(amt+interest);
+  const monthly=Math.round(total/months);
+  document.getElementById('amtDisplay').textContent=amt.toLocaleString();
+  document.getElementById('crM').textContent='GHS '+monthly.toLocaleString();
+  document.getElementById('crT').textContent='GHS '+total.toLocaleString();
+  document.getElementById('crNote').textContent=months+' month'+(months>1?'s':'')+' · GHS '+Math.round(interest).toLocaleString()+' interest';
+  updateSliderFill();
+  window._ld={amount:amt,months,total,monthly,interest:Math.round(interest)};
+}
+
+function onSlider(v){amt=parseInt(v);calc()}
+function selPeriod(m){
+  months=m;
+  document.querySelectorAll('.ptab').forEach(b=>b.classList.toggle('act',+b.dataset.m===m));
   calc();
 }
 
-function selPeriod(m) {
-  months = m;
-  document.querySelectorAll('.ptab').forEach(b => b.classList.toggle('act', +b.dataset.m === m));
-  calc();
-}
-
-// Step navigation
-function goStep(n) {
-  if (n === 2) {
-    // validate nothing on step 1, just proceed
+function goStep(n){
+  if(n===3){
+    const name=document.getElementById('fName').value.trim();
+    const phone=document.getElementById('fPhone').value.trim();
+    if(!name){alert('Please enter your full name.');return;}
+    if(!phone||phone.length<9){alert('Please enter a valid Telecel number.');return;}
+    const d=window._ld;
+    document.getElementById('rvName').textContent=name;
+    document.getElementById('rvPhone').textContent=phone;
+    document.getElementById('rvJob').textContent=document.getElementById('fJob').value||'—';
+    document.getElementById('rvInc').textContent='GHS '+(parseInt(document.getElementById('fIncome').value)||0).toLocaleString();
+    document.getElementById('rvAmt').textContent='GHS '+d.amount.toLocaleString();
+    document.getElementById('rvPer').textContent=d.months+' month'+(d.months>1?'s':'');
+    document.getElementById('rvTotal').textContent='GHS '+d.total.toLocaleString();
   }
-  if (n === 3) {
-    const name = document.getElementById('fName').value.trim();
-    const phone = document.getElementById('fPhone').value.trim();
-    if (!name) { alert('Please enter your full name.'); return; }
-    if (!phone || phone.length < 9) { alert('Please enter a valid Telecel number.'); return; }
-    const d = window._ld;
-    document.getElementById('rvName').textContent = name;
-    document.getElementById('rvPhone').textContent = phone;
-    document.getElementById('rvJob').textContent = document.getElementById('fJob').value || '—';
-    document.getElementById('rvInc').textContent = 'GHS ' + (parseInt(document.getElementById('fIncome').value) || 0).toLocaleString();
-    document.getElementById('rvAmt').textContent = 'GHS ' + d.amount.toLocaleString();
-    document.getElementById('rvPer').textContent = d.months + ' month' + (d.months > 1 ? 's' : '');
-    document.getElementById('rvTotal').textContent = 'GHS ' + d.total.toLocaleString();
-  }
-  document.getElementById('step1').style.display = n === 1 ? 'block' : 'none';
-  document.getElementById('step2').style.display = n === 2 ? 'block' : 'none';
-  document.getElementById('step3').style.display = n === 3 ? 'block' : 'none';
-  ['si1','si2','si3'].forEach((id, i) => {
-    const el = document.getElementById(id);
-    el.className = 'step-mini-n';
-    if (i + 1 < n) el.classList.add('done');
-    else if (i + 1 === n) el.classList.add('act');
+  document.getElementById('step1').style.display=n===1?'block':'none';
+  document.getElementById('step2').style.display=n===2?'block':'none';
+  document.getElementById('step3').style.display=n===3?'block':'none';
+  ['si1','si2','si3'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    el.className='si-n';
+    if(i+1<n)el.classList.add('done');
+    else if(i+1===n)el.classList.add('act');
   });
-  // Scroll card into view on mobile
-  if (window.innerWidth < 900) document.getElementById('applyCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if(window.innerWidth<960){
+    setTimeout(()=>document.getElementById('applyCard').scrollIntoView({behavior:'smooth',block:'start'}),100);
+  }
 }
 
-function submitApp() {
-  const d = window._ld;
-  const name = document.getElementById('fName').value;
-  const phone = document.getElementById('fPhone').value;
-  const employment = document.getElementById('fJob').value;
-  const income = document.getElementById('fIncome').value;
-  sessionStorage.setItem('loanApplicationData', JSON.stringify({
-    fullName: name, phone, employment, income,
-    loanAmount: d.amount, repaymentMonths: d.months,
-    interestRate: '8.9%', totalRepayment: d.total,
-    totalInterest: d.interest, timestamp: new Date().toISOString()
+function submitApp(){
+  const d=window._ld;
+  const name=document.getElementById('fName').value;
+  const phone=document.getElementById('fPhone').value;
+  const employment=document.getElementById('fJob').value;
+  const income=document.getElementById('fIncome').value;
+  sessionStorage.setItem('loanApplicationData',JSON.stringify({
+    fullName:name,phone,employment,income,
+    loanAmount:d.amount,repaymentMonths:d.months,
+    interestRate:'8.9%',totalRepayment:d.total,
+    totalInterest:d.interest,timestamp:new Date().toISOString()
   }));
-  window.location.href = 'verify.html?' + new URLSearchParams({
-    phone, amount: d.amount, days: d.months * 30,
-    fee: d.interest, repay: d.total, name, employment, income
+  window.location.href='verify.html?'+new URLSearchParams({
+    phone,amount:d.amount,days:d.months*30,
+    fee:d.interest,repay:d.total,name,employment,income
   }).toString();
 }
 
-function scrollToForm() {
-  document.getElementById('applyCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  setTimeout(() => goStep(1), 400);
+function scrollToForm(){
+  document.getElementById('applyCard').scrollIntoView({behavior:'smooth',block:'start'});
+  setTimeout(()=>goStep(1),300);
 }
-
-function toggleNav() {
+function toggleNav(){
   document.getElementById('mobMenu').classList.toggle('open');
   document.getElementById('ham').classList.toggle('open');
 }
-function closeNav() {
+function closeNav(){
   document.getElementById('mobMenu').classList.remove('open');
   document.getElementById('ham').classList.remove('open');
 }
-function toggleFaq(el) { el.parentElement.classList.toggle('open'); }
+function toggleFaq(el){el.parentElement.classList.toggle('open')}
 
 calc();
 </script>
