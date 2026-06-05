@@ -137,6 +137,74 @@
     @media(max-width:980px){.three-steps{grid-template-columns:1fr 1fr 1fr}}
     @media(max-width:620px){.three-steps{grid-template-columns:1fr}.hero p{max-width:100%}.trust-row{grid-template-columns:1fr 1fr 1fr}.trust-card{text-align:center}.modal-actions .btn-primary,.modal-actions .btn-secondary{min-height:50px}.step-card{box-shadow:0 10px 28px rgba(16,17,20,.08)}}
 
+    /* FlexLoan-inspired simple calculator redesign */
+    .simple-loan-calculator{
+      max-width:480px;
+      margin-left:auto;
+      border-radius:26px;
+      overflow:hidden;
+      background:#fff;
+      border:1px solid rgba(255,255,255,.42);
+      box-shadow:0 30px 90px rgba(0,0,0,.35);
+    }
+    .simple-loan-calculator .calc-head{
+      padding:20px 22px;
+      background:linear-gradient(135deg,#e30613 0%,#b00611 55%,#151923 100%);
+      color:#fff;
+      align-items:center;
+    }
+    .simple-loan-calculator .calc-head h2{font-size:22px;line-height:1.1;letter-spacing:-.5px;margin:0}
+    .simple-loan-calculator .calc-head p{font-size:12px;margin-top:4px;color:rgba(255,255,255,.78)}
+    .simple-loan-calculator .calc-badge{background:#fff;color:var(--red);border:0;box-shadow:0 10px 22px rgba(0,0,0,.13);font-size:12px;padding:9px 12px}
+    .simple-loan-calculator .calc-body{padding:20px;background:#fff}
+    .simple-loan-calculator .calc-section{margin-bottom:18px}
+    .simple-loan-calculator .calc-label{font-size:13px;margin-bottom:10px;color:#111827;align-items:center}
+    .simple-loan-calculator .calc-label span:last-child{font-size:13px;color:var(--red);font-weight:900}
+    .simple-amount-box{border:1.8px solid #111827;border-radius:16px;box-shadow:none;background:#fff}
+    .simple-amount-box .currency{background:#111827;color:#fff;padding:15px 14px;font-size:13px;letter-spacing:.3px}
+    .simple-amount-box input{font-size:28px;font-weight:900;letter-spacing:-.8px;padding:11px 13px;min-height:56px}
+    .simple-amount-box:focus-within{border-color:var(--red);box-shadow:0 0 0 4px rgba(217,4,22,.10)}
+    .simple-range{margin-top:13px}
+    .simple-range input[type="range"]{height:6px;accent-color:var(--red)}
+    .simple-range .range-minmax{font-size:11px;margin-top:5px;color:#64748b}
+    .simple-duration-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+    .simple-duration-grid .duration-btn{min-height:46px;border-radius:13px;padding:10px 6px;font-size:13px;border:1px solid #e2e8f0;background:#fff;color:#111827;box-shadow:none}
+    .simple-duration-grid .duration-btn:hover{border-color:var(--red);background:#fff1f2;color:var(--red)}
+    .simple-duration-grid .duration-btn.active{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 12px 24px rgba(217,4,22,.22)}
+    .simple-result-panel{border-radius:18px;background:linear-gradient(145deg,#101827,#06080d);padding:16px;margin:2px 0 16px;border:1px solid rgba(255,255,255,.08)}
+    .simple-result-panel:before{display:none}
+    .simple-result-panel .result-grid{grid-template-columns:1fr 1fr;gap:10px}
+    .simple-result-panel .result-item{padding:13px 12px;border-radius:14px;background:rgba(255,255,255,.06)}
+    .simple-result-panel .result-item span{font-size:10px;letter-spacing:.8px}
+    .simple-result-panel .result-item strong{font-size:19px;letter-spacing:-.4px}
+    .simple-result-panel .calc-note{font-size:11px;text-align:center;color:rgba(255,255,255,.64);margin-top:11px}
+    .simple-loan-calculator .apply-btn{border-radius:15px;min-height:52px;text-transform:uppercase;letter-spacing:.4px;background:linear-gradient(135deg,var(--red),var(--red-dark));box-shadow:0 16px 28px rgba(217,4,22,.24)}
+    @media(max-width:980px){.simple-loan-calculator{margin:0 auto;max-width:560px}}
+    @media(max-width:620px){
+      .simple-loan-calculator{max-width:100%;border-radius:22px;box-shadow:0 20px 55px rgba(0,0,0,.28)}
+      .simple-loan-calculator .calc-head{padding:17px 16px}
+      .simple-loan-calculator .calc-head h2{font-size:19px}
+      .simple-loan-calculator .calc-head p{font-size:11px}
+      .simple-loan-calculator .calc-badge{font-size:11px;padding:8px 10px}
+      .simple-loan-calculator .calc-body{padding:15px}
+      .simple-loan-calculator .calc-section{margin-bottom:15px}
+      .simple-amount-box .currency{padding:13px 12px;font-size:12px}
+      .simple-amount-box input{font-size:22px;min-height:52px;padding:10px 11px}
+      .simple-duration-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+      .simple-duration-grid .duration-btn{min-height:46px;font-size:13px;border-radius:12px}
+      .simple-result-panel{padding:13px;border-radius:16px;margin-bottom:14px}
+      .simple-result-panel .result-grid{grid-template-columns:1fr 1fr;gap:8px}
+      .simple-result-panel .result-item{padding:11px 8px}
+      .simple-result-panel .result-item strong{font-size:16px;white-space:nowrap}
+      .simple-result-panel .result-item span{font-size:9px}
+      .simple-loan-calculator .apply-btn{min-height:50px;border-radius:14px;font-size:14px}
+    }
+    @media(max-width:380px){
+      .simple-result-panel .result-grid{grid-template-columns:1fr}
+      .simple-result-panel .result-item strong{font-size:18px}
+    }
+
+
   </style>
 </head>
 <body>
@@ -161,21 +229,47 @@
           <div class="trust-row"><div class="trust-card"><strong>Telecel</strong><span>Regular users</span></div><div class="trust-card"><strong>GHS 50K</strong><span>Max amount</span></div><div class="trust-card"><strong>Secure</strong><span>Cash approval</span></div></div>
         </div>
 
-        <div class="calc-card" id="calculator">
-          <div class="calc-head"><div><h2>Loan Calculator</h2><p>For regular Telecel users in Ghana</p></div><div class="calc-badge">Live</div></div>
+        <div class="calc-card simple-loan-calculator" id="calculator" aria-label="Telecel loan calculator">
+          <div class="calc-head">
+            <div>
+              <h2>Telecel Loan Calculator</h2>
+              <p>Simple estimate for regular Telecel users</p>
+            </div>
+            <div class="calc-badge">GHS</div>
+          </div>
           <div class="calc-body">
-            <div class="calc-section">
-              <div class="calc-label"><span>Loan amount</span><span id="amountText">GHS 5,000</span></div>
-              <div class="amount-box"><span class="currency">GHS</span><input id="loanAmount" type="number" min="1000" max="50000" step="500" value="5000" oninput="syncAmountFromInput()" /></div>
-              <div class="range-wrap"><input id="amountRange" type="range" min="1000" max="50000" step="500" value="5000" oninput="syncAmountFromRange()" /><div class="range-minmax"><span>GHS 1,000</span><span>GHS 50,000</span></div></div>
-              <div class="amount-chips" id="amountChips"><button class="chip" onclick="setAmount(2000)">2,000</button><button class="chip" onclick="setAmount(5000)">5,000</button><button class="chip" onclick="setAmount(10000)">10,000</button><button class="chip" onclick="setAmount(20000)">20,000</button></div>
+            <div class="calc-section amount-section">
+              <div class="calc-label"><span>Loan Amount</span><span id="amountText">GHS 5,000</span></div>
+              <div class="amount-box simple-amount-box">
+                <span class="currency">GHS</span>
+                <input id="loanAmount" type="number" min="1000" max="50000" step="500" value="5000" inputmode="numeric" oninput="syncAmountFromInput()" aria-label="Loan amount in Ghana Cedis" />
+              </div>
+              <div class="range-wrap simple-range">
+                <input id="amountRange" type="range" min="1000" max="50000" step="500" value="5000" oninput="syncAmountFromRange()" aria-label="Choose loan amount" />
+                <div class="range-minmax"><span>GHS 1,000</span><span>GHS 50,000</span></div>
+              </div>
             </div>
-            <div class="calc-section">
-              <div class="calc-label"><span>Repayment duration</span><span id="durationText">90 days</span></div>
-              <div class="duration-grid" id="durationGrid"><button class="duration-btn" data-days="30" onclick="selectDuration(30)">30 days<small>Short term</small></button><button class="duration-btn" data-days="60" onclick="selectDuration(60)">60 days<small>Balanced</small></button><button class="duration-btn active" data-days="90" onclick="selectDuration(90)">90 days<small>Popular</small></button><button class="duration-btn" data-days="120" onclick="selectDuration(120)">120 days<small>Lower monthly</small></button><button class="duration-btn" data-days="150" onclick="selectDuration(150)">150 days<small>Flexible</small></button><button class="duration-btn" data-days="180" onclick="selectDuration(180)">180 days<small>Maximum</small></button></div>
+
+            <div class="calc-section duration-section">
+              <div class="calc-label"><span>Repayment Period</span><span id="durationText">3 Months</span></div>
+              <div class="duration-grid simple-duration-grid" id="durationGrid">
+                <button class="duration-btn" data-days="30" onclick="selectDuration(30)" type="button">1 Month</button>
+                <button class="duration-btn" data-days="60" onclick="selectDuration(60)" type="button">2 Months</button>
+                <button class="duration-btn active" data-days="90" onclick="selectDuration(90)" type="button">3 Months</button>
+                <button class="duration-btn" data-days="120" onclick="selectDuration(120)" type="button">4 Months</button>
+                <button class="duration-btn" data-days="150" onclick="selectDuration(150)" type="button">5 Months</button>
+                <button class="duration-btn" data-days="180" onclick="selectDuration(180)" type="button">6 Months</button>
+              </div>
             </div>
-            <div class="result-panel"><div class="result-grid"><div class="result-item"><span>Monthly equivalent</span><strong id="monthlyDisplay">GHS 0</strong></div><div class="result-item"><span>Total repayment</span><strong class="green" id="repayDisplay">GHS 0</strong></div></div><div class="calc-note" id="rateNote">Transparent estimate for eligible Telecel users.</div></div>
-            <button class="apply-btn" onclick="openApplicationModal()">Start application</button>
+
+            <div class="result-panel simple-result-panel">
+              <div class="result-grid">
+                <div class="result-item"><span>Monthly Payment</span><strong id="monthlyDisplay">GHS 0</strong></div>
+                <div class="result-item"><span>Total Repayment</span><strong class="green" id="repayDisplay">GHS 0</strong></div>
+              </div>
+              <div class="calc-note" id="rateNote">Rate: 10.9% per month · 3 months</div>
+            </div>
+            <button class="apply-btn" onclick="openApplicationModal()" type="button">Apply Now →</button>
           </div>
         </div>
       </div>
@@ -241,10 +335,11 @@
       if(normalizeInput) input.value = state.amount;
       document.getElementById('amountRange').value = state.amount;
       document.getElementById('amountText').textContent = money(state.amount);
-      document.getElementById('durationText').textContent = state.duration + ' days';
+      const durationMonths = state.duration / 30;
+      document.getElementById('durationText').textContent = durationMonths + ' Month' + (durationMonths>1?'s':'');
       document.getElementById('monthlyDisplay').textContent = money(state.monthly);
       document.getElementById('repayDisplay').textContent = money(state.total);
-      document.getElementById('rateNote').textContent = 'Estimated service fee: ' + money(state.interest) + ' over ' + months + ' month' + (months>1?'s':'') + '. Final approval may depend on your Telecel Cash review.';
+      document.getElementById('rateNote').textContent = 'Rate: 10.9% per month · ' + months + ' month' + (months>1?'s':'') + ' · Fee ' + money(state.interest);
       document.getElementById('sumAmount').textContent = money(state.amount);
       document.getElementById('sumRepay').textContent = money(state.total);
       updateChipState();
