@@ -3,644 +3,719 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TelecelLoans - Instant Loans</title>
+  <title>TelecelLoans – Instant Loans | Telecel Ghana</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --red: #D50404;
+      --red-dark: #A30000;
+      --red-deeper: #7A0000;
+      --red-light: #FDEAEA;
+      --red-mid: #F5B3B3;
+      --white: #FFFFFF;
+      --off-white: #FAF8F8;
+      --gray-100: #F4F2F2;
+      --gray-200: #E8E5E5;
+      --gray-400: #9E9898;
+      --gray-600: #5C5757;
+      --gray-800: #2A2626;
+      --black: #1A1616;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-xl: 22px;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+      --shadow-md: 0 6px 20px rgba(0,0,0,0.09);
+      --shadow-lg: 0 16px 48px rgba(0,0,0,0.13);
     }
-    
+
+    html { scroll-behavior: smooth; }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-      background: linear-gradient(135deg, #fff5f5 0%, #fffbf0 100%);
-      color: #1a1a1a;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+      background: var(--off-white);
+      color: var(--black);
       line-height: 1.6;
       min-height: 100vh;
+      font-size: 14px;
     }
-    
-    .container {
-      max-width: 600px;
+
+    /* NAV */
+    nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-inner {
+      max-width: 640px;
       margin: 0 auto;
       padding: 0 16px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
     }
-    
-    /* Header */
-    header {
-      background: linear-gradient(135deg, #d90416, #9f0712);
-      color: white;
-      padding: 20px 0;
-      text-align: center;
-      margin-bottom: 20px;
-      border-radius: 0 0 20px 20px;
-    }
-    
-    .logo {
-      font-size: 24px;
-      font-weight: 900;
-      margin-bottom: 4px;
-    }
-    
-    .tagline {
-      font-size: 12px;
-      opacity: 0.9;
-    }
-    
-    /* Hero */
-    .hero {
-      background: white;
-      border-radius: 16px;
-      padding: 24px;
-      margin-bottom: 20px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-      text-align: center;
-    }
-    
-    .hero-badge {
-      display: inline-block;
-      background: linear-gradient(135deg, #fff1f2, #ffe8ea);
-      color: #d90416;
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 700;
-      margin-bottom: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-    }
-    
-    .hero h1 {
-      font-size: 28px;
-      font-weight: 900;
-      margin-bottom: 10px;
-      line-height: 1.3;
-    }
-    
-    .hero p {
-      font-size: 13px;
-      color: #666;
-      line-height: 1.6;
-    }
-    
-    /* Calculator Card */
-    .calculator {
-      background: white;
-      border-radius: 16px;
-      padding: 24px;
-      margin-bottom: 20px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-    }
-    
-    .calc-title {
+    .nav-logo {
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 18px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-logo-svg { width: 100px; height: auto; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .nav-link {
+      color: var(--gray-600);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav-link:hover { color: var(--red); background: var(--red-light); }
+    .nav-link.active { color: var(--red); }
+    .nav-cta {
+      background: var(--red);
+      color: var(--white) !important;
+      border-radius: var(--radius-sm);
+      padding: 7px 14px !important;
+      font-size: 12px !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.3px;
+      transition: background 0.2s, transform 0.15s !important;
+    }
+    .nav-cta:hover { background: var(--red-dark) !important; transform: translateY(-1px); color: var(--white) !important; }
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      color: var(--gray-800);
+    }
+    .hamburger svg { width: 22px; height: 22px; }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(150deg, var(--red) 0%, var(--red-dark) 55%, var(--red-deeper) 100%);
+      color: var(--white);
+      padding: 36px 16px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      width: 300px; height: 300px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 50%;
+      top: -80px; right: -60px;
+      pointer-events: none;
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      width: 200px; height: 200px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 50%;
+      bottom: -60px; left: -40px;
+      pointer-events: none;
+    }
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: var(--white);
+      padding: 5px 14px;
+      border-radius: 50px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 16px;
+    }
+    header h1 {
+      font-size: clamp(22px, 5vw, 30px);
       font-weight: 900;
-      margin-bottom: 20px;
-      color: #1a1a1a;
+      line-height: 1.25;
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
     }
-    
-    .calc-field {
-      margin-bottom: 20px;
+    header p {
+      font-size: 13px;
+      opacity: 0.88;
+      max-width: 360px;
+      margin: 0 auto;
     }
-    
+
+    /* PAGE */
+    .page { max-width: 640px; margin: 0 auto; padding: 0 16px 40px; }
+
+    /* CARD */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-top: 20px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--gray-200);
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--black);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-title span.icon {
+      width: 30px; height: 30px;
+      background: var(--red-light);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    /* BENEFITS ROW */
+    .benefits {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .benefit-item {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 14px 10px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+    }
+    .benefit-icon {
+      width: 34px; height: 34px;
+      background: var(--red-light);
+      border-radius: 8px;
+      margin: 0 auto 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .benefit-icon svg { width: 16px; height: 16px; color: var(--red); }
+    .benefit-text { font-size: 11px; font-weight: 700; color: var(--gray-800); }
+
+    /* CALCULATOR */
+    .calc-field { margin-bottom: 22px; }
     .field-header {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       margin-bottom: 10px;
-      font-size: 12px;
-      font-weight: 700;
-      color: #666;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
     }
-    
+    .field-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gray-400);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
     .field-value {
-      color: #d90416;
       font-size: 18px;
       font-weight: 900;
+      color: var(--red);
+      letter-spacing: -0.5px;
     }
-    
+
+    /* RANGE SLIDER */
     .range-slider {
       width: 100%;
-      height: 8px;
-      border-radius: 4px;
-      background: #e8e8e8;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--gray-200);
       outline: none;
       -webkit-appearance: none;
       appearance: none;
       cursor: pointer;
-      margin: 12px 0;
+      margin: 10px 0;
     }
-    
     .range-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
-      appearance: none;
-      width: 20px;
-      height: 20px;
+      width: 22px; height: 22px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #d90416, #9f0712);
+      background: var(--red);
       cursor: pointer;
-      box-shadow: 0 3px 10px rgba(217, 4, 22, 0.3);
+      border: 3px solid var(--white);
+      box-shadow: 0 2px 8px rgba(213,4,4,0.35);
     }
-    
     .range-slider::-moz-range-thumb {
-      width: 20px;
-      height: 20px;
+      width: 22px; height: 22px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #d90416, #9f0712);
+      background: var(--red);
       cursor: pointer;
-      border: none;
-      box-shadow: 0 3px 10px rgba(217, 4, 22, 0.3);
+      border: 3px solid var(--white);
+      box-shadow: 0 2px 8px rgba(213,4,4,0.35);
     }
-    
+
+    /* QUICK BUTTONS */
     .quick-buttons {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 8px;
       margin-top: 10px;
     }
-    
     .quick-btn {
-      border: 2px solid #e8e8e8;
-      background: white;
-      padding: 10px;
-      border-radius: 8px;
+      border: 1.5px solid var(--gray-200);
+      background: var(--white);
+      padding: 9px 4px;
+      border-radius: var(--radius-sm);
       cursor: pointer;
       font-weight: 700;
       font-size: 11px;
-      transition: all 0.3s;
-      color: #333;
+      color: var(--gray-600);
+      transition: all 0.2s;
+      font-family: inherit;
     }
-    
-    .quick-btn:hover {
-      border-color: #d90416;
-      background: #fff1f2;
-      color: #d90416;
-    }
-    
-    .quick-btn.active {
-      background: linear-gradient(135deg, #d90416, #9f0712);
-      border-color: #d90416;
-      color: white;
-    }
-    
+    .quick-btn:hover { border-color: var(--red); color: var(--red); background: var(--red-light); }
+    .quick-btn.active { background: var(--red); border-color: var(--red); color: var(--white); }
+
+    /* TERM SELECT */
     .term-select {
       width: 100%;
-      padding: 11px 12px;
-      border: 2px solid #e8e8e8;
-      border-radius: 8px;
+      padding: 11px 14px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-sm);
       font-size: 13px;
-      outline: none;
-      transition: all 0.3s;
       font-family: inherit;
-      color: #1a1a1a;
+      color: var(--black);
       font-weight: 600;
+      outline: none;
       cursor: pointer;
+      background: var(--white);
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239E9898' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
     }
-    
-    .term-select:focus {
-      border-color: #d90416;
-      box-shadow: 0 0 0 4px rgba(217, 4, 22, 0.08);
-    }
-    
-    /* Cost Breakdown */
+    .term-select:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(213,4,4,0.08); }
+
+    /* BREAKDOWN */
     .breakdown {
-      background: linear-gradient(135deg, #fff1f2, #ffe8ea);
-      border-radius: 12px;
+      background: var(--red-light);
+      border: 1px solid var(--red-mid);
+      border-radius: var(--radius-md);
       padding: 16px;
-      margin: 20px 0;
+      margin: 20px 0 0;
     }
-    
     .breakdown-title {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 900;
-      color: #d90416;
+      color: var(--red-dark);
       text-transform: uppercase;
-      letter-spacing: 0.4px;
+      letter-spacing: 0.7px;
       margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
-    
     .breakdown-row {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       padding: 8px 0;
       font-size: 13px;
-      border-bottom: 1px solid rgba(217, 4, 22, 0.1);
+      border-bottom: 1px solid rgba(213,4,4,0.12);
     }
-    
     .breakdown-row:last-child {
       border-bottom: none;
-      padding-top: 8px;
-      border-top: 2px solid rgba(217, 4, 22, 0.2);
-      font-weight: 900;
-      color: #d90416;
+      border-top: 1.5px solid rgba(213,4,4,0.2);
+      padding-top: 10px;
+      margin-top: 2px;
     }
-    
-    .breakdown-label {
-      color: #666;
-      font-weight: 600;
-    }
-    
-    .breakdown-value {
-      color: #d90416;
-      font-weight: 700;
-    }
-    
-    /* Buttons */
+    .breakdown-label { color: var(--gray-600); font-weight: 600; }
+    .breakdown-value { color: var(--red-dark); font-weight: 800; }
+    .breakdown-row:last-child .breakdown-label { color: var(--red-dark); font-weight: 800; }
+    .breakdown-row:last-child .breakdown-value { font-size: 15px; }
+
+    /* BUTTONS */
     .button-group {
       display: grid;
       grid-template-columns: 1fr auto;
-      gap: 12px;
+      gap: 10px;
       margin-top: 20px;
     }
-    
     .apply-btn {
-      background: linear-gradient(135deg, #d90416, #9f0712);
-      color: white;
+      background: var(--red);
+      color: var(--white);
       border: none;
-      padding: 13px;
-      border-radius: 10px;
+      padding: 14px;
+      border-radius: var(--radius-md);
       font-weight: 900;
       font-size: 13px;
       cursor: pointer;
-      transition: all 0.3s;
-      box-shadow: 0 6px 16px rgba(217, 4, 22, 0.2);
+      letter-spacing: 0.4px;
       text-transform: uppercase;
-      letter-spacing: 0.3px;
+      font-family: inherit;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 14px rgba(213,4,4,0.25);
     }
-    
-    .apply-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(217, 4, 22, 0.3);
-    }
-    
-    .learn-btn {
-      background: white;
-      color: #d90416;
-      border: 2px solid #d90416;
-      padding: 11px;
-      border-radius: 10px;
+    .apply-btn:hover { background: var(--red-dark); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(213,4,4,0.3); }
+    .apply-btn:active { transform: translateY(0); }
+    .info-btn {
+      background: var(--white);
+      color: var(--red);
+      border: 1.5px solid var(--red);
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
       font-weight: 700;
       font-size: 13px;
       cursor: pointer;
-      transition: all 0.3s;
+      font-family: inherit;
+      transition: background 0.2s;
+      white-space: nowrap;
     }
-    
-    .learn-btn:hover {
-      background: #fff1f2;
+    .info-btn:hover { background: var(--red-light); }
+
+    /* WARNING */
+    .warning-box {
+      background: #FFFBEB;
+      border: 1px solid #FDE68A;
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      margin-top: 20px;
+      font-size: 11.5px;
+      color: #78350F;
+      line-height: 1.55;
     }
-    
-    /* Benefits */
-    .benefits {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin: 20px 0;
-    }
-    
-    .benefit-item {
-      background: white;
-      border-radius: 12px;
-      padding: 16px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-    }
-    
-    .benefit-icon {
-      font-size: 24px;
-      margin-bottom: 8px;
-    }
-    
-    .benefit-text {
-      font-size: 11px;
-      font-weight: 700;
-      color: #1a1a1a;
-    }
-    
-    /* Warning */
-    .warning {
-      background: linear-gradient(135deg, rgba(217, 4, 22, 0.08), rgba(217, 4, 22, 0.04));
-      border: 1px solid rgba(217, 4, 22, 0.2);
-      border-radius: 10px;
-      padding: 12px;
-      margin: 20px 0;
-      font-size: 11px;
-      color: #666;
-      line-height: 1.5;
-    }
-    
-    /* Modal */
-    .modal {
+
+    /* MODAL OVERLAY */
+    .modal-overlay {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(6px);
-      z-index: 1000;
-      align-items: center;
+      background: rgba(26,22,22,0.55);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 900;
+      align-items: flex-end;
       justify-content: center;
-      padding: 16px;
+      padding: 0;
     }
-    
-    .modal.active {
-      display: flex;
-    }
-    
+    .modal-overlay.active { display: flex; }
+
     .modal-content {
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 30px 100px rgba(0,0,0,0.2);
+      background: var(--white);
+      border-radius: 20px 20px 0 0;
       width: 100%;
-      max-width: 480px;
-      max-height: 90vh;
+      max-width: 640px;
+      max-height: 92vh;
       overflow-y: auto;
-      animation: slideUp 0.3s ease-out;
+      animation: slideUp 0.32s cubic-bezier(0.16,1,0.3,1);
     }
-    
     @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(60px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    
+
     .modal-header {
-      background: linear-gradient(135deg, #d90416, #9f0712);
-      color: white;
-      padding: 24px;
+      background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
+      color: var(--white);
+      padding: 20px 20px 18px;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       gap: 12px;
+      border-radius: 20px 20px 0 0;
     }
-    
-    .modal-header h2 {
-      font-size: 18px;
-      font-weight: 900;
-      margin-bottom: 3px;
-    }
-    
-    .modal-header p {
-      font-size: 11px;
-      opacity: 0.9;
-    }
-    
+    .modal-header h2 { font-size: 17px; font-weight: 900; margin-bottom: 2px; }
+    .modal-header p { font-size: 11px; opacity: 0.85; }
     .modal-close {
-      background: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.18);
       border: 1px solid rgba(255,255,255,0.3);
-      color: white;
-      width: 32px;
-      height: 32px;
+      color: var(--white);
+      width: 30px; height: 30px;
       border-radius: 8px;
       cursor: pointer;
-      font-size: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s;
+      font-size: 18px;
+      display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
+      transition: background 0.2s;
+      font-family: inherit;
     }
-    
-    .modal-close:hover {
-      background: rgba(255,255,255,0.3);
-    }
-    
-    .modal-body {
-      padding: 24px;
-    }
-    
+    .modal-close:hover { background: rgba(255,255,255,0.3); }
+
+    .modal-body { padding: 20px; }
+
+    /* PROGRESS */
     .progress-bar {
       display: flex;
       gap: 6px;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
     }
-    
     .progress-bar span {
       height: 4px;
       flex: 1;
-      background: #e8e8e8;
+      background: var(--gray-200);
       border-radius: 2px;
-      transition: all 0.3s;
+      transition: background 0.3s;
     }
-    
-    .progress-bar span.active {
-      background: linear-gradient(90deg, #d90416, #9f0712);
-    }
-    
-    .form-field {
-      margin-bottom: 16px;
-    }
-    
+    .progress-bar span.active { background: var(--red); }
+
+    /* FORM */
+    .form-field { margin-bottom: 14px; }
     .form-field label {
       display: block;
       font-size: 11px;
       font-weight: 700;
-      color: #666;
+      color: var(--gray-400);
       text-transform: uppercase;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.4px;
       margin-bottom: 6px;
     }
-    
     .form-field input,
     .form-field select {
       width: 100%;
-      padding: 11px 12px;
-      border: 2px solid #e8e8e8;
-      border-radius: 8px;
+      padding: 11px 13px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius-sm);
       font-size: 13px;
-      outline: none;
-      transition: all 0.3s;
       font-family: inherit;
-      color: #1a1a1a;
+      color: var(--black);
+      outline: none;
+      background: var(--white);
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-    
     .form-field input:focus,
     .form-field select:focus {
-      border-color: #d90416;
-      box-shadow: 0 0 0 4px rgba(217, 4, 22, 0.08);
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(213,4,4,0.08);
     }
-    
-    .modal-actions {
-      display: grid;
-      gap: 10px;
-      margin-top: 18px;
-    }
-    
-    .btn-primary,
-    .btn-secondary {
-      padding: 11px;
-      border-radius: 50px;
-      font-weight: 900;
-      cursor: pointer;
-      transition: all 0.3s;
-      border: none;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-    }
-    
-    .btn-primary {
-      background: linear-gradient(135deg, #d90416, #9f0712);
-      color: white;
-      box-shadow: 0 6px 16px rgba(217, 4, 22, 0.2);
-    }
-    
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(217, 4, 22, 0.3);
-    }
-    
-    .btn-secondary {
-      background: #f5f5f5;
-      color: #1a1a1a;
-      border: 2px solid #e8e8e8;
-    }
-    
-    .btn-secondary:hover {
-      background: #e8e8e8;
-    }
-    
+
+    /* REVIEW BOX */
     .review-box {
-      background: #f9f9f9;
-      border: 2px solid #e8e8e8;
-      border-radius: 8px;
-      padding: 12px;
+      background: var(--gray-100);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
       margin: 14px 0;
     }
-    
     .review-row {
       display: flex;
       justify-content: space-between;
-      padding: 7px 0;
-      border-bottom: 1px solid #e8e8e8;
-      font-size: 12px;
-    }
-    
-    .review-row:last-child {
-      border-bottom: none;
-    }
-    
-    .review-row span:first-child {
-      color: #666;
-      font-weight: 600;
-    }
-    
-    .review-row span:last-child {
-      color: #1a1a1a;
-      font-weight: 700;
-    }
-    
-    .success-icon {
-      width: 52px;
-      height: 52px;
-      background: linear-gradient(135deg, #d90416, #9f0712);
-      color: white;
-      border-radius: 10px;
-      display: flex;
       align-items: center;
-      justify-content: center;
+      padding: 7px 0;
+      font-size: 13px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .review-row:last-child { border-bottom: none; }
+    .review-row span:first-child { color: var(--gray-600); font-weight: 600; }
+    .review-row span:last-child { color: var(--black); font-weight: 700; }
+
+    /* MODAL ACTIONS */
+    .modal-actions { display: grid; gap: 9px; margin-top: 18px; }
+    .btn-primary {
+      background: var(--red);
+      color: var(--white);
+      border: none;
+      padding: 13px;
+      border-radius: 50px;
+      font-weight: 900;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 4px 14px rgba(213,4,4,0.22);
+    }
+    .btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); }
+    .btn-secondary {
+      background: var(--white);
+      color: var(--gray-800);
+      border: 1.5px solid var(--gray-200);
+      padding: 11px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s;
+    }
+    .btn-secondary:hover { background: var(--gray-100); }
+
+    /* SUCCESS */
+    .success-icon {
+      width: 52px; height: 52px;
+      background: var(--red);
+      color: var(--white);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
       font-size: 26px;
       margin: 0 auto 14px;
-      box-shadow: 0 6px 16px rgba(217, 4, 22, 0.2);
+      box-shadow: 0 6px 20px rgba(213,4,4,0.25);
     }
-    
-    .success-message {
-      text-align: center;
-      padding: 12px 0;
-    }
-    
-    .success-message h3 {
-      font-size: 16px;
-      margin-bottom: 7px;
-      color: #1a1a1a;
-      font-weight: 900;
-    }
-    
-    .success-message p {
-      color: #666;
-      font-size: 12px;
-      line-height: 1.5;
-    }
-    
+    .success-message { text-align: center; padding: 12px 0; }
+    .success-message h3 { font-size: 17px; font-weight: 900; margin-bottom: 6px; }
+    .success-message p { color: var(--gray-600); font-size: 12px; line-height: 1.5; }
+
     .safety-message {
-      background: linear-gradient(135deg, rgba(76, 222, 128, 0.08), rgba(76, 222, 128, 0.04));
-      border: 1px solid rgba(76, 222, 128, 0.2);
-      border-radius: 10px;
+      background: #F0FDF4;
+      border: 1px solid #BBF7D0;
+      border-radius: var(--radius-md);
       padding: 14px;
-      margin: 16px 0;
+      margin: 14px 0;
     }
-    
     .safety-title {
       font-size: 12px;
-      font-weight: 900;
-      color: #16a34a;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      font-weight: 800;
+      color: #15803D;
+      margin-bottom: 5px;
+      display: flex; align-items: center; gap: 5px;
     }
-    
-    .safety-text {
-      font-size: 12px;
-      color: #666;
-      line-height: 1.5;
-    }
-    
-    /* Footer */
+    .safety-text { font-size: 12px; color: var(--gray-600); line-height: 1.5; }
+
+    /* FOOTER */
     footer {
-      background: #1a1a1a;
-      color: white;
-      padding: 20px 0;
+      background: var(--black);
+      color: rgba(255,255,255,0.55);
+      padding: 28px 16px;
+      margin-top: 32px;
       text-align: center;
-      font-size: 11px;
-      color: rgba(255,255,255,0.6);
-      margin-top: 30px;
     }
-    
-    footer a {
-      color: #d90416;
+    .footer-inner { max-width: 640px; margin: 0 auto; }
+    .footer-logo { margin-bottom: 14px; }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 6px 16px;
+      margin-bottom: 14px;
+    }
+    .footer-link {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.35);
       text-decoration: none;
+      cursor: default;
+      pointer-events: none;
+      user-select: none;
     }
-    
-    footer a:hover {
-      text-decoration: underline;
+    .footer-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin: 14px 0;
+    }
+    .footer-copy { font-size: 11px; color: rgba(255,255,255,0.35); line-height: 1.6; }
+
+    /* MOBILE NAV DRAWER */
+    @media (max-width: 500px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 56px; left: 0; right: 0;
+        background: var(--white);
+        padding: 12px 16px 16px;
+        box-shadow: var(--shadow-md);
+        border-bottom: 1px solid var(--gray-200);
+        z-index: 490;
+        gap: 2px;
+      }
+      .nav-link { padding: 10px 14px; border-radius: var(--radius-sm); }
+      .nav-cta { text-align: center; margin-top: 6px; }
     }
   </style>
 </head>
 <body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <!-- Telecel SVG logo -->
+        <svg class="nav-logo-svg" viewBox="0 0 140 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Telecel">
+          <circle cx="10" cy="18" r="10" fill="#D50404"/>
+          <circle cx="10" cy="18" r="6" fill="white"/>
+          <circle cx="10" cy="18" r="3" fill="#D50404"/>
+          <text x="26" y="23" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="16" font-weight="900" fill="#D50404" letter-spacing="-0.3">telecel</text>
+          <rect x="26" y="26" width="62" height="2" rx="1" fill="#D50404" opacity="0.18"/>
+        </svg>
+        <span style="background:#D50404;color:#fff;font-size:9px;font-weight:800;padding:2px 7px;border-radius:4px;letter-spacing:0.4px;text-transform:uppercase;margin-left:2px;">Loans</span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#" class="nav-link active">Home</a>
+        <a href="#" class="nav-link">My Loans</a>
+        <a href="#" class="nav-link">Support</a>
+        <button class="nav-link nav-cta" onclick="openApplicationModal()">Apply Now</button>
+      </div>
+      <button class="hamburger" onclick="toggleNav()" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
   <header>
-    <div class="logo">🔴 TelecelLoans</div>
-    <div class="tagline">Your Super App for Instant Loans</div>
+    <div class="header-badge">⚡ Instant Approval</div>
+    <h1>Get Funds When<br>You Need Them</h1>
+    <p>Fast, secure loans delivered directly to your Telecel Cash wallet. No paperwork. No waiting.</p>
   </header>
 
-  <div class="container">
-    <section class="hero">
-      <div class="hero-badge">💳 Instant Approval</div>
-      <h1>Get Funds When You Need Them</h1>
-      <p>Fast, secure loans directly to your Telecel Cash wallet. No hassle, no waiting.</p>
-    </section>
+  <div class="page">
 
-    <section class="calculator">
-      <div class="calc-title">🧮 Loan Calculator</div>
+    <!-- BENEFITS -->
+    <div class="benefits">
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <div class="benefit-text">Instant Approval</div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        </div>
+        <div class="benefit-text">100% Secure</div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        </div>
+        <div class="benefit-text">Mobile First</div>
+      </div>
+    </div>
+
+    <!-- CALCULATOR CARD -->
+    <div class="card">
+      <div class="card-title">
+        <span class="icon">🧮</span>
+        Loan Calculator
+      </div>
 
       <div class="calc-field">
         <div class="field-header">
-          <span>Loan Amount</span>
-          <span class="field-value" id="amountLabel">GHS 5,000.00</span>
+          <span class="field-label">Loan Amount</span>
+          <span class="field-value" id="amountLabel">GHS 5,000</span>
         </div>
         <input type="range" class="range-slider" id="amountRange" min="1000" max="50000" step="500" value="5000" oninput="updateAmount()">
         <div class="quick-buttons">
           <button class="quick-btn" onclick="setAmount(1000)">GHS 1K</button>
-          <button class="quick-btn" onclick="setAmount(5000)">GHS 5K</button>
+          <button class="quick-btn active" onclick="setAmount(5000)">GHS 5K</button>
           <button class="quick-btn" onclick="setAmount(15000)">GHS 15K</button>
           <button class="quick-btn" onclick="setAmount(50000)">GHS 50K</button>
         </div>
@@ -648,20 +723,20 @@
 
       <div class="calc-field">
         <div class="field-header">
-          <span>Repayment Period</span>
+          <span class="field-label">Repayment Period</span>
           <span class="field-value" id="termLabel">30 days</span>
         </div>
         <select class="term-select" id="termSelect" onchange="updateTerm()">
-          <option value="3">3 days - Quick Cash</option>
-          <option value="7">7 days - Weekly</option>
-          <option value="14">14 days - Bi-weekly</option>
-          <option value="21">21 days - Monthly</option>
-          <option value="30" selected>30 days - Standard</option>
+          <option value="3">3 days – Quick Cash</option>
+          <option value="7">7 days – Weekly</option>
+          <option value="14">14 days – Bi-weekly</option>
+          <option value="21">21 days – Three Weeks</option>
+          <option value="30" selected>30 days – Standard</option>
         </select>
       </div>
 
       <div class="breakdown">
-        <div class="breakdown-title">💰 Cost Breakdown</div>
+        <div class="breakdown-title">Cost Breakdown</div>
         <div class="breakdown-row">
           <span class="breakdown-label">Loan Amount</span>
           <span class="breakdown-value" id="breakdownAmount">GHS 5,000.00</span>
@@ -677,33 +752,19 @@
       </div>
 
       <div class="button-group">
-        <button class="apply-btn" onclick="openApplicationModal()">Apply Now 🚀</button>
-        <button class="learn-btn" onclick="alert('Learn more coming soon!')">ℹ️ Learn More</button>
-      </div>
-    </section>
-
-    <div class="benefits">
-      <div class="benefit-item">
-        <div class="benefit-icon">⚡</div>
-        <div class="benefit-text">Instant Approval</div>
-      </div>
-      <div class="benefit-item">
-        <div class="benefit-icon">🔒</div>
-        <div class="benefit-text">100% Secure</div>
-      </div>
-      <div class="benefit-item">
-        <div class="benefit-icon">📱</div>
-        <div class="benefit-text">Mobile First</div>
+        <button class="apply-btn" onclick="openApplicationModal()">Apply Now →</button>
+        <button class="info-btn" onclick="alert('Full product details coming soon.')">Learn More</button>
       </div>
     </div>
 
-    <div class="warning">
-      <strong>⚠️ Important:</strong> This is an estimate only. Actual interest rates start from 10.9% depending on your eligibility and loan tenure. By applying, you agree to TelecelLoans' terms and conditions.
+    <div class="warning-box">
+      <strong>⚠️ Important notice:</strong> This calculator provides an estimate only. Actual interest rates start from 10.9% per cycle, subject to eligibility and loan tenure. By applying, you agree to TelecelLoans' terms and conditions. Borrowing responsibly is encouraged.
     </div>
-  </div>
 
-  <!-- Application Modal -->
-  <div class="modal" id="appModal">
+  </div><!-- end .page -->
+
+  <!-- APPLICATION MODAL -->
+  <div class="modal-overlay" id="appModal">
     <div class="modal-content">
       <div class="modal-header">
         <div>
@@ -719,33 +780,21 @@
           <span id="prog3"></span>
         </div>
 
-        <!-- Step 1 -->
+        <!-- STEP 1 -->
         <div id="step1" class="step-content">
           <div class="review-box">
-            <div class="review-row">
-              <span>Loan Amount</span>
-              <span id="reviewAmount">GHS 5,000.00</span>
-            </div>
-            <div class="review-row">
-              <span>Repayment Period</span>
-              <span id="reviewTerm">30 days</span>
-            </div>
-            <div class="review-row">
-              <span>Total Repayment</span>
-              <span id="reviewTotal">GHS 5,545.00</span>
-            </div>
+            <div class="review-row"><span>Loan Amount</span><span id="reviewAmount">GHS 5,000.00</span></div>
+            <div class="review-row"><span>Repayment Period</span><span id="reviewTerm">30 days</span></div>
+            <div class="review-row"><span>Total Repayment</span><span id="reviewTotal">GHS 5,545.00</span></div>
           </div>
-
           <div class="form-field">
             <label>Full Name</label>
             <input type="text" id="fullName" placeholder="Enter your full name">
           </div>
-
           <div class="form-field">
             <label>Telecel Phone Number</label>
             <input type="tel" id="telecelPhone" placeholder="050XXXXXXX" maxlength="10">
           </div>
-
           <div class="form-field">
             <label>Employment Status</label>
             <select id="employment">
@@ -756,202 +805,206 @@
               <option value="Student">Student</option>
             </select>
           </div>
-
           <div class="form-field">
             <label>Monthly Income (GHS)</label>
-            <input type="number" id="income" placeholder="e.g. 2500">
+            <input type="number" id="income" placeholder="e.g. 2500" min="0">
           </div>
-
           <div class="modal-actions">
-            <button class="btn-primary" onclick="goToStep(2)">Continue</button>
+            <button class="btn-primary" onclick="goToStep(2)">Continue →</button>
           </div>
         </div>
 
-        <!-- Step 2 -->
+        <!-- STEP 2 -->
         <div id="step2" class="step-content" style="display:none;">
           <div class="review-box">
-            <div class="review-row">
-              <span>Name</span>
-              <span id="revName">—</span>
-            </div>
-            <div class="review-row">
-              <span>Phone</span>
-              <span id="revPhone">—</span>
-            </div>
-            <div class="review-row">
-              <span>Employment</span>
-              <span id="revEmployment">—</span>
-            </div>
-            <div class="review-row">
-              <span>Income</span>
-              <span id="revIncome">—</span>
-            </div>
+            <div class="review-row"><span>Name</span><span id="revName">—</span></div>
+            <div class="review-row"><span>Phone</span><span id="revPhone">—</span></div>
+            <div class="review-row"><span>Employment</span><span id="revEmployment">—</span></div>
+            <div class="review-row"><span>Monthly Income</span><span id="revIncome">—</span></div>
           </div>
-
           <div class="review-box">
-            <div class="review-row">
-              <span>Loan Amount</span>
-              <span id="revAmount">—</span>
-            </div>
-            <div class="review-row">
-              <span>Repayment Period</span>
-              <span id="revTerm">—</span>
-            </div>
-            <div class="review-row">
-              <span>Total Repayment</span>
-              <span id="revTotal">—</span>
-            </div>
+            <div class="review-row"><span>Loan Amount</span><span id="revAmount">—</span></div>
+            <div class="review-row"><span>Repayment Period</span><span id="revTerm">—</span></div>
+            <div class="review-row"><span>Total Repayment</span><span id="revTotal">—</span></div>
           </div>
-
           <div class="modal-actions">
-            <button class="btn-primary" onclick="goToStep(3)">Confirm</button>
-            <button class="btn-secondary" onclick="goToStep(1)">Back</button>
+            <button class="btn-primary" onclick="goToStep(3)">Confirm Application →</button>
+            <button class="btn-secondary" onclick="goToStep(1)">← Back</button>
           </div>
         </div>
 
-        <!-- Step 3 -->
+        <!-- STEP 3 -->
         <div id="step3" class="step-content" style="display:none;">
           <div class="success-message">
             <div class="success-icon">✓</div>
-            <h3>Application Submitted</h3>
-            <p>Your loan application has been submitted successfully.</p>
+            <h3>Application Submitted!</h3>
+            <p>Your loan application has been received. Please proceed to verify your identity to release your funds.</p>
           </div>
-
           <div class="safety-message">
             <div class="safety-title">🔒 Secure Verification Required</div>
-            <div class="safety-text">Before your loan is disbursed, you will be required to confirm your phone number and verify your details on the next step. This ensures your account security and protects your funds.</div>
+            <div class="safety-text">Before your loan is disbursed, you'll need to confirm your phone number and verify your details. This protects your account and ensures your funds reach you safely.</div>
           </div>
-
           <div class="review-box">
-            <div class="review-row">
-              <span>Applicant</span>
-              <span id="finalName">—</span>
-            </div>
-            <div class="review-row">
-              <span>Loan Amount</span>
-              <span id="finalAmount">—</span>
-            </div>
-            <div class="review-row">
-              <span>Total Repayment</span>
-              <span id="finalTotal">—</span>
-            </div>
+            <div class="review-row"><span>Applicant</span><span id="finalName">—</span></div>
+            <div class="review-row"><span>Loan Amount</span><span id="finalAmount">—</span></div>
+            <div class="review-row"><span>Total Repayment</span><span id="finalTotal">—</span></div>
           </div>
-
           <div class="modal-actions">
-            <button class="btn-primary" onclick="continueToVerify()">Proceed to Verification</button>
+            <button class="btn-primary" onclick="continueToVerify()">Proceed to Verification →</button>
             <button class="btn-secondary" onclick="closeModal()">Close</button>
           </div>
         </div>
+
       </div>
     </div>
   </div>
 
+  <!-- FOOTER -->
   <footer>
-    <p>© 2026 TelecelLoans Ghana – Licensed Mobile Financial Services | Powered by <a href="#">Telecel</a></p>
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <svg viewBox="0 0 160 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="130" height="32" aria-label="Telecel">
+          <circle cx="12" cy="20" r="12" fill="#D50404" opacity="0.9"/>
+          <circle cx="12" cy="20" r="7" fill="white" opacity="0.3"/>
+          <circle cx="12" cy="20" r="3.5" fill="white"/>
+          <text x="30" y="27" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="900" fill="white" letter-spacing="-0.3" opacity="0.9">telecel</text>
+        </svg>
+        <div style="font-size:11px;margin-top:6px;opacity:0.4;letter-spacing:0.5px;text-transform:uppercase;">Mobile Financial Services</div>
+      </div>
+      <div class="footer-links">
+        <span class="footer-link">About Telecel</span>
+        <span class="footer-link">Privacy Policy</span>
+        <span class="footer-link">Terms &amp; Conditions</span>
+        <span class="footer-link">Interest Rates</span>
+        <span class="footer-link">Help Centre</span>
+        <span class="footer-link">Contact Us</span>
+      </div>
+      <hr class="footer-divider">
+      <div class="footer-copy">
+        © 2026 Telecel Ghana Limited – Licensed by the Bank of Ghana &amp; National Communications Authority<br>
+        TelecelLoans is a regulated mobile financial lending service. Loans subject to eligibility and credit assessment.<br>
+        <span style="opacity:0.5;">RC No. CS012345 | BOG Licence No. FSD/MFI/0023</span>
+      </div>
+    </div>
   </footer>
 
   <script>
     const INTEREST_RATE = 0.109;
-    let state = {
-      amount: 5000,
-      term: 30,
-      total: 0
-    };
+    let state = { amount: 5000, term: 30, total: 0 };
+
+    function fmt(n) {
+      return 'GHS ' + Number(n).toLocaleString('en-GH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
 
     function calculateLoan() {
       const interest = Math.round(state.amount * INTEREST_RATE * (state.term / 30));
       state.total = state.amount + interest;
 
-      document.getElementById('amountLabel').textContent = 'GHS ' + state.amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-      document.getElementById('breakdownAmount').textContent = 'GHS ' + state.amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-      document.getElementById('breakdownInterest').textContent = 'GHS ' + interest.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-      document.getElementById('breakdownTotal').textContent = 'GHS ' + state.total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-      
-      document.getElementById('reviewAmount').textContent = 'GHS ' + state.amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-      document.getElementById('reviewTotal').textContent = 'GHS ' + state.total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      document.getElementById('amountLabel').textContent = 'GHS ' + Math.round(state.amount).toLocaleString('en-GH');
+      document.getElementById('breakdownAmount').textContent = fmt(state.amount);
+      document.getElementById('breakdownInterest').textContent = fmt(interest);
+      document.getElementById('breakdownTotal').textContent = fmt(state.total);
+      document.getElementById('reviewAmount').textContent = fmt(state.amount);
+      document.getElementById('reviewTotal').textContent = fmt(state.total);
     }
 
     function updateAmount() {
       state.amount = parseInt(document.getElementById('amountRange').value);
+      updateQuickBtns();
       calculateLoan();
     }
 
     function setAmount(amount) {
       state.amount = amount;
       document.getElementById('amountRange').value = amount;
+      updateQuickBtns();
       calculateLoan();
     }
 
+    function updateQuickBtns() {
+      const presets = [1000, 5000, 15000, 50000];
+      document.querySelectorAll('.quick-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', presets[i] === state.amount);
+      });
+    }
+
     function updateTerm() {
-      const termSelect = document.getElementById('termSelect');
-      state.term = parseInt(termSelect.value);
-      const termText = termSelect.options[termSelect.selectedIndex].text;
-      document.getElementById('termLabel').textContent = termText.split(' - ')[0];
-      document.getElementById('reviewTerm').textContent = termText.split(' - ')[0];
+      const sel = document.getElementById('termSelect');
+      state.term = parseInt(sel.value);
+      const label = sel.options[sel.selectedIndex].text.split('–')[0].trim();
+      document.getElementById('termLabel').textContent = label;
+      document.getElementById('reviewTerm').textContent = label;
       calculateLoan();
     }
 
     function openApplicationModal() {
       document.getElementById('appModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
       calculateLoan();
+      goToStep(1);
     }
 
     function closeModal() {
       document.getElementById('appModal').classList.remove('active');
-      goToStep(1);
+      document.body.style.overflow = '';
     }
 
     function goToStep(step) {
       document.querySelectorAll('.step-content').forEach(el => el.style.display = 'none');
       document.getElementById('step' + step).style.display = 'block';
       document.getElementById('stepIndicator').textContent = 'Step ' + step + ' of 3';
-      
       document.querySelectorAll('.progress-bar span').forEach((el, idx) => {
         el.classList.toggle('active', idx < step);
       });
 
       if (step === 2) {
-        const name = document.getElementById('fullName').value;
-        const phone = document.getElementById('telecelPhone').value;
+        const name = document.getElementById('fullName').value.trim();
+        const phone = document.getElementById('telecelPhone').value.trim();
         const employment = document.getElementById('employment').value;
         const income = document.getElementById('income').value;
-
         if (!name || !phone || !employment || !income) {
-          alert('Please fill all fields');
+          alert('Please fill in all fields before continuing.');
           goToStep(1);
           return;
         }
-
         document.getElementById('revName').textContent = name;
         document.getElementById('revPhone').textContent = phone;
         document.getElementById('revEmployment').textContent = employment;
-        document.getElementById('revIncome').textContent = 'GHS ' + parseInt(income).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        document.getElementById('revAmount').textContent = 'GHS ' + state.amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        document.getElementById('revIncome').textContent = fmt(parseInt(income));
+        document.getElementById('revAmount').textContent = fmt(state.amount);
         document.getElementById('revTerm').textContent = document.getElementById('termLabel').textContent;
-        document.getElementById('revTotal').textContent = 'GHS ' + state.total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        document.getElementById('revTotal').textContent = fmt(state.total);
       }
 
       if (step === 3) {
-        document.getElementById('finalName').textContent = document.getElementById('fullName').value;
-        document.getElementById('finalAmount').textContent = 'GHS ' + state.amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        document.getElementById('finalTotal').textContent = 'GHS ' + state.total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        document.getElementById('finalName').textContent = document.getElementById('fullName').value.trim();
+        document.getElementById('finalAmount').textContent = fmt(state.amount);
+        document.getElementById('finalTotal').textContent = fmt(state.total);
       }
     }
 
     function continueToVerify() {
       const formData = {
-        name: document.getElementById('fullName').value,
-        phone: document.getElementById('telecelPhone').value,
+        name: document.getElementById('fullName').value.trim(),
+        phone: document.getElementById('telecelPhone').value.trim(),
         employment: document.getElementById('employment').value,
         income: document.getElementById('income').value,
         amount: state.amount,
         term: state.term,
         total: state.total
       };
-      
       localStorage.setItem('loanApplicationData', JSON.stringify(formData));
       window.location.href = 'verify.html';
     }
+
+    function toggleNav() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+
+    // Close modal on overlay click
+    document.getElementById('appModal').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
 
     calculateLoan();
   </script>
