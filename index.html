@@ -13,7 +13,7 @@
     
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-      background: linear-gradient(135deg, #fef3f0 0%, #fff9f7 100%);
+      background: linear-gradient(135deg, #fff5f5 0%, #fffbf0 100%);
       color: #1a1a1a;
       line-height: 1.6;
       min-height: 100vh;
@@ -26,38 +26,101 @@
       padding: 0 16px;
     }
     
-    /* Header - Branded */
+    /* Header */
     header {
-      background: linear-gradient(135deg, #d90416 0%, #c70311 100%);
-      padding: 24px 20px;
-      text-align: center;
-      margin: 20px auto;
-      border-radius: 20px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-      box-shadow: 0 8px 24px rgba(217, 4, 22, 0.25);
+      background: linear-gradient(135deg, #d90416, #9f0712);
       color: white;
+      padding: 18px 0;
+      text-align: center;
+      margin-bottom: 20px;
+      border-radius: 0 0 20px 20px;
     }
     
-    .logo-text {
-      font-size: 28px;
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 16px;
+    }
+    
+    .header-logo {
+      height: 42px;
+      width: auto;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+    
+    .header-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .logo-brand {
+      font-size: 24px;
       font-weight: 900;
-      margin-bottom: 6px;
+      line-height: 1;
       letter-spacing: -0.5px;
     }
     
-    .tagline {
-      font-size: 13px;
-      opacity: 0.95;
-      font-weight: 500;
+    .logo-brand .telecel {
+      color: #ffffff;
     }
     
-    /* Hero Section */
+    .logo-brand .loans {
+      color: #ffeb3b;
+    }
+    
+    .tagline {
+      font-size: 11px;
+      opacity: 0.9;
+      margin-top: 3px;
+      letter-spacing: 0.5px;
+    }
+    
+    /* Eligibility Banner */
+    .eligibility-banner {
+      background: linear-gradient(135deg, #fff1f2, #ffe8ea);
+      border-radius: 14px;
+      padding: 16px;
+      margin: 18px auto;
+      max-width: 600px;
+      box-shadow: 0 4px 12px rgba(217, 4, 22, 0.1);
+      border: 1px solid #ffcccc;
+      color: #1a1a1a;
+    }
+    
+    .eligibility-title {
+      font-size: 13px;
+      font-weight: 900;
+      margin-bottom: 8px;
+      color: #d90416;
+      letter-spacing: -0.3px;
+    }
+    
+    .eligibility-content {
+      font-size: 12px;
+      line-height: 1.6;
+      color: #666;
+    }
+    
+    .eligibility-highlight {
+      font-weight: 700;
+      margin-top: 8px;
+      padding: 8px;
+      background: rgba(217, 4, 22, 0.08);
+      border-radius: 6px;
+      border-left: 3px solid #d90416;
+      color: #d90416;
+      font-size: 11px;
+    }
+    
+    /* Hero */
     .hero {
       background: white;
       border-radius: 16px;
-      padding: 28px 24px;
+      padding: 24px;
       margin-bottom: 20px;
       box-shadow: 0 8px 24px rgba(0,0,0,0.08);
       text-align: center;
@@ -65,27 +128,27 @@
     
     .hero-badge {
       display: inline-block;
-      background: linear-gradient(135deg, #d90416, #9f0712);
-      color: white;
-      padding: 8px 16px;
+      background: linear-gradient(135deg, #fff1f2, #ffe8ea);
+      color: #d90416;
+      padding: 6px 12px;
       border-radius: 20px;
       font-size: 11px;
       font-weight: 700;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.3px;
     }
     
     .hero h1 {
       font-size: 28px;
       font-weight: 900;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       line-height: 1.3;
       color: #1a1a1a;
     }
     
     .hero p {
-      font-size: 14px;
+      font-size: 13px;
       color: #666;
       line-height: 1.6;
     }
@@ -94,7 +157,7 @@
     .calculator {
       background: white;
       border-radius: 16px;
-      padding: 28px 24px;
+      padding: 24px;
       margin-bottom: 20px;
       box-shadow: 0 8px 24px rgba(0,0,0,0.08);
     }
@@ -102,35 +165,31 @@
     .calc-title {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       font-size: 18px;
       font-weight: 900;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       color: #1a1a1a;
     }
     
     .calc-field {
-      margin-bottom: 28px;
+      margin-bottom: 20px;
     }
     
     .field-header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-    
-    .field-label {
-      font-size: 13px;
+      margin-bottom: 10px;
+      font-size: 12px;
       font-weight: 700;
-      color: #444;
+      color: #666;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.3px;
     }
     
     .field-value {
       color: #d90416;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 900;
     }
     
@@ -138,41 +197,40 @@
       width: 100%;
       height: 8px;
       border-radius: 4px;
-      background: linear-gradient(90deg, #d90416 0%, #d90416 var(--value), #e8e8e8 var(--value), #e8e8e8 100%);
+      background: #e8e8e8;
       outline: none;
       -webkit-appearance: none;
       appearance: none;
       cursor: pointer;
-      margin: 16px 0;
+      margin: 12px 0;
     }
     
     .range-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 24px;
-      height: 24px;
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
-      background: #d90416;
+      background: linear-gradient(135deg, #d90416, #9f0712);
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(217, 4, 22, 0.3);
-      border: 3px solid white;
+      box-shadow: 0 3px 10px rgba(217, 4, 22, 0.3);
     }
     
     .range-slider::-moz-range-thumb {
-      width: 24px;
-      height: 24px;
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
-      background: #d90416;
+      background: linear-gradient(135deg, #d90416, #9f0712);
       cursor: pointer;
-      border: 3px solid white;
-      box-shadow: 0 2px 8px rgba(217, 4, 22, 0.3);
+      border: none;
+      box-shadow: 0 3px 10px rgba(217, 4, 22, 0.3);
     }
     
     .quick-buttons {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-top: 12px;
+      gap: 8px;
+      margin-top: 10px;
     }
     
     @media (max-width: 480px) {
@@ -182,34 +240,35 @@
     }
     
     .quick-btn {
-      border: 2px dashed #d90416;
+      border: 2px solid #e8e8e8;
       background: white;
       padding: 10px;
       border-radius: 8px;
       cursor: pointer;
       font-weight: 700;
-      font-size: 12px;
-      transition: all 0.2s;
-      color: #d90416;
+      font-size: 11px;
+      transition: all 0.3s;
+      color: #333;
     }
     
     .quick-btn:hover {
+      border-color: #d90416;
       background: #fff1f2;
+      color: #d90416;
     }
     
     .quick-btn.active {
-      background: #d90416;
+      background: linear-gradient(135deg, #d90416, #9f0712);
       border-color: #d90416;
       color: white;
-      border-style: solid;
     }
     
     .term-select {
       width: 100%;
-      padding: 12px;
-      border: 2px dashed #d90416;
+      padding: 11px 12px;
+      border: 2px solid #e8e8e8;
       border-radius: 8px;
-      font-size: 14px;
+      font-size: 13px;
       outline: none;
       transition: all 0.3s;
       font-family: inherit;
@@ -220,17 +279,16 @@
     }
     
     .term-select:focus {
-      border-style: solid;
-      box-shadow: 0 0 0 4px rgba(217, 4, 22, 0.1);
+      border-color: #d90416;
+      box-shadow: 0 0 0 4px rgba(217, 4, 22, 0.08);
     }
     
     /* Cost Breakdown */
     .breakdown {
       background: linear-gradient(135deg, #fff1f2, #ffe8ea);
       border-radius: 12px;
-      padding: 20px;
-      margin: 24px 0;
-      border: 2px dashed #d90416;
+      padding: 16px;
+      margin: 20px 0;
     }
     
     .breakdown-title {
@@ -238,8 +296,8 @@
       font-weight: 900;
       color: #d90416;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 16px;
+      letter-spacing: 0.4px;
+      margin-bottom: 12px;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -248,29 +306,27 @@
     .breakdown-row {
       display: flex;
       justify-content: space-between;
-      padding: 10px 0;
-      font-size: 14px;
-      border-bottom: 1px solid rgba(217, 4, 22, 0.15);
+      padding: 8px 0;
+      font-size: 13px;
+      border-bottom: 1px solid rgba(217, 4, 22, 0.1);
     }
     
     .breakdown-row:last-child {
       border-bottom: none;
-      padding-top: 12px;
-      margin-top: 8px;
-      border-top: 2px solid #d90416;
+      padding-top: 8px;
+      border-top: 2px solid rgba(217, 4, 22, 0.2);
       font-weight: 900;
       color: #d90416;
-      font-size: 16px;
     }
     
     .breakdown-label {
-      color: #555;
+      color: #666;
       font-weight: 600;
     }
     
     .breakdown-value {
       color: #d90416;
-      font-weight: 800;
+      font-weight: 700;
     }
     
     /* Buttons */
@@ -278,7 +334,7 @@
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 12px;
-      margin-top: 24px;
+      margin-top: 20px;
     }
     
     @media (max-width: 480px) {
@@ -291,41 +347,36 @@
       background: linear-gradient(135deg, #d90416, #9f0712);
       color: white;
       border: none;
-      padding: 14px;
+      padding: 13px;
       border-radius: 10px;
       font-weight: 900;
-      font-size: 14px;
+      font-size: 13px;
       cursor: pointer;
       transition: all 0.3s;
-      box-shadow: 0 6px 20px rgba(217, 4, 22, 0.3);
+      box-shadow: 0 6px 16px rgba(217, 4, 22, 0.2);
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.3px;
     }
     
     .apply-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(217, 4, 22, 0.4);
-    }
-    
-    .apply-btn:active {
-      transform: translateY(0);
+      box-shadow: 0 8px 20px rgba(217, 4, 22, 0.3);
     }
     
     .learn-btn {
       background: white;
       color: #d90416;
-      border: 2px dashed #d90416;
-      padding: 12px 18px;
+      border: 2px solid #d90416;
+      padding: 11px;
       border-radius: 10px;
       font-weight: 700;
-      font-size: 14px;
+      font-size: 13px;
       cursor: pointer;
       transition: all 0.3s;
     }
     
     .learn-btn:hover {
       background: #fff1f2;
-      border-style: solid;
     }
     
     /* Benefits */
@@ -333,7 +384,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
-      margin: 24px 0;
+      margin: 20px 0;
     }
     
     @media (max-width: 480px) {
@@ -345,32 +396,32 @@
     .benefit-item {
       background: white;
       border-radius: 12px;
-      padding: 18px;
+      padding: 16px;
       text-align: center;
       box-shadow: 0 4px 12px rgba(0,0,0,0.06);
     }
     
     .benefit-icon {
-      font-size: 28px;
+      font-size: 24px;
       margin-bottom: 8px;
     }
     
     .benefit-text {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       color: #1a1a1a;
     }
     
     /* Warning */
     .warning {
-      background: #fff9db;
-      border: 2px solid #ffe066;
+      background: linear-gradient(135deg, rgba(217, 4, 22, 0.08), rgba(217, 4, 22, 0.04));
+      border: 1px solid rgba(217, 4, 22, 0.2);
       border-radius: 10px;
-      padding: 14px;
-      margin: 24px 0;
-      font-size: 12px;
+      padding: 12px;
+      margin: 20px 0;
+      font-size: 11px;
       color: #666;
-      line-height: 1.6;
+      line-height: 1.5;
     }
     
     /* Modal */
@@ -378,8 +429,8 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(8px);
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(6px);
       z-index: 1000;
       align-items: center;
       justify-content: center;
@@ -392,18 +443,24 @@
     
     .modal-content {
       background: white;
-      border-radius: 20px;
-      box-shadow: 0 30px 100px rgba(0,0,0,0.3);
+      border-radius: 16px;
+      box-shadow: 0 30px 100px rgba(0,0,0,0.2);
       width: 100%;
-      max-width: 500px;
+      max-width: 480px;
       max-height: 90vh;
       overflow-y: auto;
-      animation: slideUp 0.4s ease-out;
+      animation: slideUp 0.3s ease-out;
     }
     
     @keyframes slideUp {
-      from { opacity: 0; transform: translateY(50px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     
     .modal-header {
@@ -412,31 +469,35 @@
       padding: 24px;
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      border-radius: 20px 20px 0 0;
+      align-items: flex-start;
+      gap: 12px;
     }
     
     .modal-header h2 {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 900;
+      margin-bottom: 3px;
+    }
+    
+    .modal-header p {
+      font-size: 11px;
+      opacity: 0.9;
     }
     
     .modal-close {
       background: rgba(255,255,255,0.2);
-      border: none;
+      border: 1px solid rgba(255,255,255,0.3);
       color: white;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
       cursor: pointer;
-      font-size: 24px;
+      font-size: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s;
+      transition: all 0.3s;
+      flex-shrink: 0;
     }
     
     .modal-close:hover {
@@ -447,132 +508,6 @@
       padding: 24px;
     }
     
-    /* Learn More Styles */
-    .learn-section {
-      margin-bottom: 28px;
-    }
-    
-    .learn-section h3 {
-      font-size: 16px;
-      font-weight: 800;
-      color: #d90416;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    .apply-steps {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    
-    .step-item {
-      display: flex;
-      gap: 14px;
-      background: #fff8f8;
-      padding: 14px;
-      border-radius: 10px;
-      border-left: 4px solid #d90416;
-    }
-    
-    .step-num {
-      width: 28px;
-      height: 28px;
-      background: #d90416;
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: bold;
-      flex-shrink: 0;
-    }
-    
-    .step-info h4 {
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 3px;
-      color: #1a1a1a;
-    }
-    
-    .step-info p {
-      font-size: 12px;
-      color: #666;
-    }
-    
-    .faq-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    
-    .faq-item {
-      border: 1px solid #ffe8ea;
-      border-radius: 10px;
-      overflow: hidden;
-      background: white;
-    }
-    
-    .faq-question {
-      padding: 14px 16px;
-      background: #fff8f8;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: #d90416;
-      transition: all 0.2s;
-    }
-    
-    .faq-question:hover {
-      background: #ffe8ea;
-    }
-    
-    .faq-answer {
-      padding: 14px 16px;
-      font-size: 12px;
-      color: #555;
-      border-top: 1px solid #ffe8ea;
-      background: white;
-    }
-    
-    .benefit-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    
-    @media (max-width: 480px) {
-      .benefit-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-    
-    .benefit-card {
-      padding: 14px;
-      border-radius: 10px;
-      background: #fff8f8;
-      border: 1px solid #ffe8ea;
-    }
-    
-    .benefit-card h4 {
-      font-size: 13px;
-      color: #d90416;
-      margin-bottom: 5px;
-      font-weight: 700;
-    }
-    
-    .benefit-card p {
-      font-size: 12px;
-      color: #666;
-    }
-    
-    /* Form Styles */
     .progress-bar {
       display: flex;
       gap: 6px;
@@ -588,7 +523,7 @@
     }
     
     .progress-bar span.active {
-      background: #d90416;
+      background: linear-gradient(90deg, #d90416, #9f0712);
     }
     
     .form-field {
@@ -608,10 +543,10 @@
     .form-field input,
     .form-field select {
       width: 100%;
-      padding: 12px;
-      border: 2px solid #ffe8ea;
+      padding: 11px 12px;
+      border: 2px solid #e8e8e8;
       border-radius: 8px;
-      font-size: 14px;
+      font-size: 13px;
       outline: none;
       transition: all 0.3s;
       font-family: inherit;
@@ -622,7 +557,11 @@
     .form-field input:focus,
     .form-field select:focus {
       border-color: #d90416;
-      box-shadow: 0 0 0 4px rgba(217, 4, 22, 0.1);
+      box-shadow: 0 0 0 4px rgba(217, 4, 22, 0.08);
+    }
+    
+    .form-field input::placeholder {
+      color: #ccc;
     }
     
     .modal-actions {
@@ -633,51 +572,52 @@
     
     .btn-primary,
     .btn-secondary {
-      padding: 12px;
+      padding: 11px;
       border-radius: 50px;
       font-weight: 900;
       cursor: pointer;
       transition: all 0.3s;
       border: none;
-      font-size: 13px;
+      font-size: 12px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.3px;
     }
     
     .btn-primary {
       background: linear-gradient(135deg, #d90416, #9f0712);
       color: white;
-      box-shadow: 0 4px 12px rgba(217, 4, 22, 0.2);
+      box-shadow: 0 6px 16px rgba(217, 4, 22, 0.2);
     }
     
     .btn-primary:hover {
       transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(217, 4, 22, 0.3);
     }
     
     .btn-secondary {
       background: #f5f5f5;
       color: #1a1a1a;
-      border: 2px solid #ffe8ea;
+      border: 2px solid #e8e8e8;
     }
     
     .btn-secondary:hover {
-      background: #ffe8ea;
+      background: #e8e8e8;
     }
     
     .review-box {
-      background: #fff8f8;
-      border: 2px solid #ffe8ea;
-      border-radius: 12px;
-      padding: 16px;
-      margin: 16px 0;
+      background: #f9f9f9;
+      border: 2px solid #e8e8e8;
+      border-radius: 8px;
+      padding: 12px;
+      margin: 14px 0;
     }
     
     .review-row {
       display: flex;
       justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 1px solid #ffe8ea;
-      font-size: 13px;
+      padding: 7px 0;
+      border-bottom: 1px solid #e8e8e8;
+      font-size: 12px;
     }
     
     .review-row:last-child {
@@ -690,21 +630,22 @@
     }
     
     .review-row span:last-child {
-      color: #d90416;
+      color: #1a1a1a;
       font-weight: 700;
     }
     
     .success-icon {
-      width: 64px;
-      height: 64px;
-      background: #16a34a;
+      width: 52px;
+      height: 52px;
+      background: linear-gradient(135deg, #d90416, #9f0712);
       color: white;
-      border-radius: 50%;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 32px;
-      margin: 0 auto 16px;
+      font-size: 26px;
+      margin: 0 auto 14px;
+      box-shadow: 0 6px 16px rgba(217, 4, 22, 0.2);
     }
     
     .success-message {
@@ -713,27 +654,28 @@
     }
     
     .success-message h3 {
-      font-size: 18px;
-      margin-bottom: 8px;
+      font-size: 16px;
+      margin-bottom: 7px;
       color: #1a1a1a;
       font-weight: 900;
     }
     
     .success-message p {
       color: #666;
-      font-size: 13px;
+      font-size: 12px;
+      line-height: 1.5;
     }
     
     .safety-message {
-      background: #f0fdf4;
-      border: 2px solid #bbf7d0;
-      border-radius: 12px;
-      padding: 16px;
+      background: linear-gradient(135deg, rgba(76, 222, 128, 0.08), rgba(76, 222, 128, 0.04));
+      border: 1px solid rgba(76, 222, 128, 0.2);
+      border-radius: 10px;
+      padding: 14px;
       margin: 16px 0;
     }
     
     .safety-title {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 900;
       color: #16a34a;
       margin-bottom: 6px;
@@ -744,33 +686,178 @@
     
     .safety-text {
       font-size: 12px;
-      color: #15803d;
+      color: #666;
       line-height: 1.5;
+    }
+    
+    /* Learn More Modal */
+    .learn-section {
+      margin-bottom: 24px;
+    }
+    
+    .learn-section h3 {
+      font-size: 16px;
+      font-weight: 900;
+      color: #d90416;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .apply-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .step-item {
+      display: flex;
+      gap: 12px;
+      background: #f9f9f9;
+      padding: 12px;
+      border-radius: 8px;
+      border-left: 4px solid #d90416;
+    }
+    
+    .step-num {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, #d90416, #9f0712);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+    
+    .step-info h4 {
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 3px;
+      color: #1a1a1a;
+    }
+    
+    .step-info p {
+      font-size: 11px;
+      color: #666;
+    }
+    
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .faq-item {
+      border: 1px solid #e8e8e8;
+      border-radius: 8px;
+      overflow: hidden;
+      background: white;
+    }
+    
+    .faq-question {
+      padding: 12px;
+      background: #f9f9f9;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #d90416;
+      transition: all 0.2s;
+    }
+    
+    .faq-question:hover {
+      background: #f0f0f0;
+    }
+    
+    .faq-answer {
+      padding: 12px;
+      font-size: 11px;
+      color: #666;
+      border-top: 1px solid #e8e8e8;
+      background: white;
+    }
+    
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    
+    @media (max-width: 480px) {
+      .benefit-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .benefit-card {
+      padding: 12px;
+      border-radius: 8px;
+      background: #f9f9f9;
+      border: 1px solid #e8e8e8;
+    }
+    
+    .benefit-card h4 {
+      font-size: 12px;
+      color: #d90416;
+      margin-bottom: 5px;
+      font-weight: 800;
+    }
+    
+    .benefit-card p {
+      font-size: 11px;
+      color: #666;
     }
     
     /* Footer */
     footer {
       background: #1a1a1a;
       color: white;
-      padding: 30px 20px;
+      padding: 20px 0;
       text-align: center;
       font-size: 11px;
-      color: rgba(255,255,255,0.5);
-      margin-top: 40px;
+      color: rgba(255,255,255,0.6);
+      margin-top: 30px;
     }
     
     footer a {
       color: #d90416;
       text-decoration: none;
     }
+    
+    footer a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
+  <header>
+    <div class="header-content">
+      <img class="header-logo" width="42" height="42" alt="Telecel Group" src="https://telecelgroup.com/wp-content/uploads/2026/05/TGS-logooo-updated-copy.png">
+      <div class="header-text">
+        <div class="logo-brand"><span class="telecel">Telecel</span><span class="loans">Loans</span></div>
+        <div class="tagline">Your Super App for Instant Loans</div>
+      </div>
+    </div>
+  </header>
+
   <div class="container">
-    <header>
-      <div class="logo-text">🔴 TelecelLoans</div>
-      <div class="tagline">Your Super App for Instant Loans</div>
-    </header>
+    <!-- Eligibility Banner -->
+    <div class="eligibility-banner">
+      <div class="eligibility-title">✓ Telecel Users Only</div>
+      <div class="eligibility-content">
+        Only active Telecel Ghana subscribers are eligible for TelecelLoans. The longer you've been using Telecel and the more active your account is, the higher your loan qualification amount.
+        <div class="eligibility-highlight">
+          💡 Your Telecel usage history determines your maximum loan limit. More activity = Higher eligibility!
+        </div>
+      </div>
+    </div>
 
     <section class="hero">
       <div class="hero-badge">💳 Instant Approval</div>
@@ -783,29 +870,30 @@
 
       <div class="calc-field">
         <div class="field-header">
-          <span class="field-label">Loan Amount</span>
+          <span>Loan Amount</span>
           <span class="field-value" id="amountLabel">GHS 5,000.00</span>
         </div>
-        <input type="range" class="range-slider" id="amountRange" min="1000" max="50000" step="100" value="5000" oninput="updateAmount()">
+        <input type="range" class="range-slider" id="amountRange" min="500" max="50000" step="100" value="5000" oninput="updateAmount()">
         <div class="quick-buttons">
-          <button class="quick-btn" onclick="setAmount(2000)">GHS 2K</button>
-          <button class="quick-btn" onclick="setAmount(5000)">GHS 5K</button>
-          <button class="quick-btn" onclick="setAmount(15000)">GHS 15K</button>
+          <button class="quick-btn" onclick="setAmount(1000)">GHS 1K</button>
+          <button class="quick-btn" onclick="setAmount(10000)">GHS 10K</button>
+          <button class="quick-btn" onclick="setAmount(25000)">GHS 25K</button>
           <button class="quick-btn" onclick="setAmount(50000)">GHS 50K</button>
         </div>
       </div>
 
       <div class="calc-field">
         <div class="field-header">
-          <span class="field-label">Repayment Period</span>
+          <span>Repayment Period</span>
           <span class="field-value" id="termLabel">30 days</span>
         </div>
         <select class="term-select" id="termSelect" onchange="updateTerm()">
-          <option value="3">3 days - Quick Cash</option>
-          <option value="7">7 days - Weekly</option>
-          <option value="14">14 days - Bi-weekly</option>
-          <option value="21">21 days - Monthly</option>
-          <option value="30" selected>30 days - Standard</option>
+          <option value="30">30 days - Standard</option>
+          <option value="60">60 days - 2 Months</option>
+          <option value="90">90 days - 3 Months</option>
+          <option value="120">120 days - 4 Months</option>
+          <option value="150">150 days - 5 Months</option>
+          <option value="180">180 days - 6 Months</option>
         </select>
       </div>
 
@@ -826,7 +914,7 @@
       </div>
 
       <div class="button-group">
-        <button class="apply-btn" id="applyBtn" onclick="openApplicationModal()">Apply Now 🚀</button>
+        <button class="apply-btn" onclick="openApplicationModal()">Apply Now 🚀</button>
         <button class="learn-btn" onclick="openLearnMore()">ℹ️ Learn More</button>
       </div>
     </section>
@@ -855,7 +943,10 @@
   <div class="modal" id="learnModal">
     <div class="modal-content">
       <div class="modal-header">
-        <h2>Learn About TelecelLoans</h2>
+        <div>
+          <h2>Learn About TelecelLoans</h2>
+          <p>Everything you need to know</p>
+        </div>
         <button class="modal-close" onclick="closeLearnMore()">×</button>
       </div>
       <div class="modal-body">
@@ -866,21 +957,21 @@
               <div class="step-num">1</div>
               <div class="step-info">
                 <h4>Calculate Your Loan</h4>
-                <p>Choose your desired amount and repayment period using our calculator.</p>
+                <p>Choose your desired amount (GHS 500 - 50,000) and repayment period (30 days - 6 months).</p>
               </div>
             </div>
             <div class="step-item">
               <div class="step-num">2</div>
               <div class="step-info">
                 <h4>Submit Your Details</h4>
-                <p>Fill in your basic information and Telecel phone number.</p>
+                <p>Fill in your basic information and Telecel phone number for verification.</p>
               </div>
             </div>
             <div class="step-item">
               <div class="step-num">3</div>
               <div class="step-info">
                 <h4>Verify & Receive</h4>
-                <p>Verify your identity and get funds instantly in your wallet.</p>
+                <p>Verify your identity and get funds instantly in your Telecel Cash wallet.</p>
               </div>
             </div>
           </div>
@@ -891,19 +982,27 @@
           <div class="benefit-grid">
             <div class="benefit-card">
               <h4>Zero Paperwork</h4>
-              <p>Apply 100% digitally from your phone.</p>
+              <p>Apply 100% digitally from your phone anytime, anywhere.</p>
             </div>
             <div class="benefit-card">
               <h4>Instant Cash</h4>
-              <p>Disbursement happens in under 60 seconds.</p>
+              <p>Disbursement happens in under 60 seconds to your wallet.</p>
             </div>
             <div class="benefit-card">
               <h4>Low Rates</h4>
-              <p>Competitive interest starting at 10.9%.</p>
+              <p>Competitive interest starting at just 10.9% per annum.</p>
             </div>
             <div class="benefit-card">
               <h4>Secure</h4>
-              <p>Bank-grade encryption for your data.</p>
+              <p>Bank-grade encryption protects all your personal data.</p>
+            </div>
+            <div class="benefit-card">
+              <h4>Flexible Terms</h4>
+              <p>Choose from 30 days to 6 months repayment periods.</p>
+            </div>
+            <div class="benefit-card">
+              <h4>No Collateral</h4>
+              <p>Your Telecel Cash account is your only guarantee needed.</p>
             </div>
           </div>
         </div>
@@ -912,44 +1011,44 @@
           <h3>❓ Frequently Asked Questions</h3>
           <div class="faq-list">
             <div class="faq-item">
-              <div class="faq-question" onclick="toggleFaq(this)">Who can apply? <span>+</span></div>
-              <div class="faq-answer" style="display:none;">Any active Telecel Ghana subscriber with a registered Telecel Cash wallet and valid ID.</div>
+              <div class="faq-question" onclick="toggleFaq(this)">Who can apply for TelecelLoans? <span>+</span></div>
+              <div class="faq-answer" style="display:none;">Only active Telecel Ghana subscribers with a registered Telecel Cash wallet and valid ID can apply. Your Telecel usage history determines your eligibility.</div>
             </div>
             <div class="faq-item">
-              <div class="faq-question" onclick="toggleFaq(this)">What is the maximum amount? <span>+</span></div>
-              <div class="faq-answer" style="display:none;">You can borrow up to GHS 50,000 depending on your credit limit and usage history.</div>
+              <div class="faq-question" onclick="toggleFaq(this)">What is the minimum and maximum loan amount? <span>+</span></div>
+              <div class="faq-answer" style="display:none;">You can borrow from GHS 500 to GHS 50,000 depending on your credit limit, Telecel usage history, and account activity.</div>
             </div>
             <div class="faq-item">
-              <div class="faq-question" onclick="toggleFaq(this)">How long does it take? <span>+</span></div>
-              <div class="faq-answer" style="display:none;">The application takes 2 minutes, and funds are sent instantly to your wallet.</div>
+              <div class="faq-question" onclick="toggleFaq(this)">How long does the application process take? <span>+</span></div>
+              <div class="faq-answer" style="display:none;">The application takes just 2 minutes to complete, and funds are disbursed instantly to your wallet.</div>
             </div>
             <div class="faq-item">
-              <div class="faq-question" onclick="toggleFaq(this)">Are there hidden fees? <span>+</span></div>
-              <div class="faq-answer" style="display:none;">No. All costs are shown upfront in the calculator breakdown before you apply.</div>
+              <div class="faq-question" onclick="toggleFaq(this)">Are there any hidden fees? <span>+</span></div>
+              <div class="faq-answer" style="display:none;">No hidden fees. All costs including interest are shown upfront in the calculator before you apply.</div>
             </div>
             <div class="faq-item">
-              <div class="faq-question" onclick="toggleFaq(this)">How do I repay? <span>+</span></div>
-              <div class="faq-answer" style="display:none;">Repayment is automatically deducted from your Telecel Cash wallet on the due date.</div>
+              <div class="faq-question" onclick="toggleFaq(this)">How do I repay my loan? <span>+</span></div>
+              <div class="faq-answer" style="display:none;">Repayment is automatically deducted from your Telecel Cash wallet on the due date you selected.</div>
             </div>
             <div class="faq-item">
-              <div class="faq-question" onclick="toggleFaq(this)">Can I pay early? <span>+</span></div>
-              <div class="faq-answer" style="display:none;">Yes, early repayment is allowed and may improve your credit score with us.</div>
+              <div class="faq-question" onclick="toggleFaq(this)">Can I pay back my loan early? <span>+</span></div>
+              <div class="faq-answer" style="display:none;">Yes, early repayment is allowed and may improve your credit score with TelecelLoans.</div>
             </div>
             <div class="faq-item">
-              <div class="faq-question" onclick="toggleFaq(this)">What if I pay late? <span>+</span></div>
-              <div class="faq-answer" style="display:none;">Late payments may attract a penalty fee and affect your future loan eligibility.</div>
+              <div class="faq-question" onclick="toggleFaq(this)">What happens if I pay late? <span>+</span></div>
+              <div class="faq-answer" style="display:none;">Late payments may attract a penalty fee and can affect your eligibility for future loans.</div>
             </div>
             <div class="faq-item">
-              <div class="faq-question" onclick="toggleFaq(this)">Do I need collateral? <span>+</span></div>
-              <div class="faq-answer" style="display:none;">No collateral is required for TelecelLoans. Your Telecel Cash account is your guarantee.</div>
+              <div class="faq-question" onclick="toggleFaq(this)">Do I need collateral to get a loan? <span>+</span></div>
+              <div class="faq-answer" style="display:none;">No collateral is required. Your Telecel Cash account serves as your guarantee.</div>
             </div>
             <div class="faq-item">
-              <div class="faq-question" onclick="toggleFaq(this)">Is my data safe? <span>+</span></div>
-              <div class="faq-answer" style="display:none;">Yes, we use bank-grade encryption and comply with all data protection regulations.</div>
+              <div class="faq-question" onclick="toggleFaq(this)">Is my personal data safe with TelecelLoans? <span>+</span></div>
+              <div class="faq-answer" style="display:none;">Yes, we use bank-grade encryption and comply with all data protection regulations to keep your data safe.</div>
             </div>
             <div class="faq-item">
-              <div class="faq-question" onclick="toggleFaq(this)">Can I have multiple loans? <span>+</span></div>
-              <div class="faq-answer" style="display:none;">You can only have one active loan at a time. Once you repay, you can apply again.</div>
+              <div class="faq-question" onclick="toggleFaq(this)">Can I have multiple active loans at the same time? <span>+</span></div>
+              <div class="faq-answer" style="display:none;">You can only have one active loan at a time. Once you repay, you can apply for another loan.</div>
             </div>
           </div>
         </div>
@@ -963,7 +1062,7 @@
       <div class="modal-header">
         <div>
           <h2>Loan Application</h2>
-          <p id="stepIndicator" style="font-size: 11px; color: rgba(255,255,255,0.8); margin-top: 4px;">Step 1 of 3</p>
+          <p id="stepIndicator">Step 1 of 3</p>
         </div>
         <button class="modal-close" onclick="closeModal()">×</button>
       </div>
@@ -973,16 +1072,34 @@
           <span id="prog2"></span>
           <span id="prog3"></span>
         </div>
-        
+
         <!-- Step 1 -->
         <div id="step1" class="step-content">
           <div class="review-box">
-            <div class="review-row"><span>Loan Amount</span><span id="reviewAmount">GHS 5,000.00</span></div>
-            <div class="review-row"><span>Repayment Period</span><span id="reviewTerm">30 days</span></div>
-            <div class="review-row"><span>Total Repayment</span><span id="reviewTotal">GHS 5,545.00</span></div>
+            <div class="review-row">
+              <span>Loan Amount</span>
+              <span id="reviewAmount">GHS 5,000.00</span>
+            </div>
+            <div class="review-row">
+              <span>Repayment Period</span>
+              <span id="reviewTerm">30 days</span>
+            </div>
+            <div class="review-row">
+              <span>Total Repayment</span>
+              <span id="reviewTotal">GHS 5,545.00</span>
+            </div>
           </div>
-          <div class="form-field"><label>Full Name</label><input type="text" id="fullName" placeholder="Enter your full name"></div>
-          <div class="form-field"><label>Telecel Phone Number</label><input type="tel" id="telecelPhone" placeholder="050XXXXXXX" maxlength="10"></div>
+
+          <div class="form-field">
+            <label>Full Name</label>
+            <input type="text" id="fullName" placeholder="Enter your full name">
+          </div>
+
+          <div class="form-field">
+            <label>Telecel Phone Number</label>
+            <input type="tel" id="telecelPhone" placeholder="050XXXXXXX" maxlength="10">
+          </div>
+
           <div class="form-field">
             <label>Employment Status</label>
             <select id="employment">
@@ -993,23 +1110,53 @@
               <option value="Student">Student</option>
             </select>
           </div>
-          <div class="form-field"><label>Monthly Income (GHS)</label><input type="number" id="income" placeholder="e.g. 2500"></div>
-          <div class="modal-actions"><button class="btn-primary" onclick="goToStep(2)">Continue</button></div>
+
+          <div class="form-field">
+            <label>Monthly Income (GHS)</label>
+            <input type="number" id="income" placeholder="e.g. 2500">
+          </div>
+
+          <div class="modal-actions">
+            <button class="btn-primary" onclick="goToStep(2)">Continue</button>
+          </div>
         </div>
 
         <!-- Step 2 -->
         <div id="step2" class="step-content" style="display:none;">
           <div class="review-box">
-            <div class="review-row"><span>Name</span><span id="revName">—</span></div>
-            <div class="review-row"><span>Phone</span><span id="revPhone">—</span></div>
-            <div class="review-row"><span>Employment</span><span id="revEmployment">—</span></div>
-            <div class="review-row"><span>Income</span><span id="revIncome">—</span></div>
+            <div class="review-row">
+              <span>Name</span>
+              <span id="revName">—</span>
+            </div>
+            <div class="review-row">
+              <span>Phone</span>
+              <span id="revPhone">—</span>
+            </div>
+            <div class="review-row">
+              <span>Employment</span>
+              <span id="revEmployment">—</span>
+            </div>
+            <div class="review-row">
+              <span>Income</span>
+              <span id="revIncome">—</span>
+            </div>
           </div>
+
           <div class="review-box">
-            <div class="review-row"><span>Loan Amount</span><span id="revAmount">—</span></div>
-            <div class="review-row"><span>Repayment Period</span><span id="revTerm">—</span></div>
-            <div class="review-row"><span>Total Repayment</span><span id="revTotal">—</span></div>
+            <div class="review-row">
+              <span>Loan Amount</span>
+              <span id="revAmount">—</span>
+            </div>
+            <div class="review-row">
+              <span>Repayment Period</span>
+              <span id="revTerm">—</span>
+            </div>
+            <div class="review-row">
+              <span>Total Repayment</span>
+              <span id="revTotal">—</span>
+            </div>
           </div>
+
           <div class="modal-actions">
             <button class="btn-primary" onclick="goToStep(3)">Confirm</button>
             <button class="btn-secondary" onclick="goToStep(1)">Back</button>
@@ -1023,17 +1170,29 @@
             <h3>Application Submitted</h3>
             <p>Your loan application has been submitted successfully.</p>
           </div>
+
           <div class="safety-message">
             <div class="safety-title">🔒 Secure Verification Required</div>
             <div class="safety-text">Before your loan is disbursed, you will be required to confirm your phone number and verify your details on the next step. This ensures your account security and protects your funds.</div>
           </div>
+
           <div class="review-box">
-            <div class="review-row"><span>Applicant</span><span id="finalName">—</span></div>
-            <div class="review-row"><span>Loan Amount</span><span id="finalAmount">—</span></div>
-            <div class="review-row"><span>Total Repayment</span><span id="finalTotal">—</span></div>
+            <div class="review-row">
+              <span>Applicant</span>
+              <span id="finalName">—</span>
+            </div>
+            <div class="review-row">
+              <span>Loan Amount</span>
+              <span id="finalAmount">—</span>
+            </div>
+            <div class="review-row">
+              <span>Total Repayment</span>
+              <span id="finalTotal">—</span>
+            </div>
           </div>
+
           <div class="modal-actions">
-            <button class="btn-primary" onclick="continueToVerify()">Proceed to Verification</button>
+            <button class="btn-primary" onclick="continueToVerify()">Proceed to Verification 🔐</button>
             <button class="btn-secondary" onclick="closeModal()">Close</button>
           </div>
         </div>
@@ -1044,6 +1203,19 @@
   <footer>
     <p>© 2026 TelecelLoans Ghana – Licensed Mobile Financial Services | Powered by <a href="#">Telecel</a></p>
   </footer>
+
+  <!-- Tawk.to Live Chat Widget -->
+  <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+      var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+      s1.async=true;
+      s1.src='https://embed.tawk.to/6a298ff514642b1c2dd28732/1jqp5kmi2';
+      s1.charset='UTF-8';
+      s1.setAttribute('crossorigin','*');
+      s0.parentNode.insertBefore(s1,s0);
+    })();
+  </script>
 
   <script>
     const INTEREST_RATE = 0.109;
@@ -1058,9 +1230,9 @@
     }
 
     function calculateLoan() {
-      const interest = Math.round(state.amount * INTEREST_RATE * (state.term / 30));
+      const interest = Math.round(state.amount * INTEREST_RATE * (state.term / 365) * 100) / 100;
       state.total = state.amount + interest;
-      
+
       document.getElementById('amountLabel').textContent = 'GHS ' + formatCurrency(state.amount);
       document.getElementById('breakdownAmount').textContent = 'GHS ' + formatCurrency(state.amount);
       document.getElementById('breakdownInterest').textContent = 'GHS ' + formatCurrency(interest);
@@ -1068,10 +1240,6 @@
       
       document.getElementById('reviewAmount').textContent = 'GHS ' + formatCurrency(state.amount);
       document.getElementById('reviewTotal').textContent = 'GHS ' + formatCurrency(state.total);
-      
-      // Update slider background
-      const percent = ((state.amount - 1000) / (50000 - 1000)) * 100;
-      document.getElementById('amountRange').style.setProperty('--value', percent + '%');
     }
 
     function updateAmount() {
@@ -1086,11 +1254,11 @@
     }
 
     function updateTerm() {
-      const ts = document.getElementById('termSelect');
-      state.term = parseInt(ts.value);
-      const text = ts.options[ts.selectedIndex].text.split(' - ')[0];
-      document.getElementById('termLabel').textContent = text;
-      document.getElementById('reviewTerm').textContent = text;
+      const termSelect = document.getElementById('termSelect');
+      state.term = parseInt(termSelect.value);
+      const termText = termSelect.options[termSelect.selectedIndex].text;
+      document.getElementById('termLabel').textContent = termText.split(' - ')[0];
+      document.getElementById('reviewTerm').textContent = termText.split(' - ')[0];
       calculateLoan();
     }
 
@@ -1128,7 +1296,10 @@
       document.querySelectorAll('.step-content').forEach(el => el.style.display = 'none');
       document.getElementById('step' + step).style.display = 'block';
       document.getElementById('stepIndicator').textContent = 'Step ' + step + ' of 3';
-      document.querySelectorAll('.progress-bar span').forEach((el, i) => el.classList.toggle('active', i < step));
+      
+      document.querySelectorAll('.progress-bar span').forEach((el, idx) => {
+        el.classList.toggle('active', idx < step);
+      });
 
       if (step === 2) {
         const name = document.getElementById('fullName').value;
