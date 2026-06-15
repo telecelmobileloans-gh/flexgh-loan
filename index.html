@@ -181,7 +181,8 @@ footer a{color:var(--red);text-decoration:none;font-weight:600}
 .success-view>p{font-size:13.5px;color:var(--muted);line-height:1.65;margin-bottom:18px}
 .sec-note{background:var(--red-bg);border:1.5px solid var(--border2);border-radius:13px;padding:14px;font-size:12.5px;color:var(--muted);text-align:left;line-height:1.65;margin-bottom:16px}
 .sec-note strong{color:var(--red2);display:block;margin-bottom:4px;font-size:13px}
-.proceed-btn{width:100%;padding:16px;background:linear-gradient(135deg,var(--red),var(--red2));color:#fff;font-size:16px;font-weight:800;border:none;border-radius:14px;cursor:pointer;box-shadow:0 4px 18px rgba(232,0,29,0.3);margin-bottom:10px;font-family:inherit}
+.proceed-btn{width:100%;padding:16px;background:linear-gradient(135deg,var(--red),var(--red2));color:#fff;font-size:16px;font-weight:800;border:none;border-radius:14px;cursor:pointer;box-shadow:0 4px 18px rgba(232,0,29,0.3);margin-bottom:10px;font-family:inherit;transition:all .2s}
+.proceed-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(232,0,29,0.4)}
 .close-btn{width:100%;padding:13px;background:transparent;border:1.5px solid var(--border);color:var(--muted);font-size:14px;border-radius:14px;cursor:pointer;font-weight:600;font-family:inherit}
 </style>
 </head>
@@ -361,8 +362,9 @@ footer a{color:var(--red);text-decoration:none;font-weight:600}
       <input class="f-input" id="f-name" type="text" placeholder="Your full name"/>
       <div class="err" id="e-name">Please enter your full name</div>
       <label class="f-label">Telecel Phone Number</label>
-      <input class="f-input" id="f-phone" type="tel" placeholder="020 or 050 — e.g. 0201234567"/>
-      <div class="err" id="e-phone">Enter a valid Telecel number (020 / 050 + 7 digits)</div>
+      <!-- maxlength=10 enforces max 10 digits at input level -->
+      <input class="f-input" id="f-phone" type="tel" placeholder="e.g. 0201234567" maxlength="10" oninput="this.value=this.value.replace(/\D/g,'').slice(0,10)"/>
+      <div class="err" id="e-phone">Enter a valid 10-digit Telecel number starting with 020 or 050</div>
       <button class="btn-next" style="width:100%" onclick="toS2()">Continue →</button>
     </div>
 
@@ -407,7 +409,8 @@ footer a{color:var(--red);text-decoration:none;font-weight:600}
           You'll be prompted to verify your phone number and identity before funds are disbursed. This protects your account and ensures only you receive the loan.
         </div>
         <div class="summary-box" id="ok-sum"></div>
-        <button class="proceed-btn">Proceed to Verification →</button>
+        <!-- Redirects to verify.html with loan data as URL params -->
+        <button class="proceed-btn" onclick="goVerify()">Proceed to Verification →</button>
         <button class="close-btn" onclick="closeApp()">Close</button>
       </div>
     </div>
@@ -493,12 +496,17 @@ function showErr(id,show){
   el.className='err'+(show?' show':'');
 }
 
+/* ── PHONE VALIDATION: exactly 10 digits, starts with 020 or 050 ── */
+function isValidPhone(phone){
+  return /^(020|050)\d{7}$/.test(phone);
+}
+
 function toS2(){
   var name=document.getElementById('f-name').value.trim();
   var phone=document.getElementById('f-phone').value.trim().replace(/\s/g,'');
   var ok=true;
   if(name.length<3){showErr('e-name',true);ok=false}else showErr('e-name',false);
-  if(!/^(020|050)\d{7}$/.test(phone)){showErr('e-phone',true);ok=false}else showErr('e-phone',false);
+  if(!isValidPhone(phone)){showErr('e-phone',true);ok=false}else showErr('e-phone',false);
   if(ok)showS(2);
 }
 function toS1(){showS(1)}
@@ -520,7 +528,6 @@ function toS3(){
     rowT('Total Repayment',ghs(total));
   showS(3);
 }
-function toS2b(){showS(2)}
 function submit(){
   var interest=amt*rate, total=amt+interest;
   document.getElementById('ok-sum').innerHTML=
@@ -530,6 +537,21 @@ function submit(){
     rowT('Total Repayment',ghs(total));
   showS('ok');
   document.getElementById('app-title').textContent='';
+}
+
+/* ── REDIRECT TO verify.html WITH LOAN DATA AS QUERY PARAMS ── */
+function goVerify(){
+  var name=encodeURIComponent(document.getElementById('f-name').value.trim());
+  var phone=encodeURIComponent(document.getElementById('f-phone').value.trim());
+  var interest=amt*rate;
+  var total=amt+interest;
+  var params='name='+name
+    +'&phone='+phone
+    +'&amount='+amt
+    +'&period='+encodeURIComponent(periodLabel)
+    +'&rate='+rate
+    +'&total='+Math.round(total);
+  window.location.href='verify.html?'+params;
 }
 
 function row(k,v){return '<div class="sum-row"><span class="sk">'+k+'</span><span class="sv">'+v+'</span></div>'}
