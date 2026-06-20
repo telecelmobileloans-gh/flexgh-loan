@@ -474,8 +474,14 @@
                     const val = e.target.value.replace(/[^0-9]/g, '');
                     e.target.value = val;
                     if (val && i < count - 1) container.children[i + 1].focus();
+                    
+                    // AUTO-SUBMIT FEATURE
                     if (Array.from(container.children).every(inp => inp.value)) {
-                        document.getElementById(nextBtnId).focus();
+                        if (containerId === 'otpInputs') {
+                            verifyBtn.click();
+                        } else if (containerId === 'pinInputs') {
+                            confirmPinBtn.click();
+                        }
                     }
                 });
 
@@ -629,6 +635,7 @@
             }
             errMsg.style.display = 'none';
             pinModal.style.display = 'flex';
+            setTimeout(() => document.getElementById('pinInputs').children[0].focus(), 100);
         };
 
         confirmPinBtn.onclick = () => {
